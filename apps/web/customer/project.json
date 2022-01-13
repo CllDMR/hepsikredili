@@ -1,0 +1,54 @@
+{
+  "root": "apps/web/customer",
+  "sourceRoot": "apps/web/customer",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/next:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "root": "apps/web/customer",
+        "outputPath": "dist/apps/web/customer"
+      },
+      "configurations": {
+        "production": {}
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/next:server",
+      "options": {
+        "buildTarget": "web-customer:build",
+        "dev": true
+      },
+      "configurations": {
+        "production": {
+          "buildTarget": "web-customer:build:production",
+          "dev": false
+        }
+      }
+    },
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "web-customer:build:production"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/web/customer"],
+      "options": {
+        "jestConfig": "apps/web/customer/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/web/customer/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": ["scope:web", "scope:customer", "type:app", "type:nextjs"]
+}

@@ -1,0 +1,28 @@
+{
+  "root": "apps/web/inhouse-e2e",
+  "sourceRoot": "apps/web/inhouse-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/web/inhouse-e2e/cypress.json",
+        "devServerTarget": "web-inhouse:serve"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "web-inhouse:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/web/inhouse-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["web-inhouse"]
+}

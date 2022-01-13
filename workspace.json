@@ -1,4 +1,12 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "api-main": "apps/api/main",
+    "web-customer": "apps/web/customer",
+    "web-customer-e2e": "apps/web/customer-e2e",
+    "web-inhouse": "apps/web/inhouse",
+    "web-inhouse-e2e": "apps/web/inhouse-e2e",
+    "web-main": "apps/web/main",
+    "web-main-e2e": "apps/web/main-e2e"
+  }
 }
