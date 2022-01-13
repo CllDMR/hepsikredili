@@ -1,6 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "back-main": "apps/back-main"
+    "back-main": "apps/back-main",
+    "front-public": "apps/front-public",
+    "front-public-e2e": "apps/front-public-e2e"
   }
 }
