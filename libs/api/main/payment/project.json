@@ -1,0 +1,23 @@
+{
+  "root": "libs/api/main/payment",
+  "sourceRoot": "libs/api/main/payment/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/main/payment/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/main/payment"],
+      "options": {
+        "jestConfig": "libs/api/main/payment/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "scope:main", "scope:payment", "tag:module"]
+}

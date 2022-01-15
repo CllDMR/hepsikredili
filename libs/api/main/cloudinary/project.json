@@ -1,0 +1,23 @@
+{
+  "root": "libs/api/main/cloudinary",
+  "sourceRoot": "libs/api/main/cloudinary/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/main/cloudinary/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/main/cloudinary"],
+      "options": {
+        "jestConfig": "libs/api/main/cloudinary/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "scope:main", "scope:cloudinary", "tag:module"]
+}

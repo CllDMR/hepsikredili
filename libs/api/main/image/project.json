@@ -1,0 +1,23 @@
+{
+  "root": "libs/api/main/image",
+  "sourceRoot": "libs/api/main/image/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/main/image/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/main/image"],
+      "options": {
+        "jestConfig": "libs/api/main/image/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "scope:main", "scope:image", "tag:module"]
+}

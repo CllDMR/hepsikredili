@@ -14,7 +14,27 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@hepsikredili/api/main/account": ["libs/api/main/account/src/index.ts"],
+      "@hepsikredili/api/main/ad": ["libs/api/main/ad/src/index.ts"],
+      "@hepsikredili/api/main/ad-detail": [
+        "libs/api/main/ad-detail/src/index.ts"
+      ],
+      "@hepsikredili/api/main/cloudinary": [
+        "libs/api/main/cloudinary/src/index.ts"
+      ],
+      "@hepsikredili/api/main/image": ["libs/api/main/image/src/index.ts"],
+      "@hepsikredili/api/main/invoice": ["libs/api/main/invoice/src/index.ts"],
+      "@hepsikredili/api/main/payment": ["libs/api/main/payment/src/index.ts"],
+      "@hepsikredili/api/main/plan": ["libs/api/main/plan/src/index.ts"],
+      "@hepsikredili/api/main/shared": ["libs/api/main/shared/src/index.ts"],
+      "@hepsikredili/api/main/user": ["libs/api/main/user/src/index.ts"],
+      "@hepsikredili/api/shared": ["libs/api/shared/src/index.ts"],
+      "@hepsikredili/web/customer/ui": ["libs/web/customer/ui/src/index.ts"],
+      "@hepsikredili/web/inhouse/ui": ["libs/web/inhouse/ui/src/index.ts"],
+      "@hepsikredili/web/main/ui": ["libs/web/main/ui/src/index.ts"],
+      "@hepsikredili/web/shared/ui": ["libs/web/shared/ui/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

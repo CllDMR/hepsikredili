@@ -2,11 +2,26 @@
   "version": 2,
   "projects": {
     "api-main": "apps/api/main",
+    "api-main-account": "libs/api/main/account",
+    "api-main-ad": "libs/api/main/ad",
+    "api-main-ad-detail": "libs/api/main/ad-detail",
+    "api-main-cloudinary": "libs/api/main/cloudinary",
+    "api-main-image": "libs/api/main/image",
+    "api-main-invoice": "libs/api/main/invoice",
+    "api-main-payment": "libs/api/main/payment",
+    "api-main-plan": "libs/api/main/plan",
+    "api-main-shared": "libs/api/main/shared",
+    "api-main-user": "libs/api/main/user",
+    "api-shared": "libs/api/shared",
     "web-customer": "apps/web/customer",
     "web-customer-e2e": "apps/web/customer-e2e",
+    "web-customer-ui": "libs/web/customer/ui",
     "web-inhouse": "apps/web/inhouse",
     "web-inhouse-e2e": "apps/web/inhouse-e2e",
+    "web-inhouse-ui": "libs/web/inhouse/ui",
     "web-main": "apps/web/main",
-    "web-main-e2e": "apps/web/main-e2e"
+    "web-main-e2e": "apps/web/main-e2e",
+    "web-main-ui": "libs/web/main/ui",
+    "web-shared-ui": "libs/web/shared/ui"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "hepsikredili-test",
+  "name": "hepsikredili",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -11,6 +11,7 @@
   "dependencies": {
     "@nestjs/common": "^8.0.0",
     "@nestjs/core": "^8.0.0",
+    "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^8.0.0",
     "@nrwl/nest": "^13.4.4",
     "@nrwl/next": "^13.4.4",

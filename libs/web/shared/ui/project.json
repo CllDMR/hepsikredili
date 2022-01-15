@@ -1,0 +1,23 @@
+{
+  "root": "libs/web/shared/ui",
+  "sourceRoot": "libs/web/shared/ui/src",
+  "projectType": "library",
+  "tags": ["scope:web", "scope:shared", "type:ui"],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web/shared/ui/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/shared/ui"],
+      "options": {
+        "jestConfig": "libs/web/shared/ui/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

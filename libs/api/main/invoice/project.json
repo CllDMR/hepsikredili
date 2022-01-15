@@ -1,0 +1,23 @@
+{
+  "root": "libs/api/main/invoice",
+  "sourceRoot": "libs/api/main/invoice/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/main/invoice/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/main/invoice"],
+      "options": {
+        "jestConfig": "libs/api/main/invoice/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "scope:main", "scope:invoice", "tag:module"]
+}
