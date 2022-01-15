@@ -1,30 +1,31 @@
-import {
-  Account,
-  AccountCorporate,
-  AccountCorporateSchema,
-  AccountIndividual,
-  AccountIndividualSchema,
-  AccountSchema,
-} from '@hepsikredili/api/main/account';
-import { Ad, AdSchema } from '@hepsikredili/api/main/ad';
-import { AdDetail, AdDetailSchema } from '@hepsikredili/api/main/ad-detail';
-import { Image, ImageSchema } from '@hepsikredili/api/main/image';
-import { Invoice, InvoiceSchema } from '@hepsikredili/api/main/invoice';
-import { Payment, PaymentSchema } from '@hepsikredili/api/main/payment';
-import { Plan, PlanSchema } from '@hepsikredili/api/main/plan';
-import {
-  Profile,
-  ProfileSchema,
-  User,
-  UserCorporate,
-  UserCorporateSchema,
-  UserIndividual,
-  UserIndividualSchema,
-  UserSchema,
-} from '@hepsikredili/api/main/user';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import mongoosePaginateV2 from 'mongoose-paginate-v2';
+import {
+  AccountCorporate,
+  AccountCorporateSchema,
+} from './schemas/account-corporate.schema';
+import {
+  AccountIndividual,
+  AccountIndividualSchema,
+} from './schemas/account-individual.schema';
+import { Account, AccountSchema } from './schemas/account.schema';
+import { AdDetail, AdDetailSchema } from './schemas/ad-detail.schema';
+import { Ad, AdSchema } from './schemas/ad.schema';
+import { Image, ImageSchema } from './schemas/image.schema';
+import { Invoice, InvoiceSchema } from './schemas/invoice.schema';
+import { Payment, PaymentSchema } from './schemas/payment.schema';
+import { Plan, PlanSchema } from './schemas/plan.schema';
+import { Profile, ProfileSchema } from './schemas/profile.schema';
+import {
+  UserCorporate,
+  UserCorporateSchema,
+} from './schemas/user-corporate.schema';
+import {
+  UserIndividual,
+  UserIndividualSchema,
+} from './schemas/user-individual.schema';
+import { User, UserSchema } from './schemas/user.schema';
 
 @Module({
   imports: [

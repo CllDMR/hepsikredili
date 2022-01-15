@@ -1,2 +1,1 @@
-export * from './lib/api-main-plan.module';
-export * from './schemas/plan.schema';
+export * from './api-main-plan.module';

@@ -6,7 +6,6 @@ import { ApiMainImageModule } from '@hepsikredili/api/main/image';
 import { ApiMainInvoiceModule } from '@hepsikredili/api/main/invoice';
 import { ApiMainPaymentModule } from '@hepsikredili/api/main/payment';
 import { ApiMainPlanModule } from '@hepsikredili/api/main/plan';
-import { ApiMainSharedModule } from '@hepsikredili/api/main/shared';
 import { ApiMainUserModule } from '@hepsikredili/api/main/user';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -39,18 +38,24 @@ import { ThrottlerModule } from '@nestjs/throttler';
         // useFindAndModify: false,
       }),
     }),
+    // ApiMainSharedMongooseModule,
 
-    ApiMainSharedModule,
     ApiMainAccountModule,
-    ApiMainAdDetailModule,
     ApiMainAdModule,
+    ApiMainAdDetailModule,
     ApiMainCloudinaryModule,
     ApiMainImageModule,
     ApiMainInvoiceModule,
     ApiMainPaymentModule,
     ApiMainPlanModule,
-    ApiMainSharedModule,
     ApiMainUserModule,
+  ],
+  providers: [
+    // {
+    //   provide: APP_PIPE,
+    //   scope: Scope.REQUEST,
+    //   useClass: MyValidationPipe,
+    // },
   ],
 })
 export class ApiMainMainModule {}

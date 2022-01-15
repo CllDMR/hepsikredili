@@ -6,7 +6,7 @@ export type AccountDocument = Account & Document;
 @Schema()
 export class Account {
   @Prop({ required: true })
-  name!: string;
+  qwe!: string;
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);
