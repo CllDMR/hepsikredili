@@ -1,31 +1,31 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { AppAbility, CaslAbilityFactory } from './casl-ability.factory';
-import { CHECK_POLICIES_KEY, PolicyHandler } from './policy-handler';
+import { AppAbility, CaslAbilityFactory } from '../casl/casl-ability.factory';
+import { CHECK_POLICIES_KEY, PolicyHandler } from '../casl/policy-handler';
 
 @Injectable()
-export class PoliciesGuard implements CanActivate {
+export class PoliciesAccountGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
-    private caslAbilityFactory: CaslAbilityFactory,
+    private caslAbilityFactory: CaslAbilityFactory
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const policyHandlers =
       this.reflector.get<PolicyHandler[]>(
         CHECK_POLICIES_KEY,
-        context.getHandler(),
+        context.getHandler()
       ) || [];
 
-    const { user, params } = context.switchToHttp().getRequest();
+    const { jwtPayload, params } = context.switchToHttp().getRequest();
 
-    const ability = this.caslAbilityFactory.createForUser(user, {
-      account_id: params?.account_id,
-      user_id: params?.user_id,
+    const ability = this.caslAbilityFactory.createForMembership(jwtPayload, {
+      accountId: params.accountId,
+      userId: params.userId,
     });
 
     return policyHandlers.every((handler) =>
-      this.execPolicyHandler(handler, ability),
+      this.execPolicyHandler(handler, ability)
     );
   }
 

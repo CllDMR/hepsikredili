@@ -38,7 +38,6 @@ import { ThrottlerModule } from '@nestjs/throttler';
         // useFindAndModify: false,
       }),
     }),
-    // ApiMainSharedMongooseModule,
 
     ApiMainAccountModule,
     ApiMainAdModule,

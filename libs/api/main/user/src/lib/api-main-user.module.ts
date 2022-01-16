@@ -1,9 +1,12 @@
-import { ApiMainSharedMongooseModule } from '@hepsikredili/api/main/shared';
+import {
+  ApiMainSharedCaslModule,
+  ApiMainSharedMongooseModule,
+} from '@hepsikredili/api/main/shared';
 import { Module } from '@nestjs/common';
 import { ApiMainUserController } from './api-main-user.controller';
 
 @Module({
-  imports: [ApiMainSharedMongooseModule],
+  imports: [ApiMainSharedMongooseModule, ApiMainSharedCaslModule],
   controllers: [ApiMainUserController],
   providers: [],
   exports: [],

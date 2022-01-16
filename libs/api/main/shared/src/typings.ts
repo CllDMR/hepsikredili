@@ -1,5 +1,4 @@
 import type { Request } from 'express';
-import { User } from '.';
 
-export type MyRequest = Request & { user: User & { _id: string } };
-export type JWTPayload = { sub: string };
+export type MyRequest = Request & { jwtPayload: JWTPayload };
+export type JWTPayload = { usr: string; acc: string; knd: string };

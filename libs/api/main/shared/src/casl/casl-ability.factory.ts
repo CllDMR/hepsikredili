@@ -42,13 +42,17 @@ type Subjects =
 
 export type AppAbility = Ability<[Action, Subjects]>;
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-type MetaData = {};
+type MetaData = {
+  accountId: string;
+  userId: string;
+};
 
 @Injectable()
 export class CaslAbilityFactory {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  createForUser(_user: Partial<MyRequest['user']>, _metaData?: MetaData) {
+  createForMembership(
+    _jwtPayload: Partial<MyRequest['jwtPayload']>,
+    _metaData?: MetaData
+  ) {
     const { can, build } = new AbilityBuilder<Ability<[Action, Subjects]>>(
       Ability as AbilityClass<AppAbility>
     );
