@@ -1,1 +1,1 @@
-export * from './lib/api-main-ad-detail.module';
+export * from './api-main-ad-detail.module';

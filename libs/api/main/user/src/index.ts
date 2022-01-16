@@ -1,2 +1,2 @@
-export * from './lib/api-main-user.controller';
-export * from './lib/api-main-user.module';
+export * from './api-main-user.module';
+export * from './controllers/api-main-user.controller';

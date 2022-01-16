@@ -1,1 +1,1 @@
-export * from './lib/api-main-invoice.module';
+export * from './api-main-invoice.module';

@@ -1,1 +1,1 @@
-export * from './lib/api-main-image.module';
+export * from './api-main-image.module';
