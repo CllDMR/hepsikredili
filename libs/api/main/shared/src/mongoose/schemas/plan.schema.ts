@@ -5,7 +5,7 @@ export type PlanDocument = Plan & Document;
 
 @Schema()
 export class Plan {
-  @Prop({ required: true })
+  @Prop({ required: true, index: 'text' })
   name!: string;
 
   @Prop({ required: true })
