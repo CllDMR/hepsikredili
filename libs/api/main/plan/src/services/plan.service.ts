@@ -1,5 +1,5 @@
 import { Plan, PlanDocument } from '@hepsikredili/api/main/shared';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as $ from 'mongo-dot-notation';
 import { Model } from 'mongoose';
@@ -24,20 +24,18 @@ export class PlanService {
 
   async create(createPlanDto: CreatePlanDto): Promise<Plan> {
     const plan = new this.planModel(createPlanDto);
-    if (!plan) throw new BadRequestException('Something went wrong');
-    const newPlan = await plan.save();
-    if (!newPlan) throw new BadRequestException('Something went wrong');
-    return newPlan;
+    return await plan.save();
   }
 
   async update(id: string, updatePlanDto: UpdatePlanDto) {
     const instructions = $.flatten(updatePlanDto);
 
-    const plan = await this.planModel
+    return await this.planModel
       .findByIdAndUpdate(id, instructions, { new: true })
       .exec();
-    if (!plan)
-      throw new BadRequestException(`Resource not found with id: ${id}`);
-    return plan;
+  }
+
+  async remove(id: string) {
+    return await this.planModel.findByIdAndRemove(id, { new: true }).exec();
   }
 }
