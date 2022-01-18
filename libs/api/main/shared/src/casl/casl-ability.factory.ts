@@ -70,7 +70,7 @@ export class CaslAbilityFactory {
     });
   }
 
-  createForPublic(
+  createForGeneral(
     _jwtPayload: Partial<MyRequest['user']>,
     _metaData?: MetaData
   ) {

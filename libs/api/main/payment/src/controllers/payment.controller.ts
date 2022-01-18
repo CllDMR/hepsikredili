@@ -1,12 +1,12 @@
 import {
   CheckPolicies,
-  CreatePublicPaymentPolicyHandler,
-  DeletePublicPaymentPolicyHandler,
+  CreateGeneralPaymentPolicyHandler,
+  DeleteGeneralPaymentPolicyHandler,
   JwtAuthGuard,
   Payment,
-  PoliciesPublicGuard,
-  ReadPublicPaymentPolicyHandler,
-  UpdatePublicPaymentPolicyHandler,
+  PoliciesGeneralGuard,
+  ReadGeneralPaymentPolicyHandler,
+  UpdateGeneralPaymentPolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import {
   BadRequestException,
@@ -26,18 +26,18 @@ import { QueryPaymentDto } from '../dtos/query-payment.dto';
 import { UpdatePaymentDto } from '../dtos/update-payment.dto';
 import { ApiMainPaymentService } from '../services/payment.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesPublicGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
 @Controller('payments')
 export class ApiMainPaymentController {
   constructor(private readonly paymentService: ApiMainPaymentService) {}
 
-  @CheckPolicies(new ReadPublicPaymentPolicyHandler())
+  @CheckPolicies(new ReadGeneralPaymentPolicyHandler())
   @Get()
   async readAll(@Query() queryPaymentDto: QueryPaymentDto): Promise<Payment[]> {
     return await this.paymentService.findAll(queryPaymentDto);
   }
 
-  @CheckPolicies(new ReadPublicPaymentPolicyHandler())
+  @CheckPolicies(new ReadGeneralPaymentPolicyHandler())
   @Get(':id')
   async readOneById(@Param('id') id: string): Promise<Payment> {
     const payment = await this.paymentService.findOneById(id);
@@ -46,7 +46,7 @@ export class ApiMainPaymentController {
     return payment;
   }
 
-  @CheckPolicies(new CreatePublicPaymentPolicyHandler())
+  @CheckPolicies(new CreateGeneralPaymentPolicyHandler())
   @Post()
   async create(@Body() createPaymentDto: CreatePaymentDto): Promise<Payment> {
     const payment = await this.paymentService.create(createPaymentDto);
@@ -54,7 +54,7 @@ export class ApiMainPaymentController {
     return payment;
   }
 
-  @CheckPolicies(new UpdatePublicPaymentPolicyHandler())
+  @CheckPolicies(new UpdateGeneralPaymentPolicyHandler())
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -68,7 +68,7 @@ export class ApiMainPaymentController {
     return payment;
   }
 
-  @CheckPolicies(new DeletePublicPaymentPolicyHandler())
+  @CheckPolicies(new DeleteGeneralPaymentPolicyHandler())
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Payment> {
     const payment = await this.paymentService.remove(id);

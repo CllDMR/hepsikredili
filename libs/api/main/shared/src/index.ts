@@ -4,8 +4,8 @@ export * from './casl/policy-handler';
 //Guards
 export * from './guards/jwt-auth.guard';
 export * from './guards/local-auth.guard';
+export * from './guards/policies-general.guard';
 export * from './guards/policies-membership.guard';
-export * from './guards/policies-public.guard';
 //Mongoose
 export * from './mongoose/api-main-mongoose.module';
 //Schemas
@@ -26,12 +26,12 @@ export * from './mongoose/schemas/user/user-individual.schema';
 export * from './mongoose/schemas/user/user.schema';
 //Pipes
 export * from './pipes/validation.pipe';
+export * from './policies/general/payment.policy';
+export * from './policies/general/plan.policy';
+export * from './policies/general/user.policy';
 //Policies
 export * from './policies/membership/plan.policy';
 export * from './policies/membership/user.policy';
-export * from './policies/public/payment.policy';
-export * from './policies/public/plan.policy';
-export * from './policies/public/user.policy';
 //Strategies
 export * from './strategies/jwt.strategy';
 export * from './strategies/local.strategy';

@@ -4,7 +4,7 @@ import { AppAbility, CaslAbilityFactory } from '../casl/casl-ability.factory';
 import { CHECK_POLICIES_KEY, PolicyHandler } from '../casl/policy-handler';
 
 @Injectable()
-export class PoliciesPublicGuard implements CanActivate {
+export class PoliciesGeneralGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private caslAbilityFactory: CaslAbilityFactory
@@ -19,7 +19,7 @@ export class PoliciesPublicGuard implements CanActivate {
 
     const { jwtPayload } = context.switchToHttp().getRequest();
 
-    const ability = this.caslAbilityFactory.createForPublic(jwtPayload);
+    const ability = this.caslAbilityFactory.createForGeneral(jwtPayload);
 
     return policyHandlers.every((handler) =>
       this.execPolicyHandler(handler, ability)
