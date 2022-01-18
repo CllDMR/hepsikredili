@@ -1,3 +1,3 @@
 export * from './api-main-user.module';
-export * from './controllers/user.controller';
-export * from './services/user.service';
+export * from './controllers/base/user.controller';
+export * from './services/base/user.service';

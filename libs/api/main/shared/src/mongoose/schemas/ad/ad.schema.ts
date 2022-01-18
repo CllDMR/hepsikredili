@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { Account } from '../account/account.schema';
+import { AccountBase } from '../account/account-base.schema';
 import { AdDetail } from '../ad-detail/ad-detail.schema';
 import { Address, AddressSchema } from '../address.schema';
 import { ImageShrinked, ImageShrinkedSchema } from '../image-shrinked.schema';
@@ -25,7 +25,7 @@ export class Ad {
   published!: boolean;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Account', required: true })
-  owner!: string | Account;
+  owner!: string | AccountBase;
 
   @Prop({ required: true })
   no!: string;

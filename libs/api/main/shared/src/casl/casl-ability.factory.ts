@@ -7,7 +7,7 @@ import {
 } from '@casl/ability';
 import { Injectable } from '@nestjs/common';
 import {
-  Account,
+  AccountBase,
   AccountCorporate,
   AccountIndividual,
   Ad,
@@ -16,7 +16,7 @@ import {
   Payment,
   Plan,
   Profile,
-  User,
+  UserBase,
   UserCorporate,
   UserIndividual,
 } from '..';
@@ -25,7 +25,7 @@ import { Action } from './action.enum';
 
 type Subjects =
   | InferSubjects<
-      | typeof Account
+      | typeof AccountBase
       | typeof AccountCorporate
       | typeof AccountIndividual
       | typeof Ad
@@ -34,7 +34,7 @@ type Subjects =
       | typeof Payment
       | typeof Plan
       | typeof Profile
-      | typeof User
+      | typeof UserBase
       | typeof UserCorporate
       | typeof UserIndividual
     >

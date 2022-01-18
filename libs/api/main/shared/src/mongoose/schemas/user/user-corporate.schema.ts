@@ -1,6 +1,6 @@
 import { Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Account } from '../account/account.schema';
+import { AccountBase } from '../account/account-base.schema';
 
 export type UserCorporateDocument = UserCorporate & Document;
 
@@ -8,7 +8,7 @@ export type UserCorporateDocument = UserCorporate & Document;
 export class UserCorporate {
   _id!: Types.ObjectId;
   kind!: string;
-  account!: string | Account;
+  account!: string | AccountBase;
   emailVerified!: boolean;
   email!: string;
   password!: string;

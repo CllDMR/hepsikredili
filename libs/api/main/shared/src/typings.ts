@@ -1,11 +1,11 @@
 import type { Request } from 'express';
-import { User } from './mongoose/schemas/user/user.schema';
+import { UserBase } from './mongoose/schemas/user/user-base.schema';
 
 export type MyRequest = Request & {
   user: {
-    user_id: User['_id'];
-    account_id: User['account'];
-    user_kind: User['kind'];
+    user_id: UserBase['_id'];
+    account_id: UserBase['account'];
+    user_kind: UserBase['kind'];
   };
   jwtPayload: JWTPayload;
 };

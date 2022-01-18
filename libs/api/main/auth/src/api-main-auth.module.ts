@@ -8,8 +8,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { ApiMainAuthController } from './controllers/api-main-auth.controller';
-import { ApiMainAuthService } from './services/api-main-auth.service';
+import { ApiMainAuthController } from './controllers/auth.controller';
+import { ApiMainAuthService } from './services/auth.service';
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
-import { Account } from './account/account.schema';
+import { AccountBase } from './account/account-base.schema';
 import { Ad } from './ad/ad.schema';
 
 export type ImageDocument = Image & Document;
@@ -16,7 +16,7 @@ export class Image {
   url!: string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Account', required: true })
-  owner!: Account | string;
+  owner!: AccountBase | string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Ad', required: false })
   ad!: Ad | string;
