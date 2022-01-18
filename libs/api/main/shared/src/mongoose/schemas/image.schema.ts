@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
-import { Account } from './account.schema';
-import { Ad } from './ad.schema';
+import { Account } from './account/account.schema';
+import { Ad } from './ad/ad.schema';
 
 export type ImageDocument = Image & Document;
 

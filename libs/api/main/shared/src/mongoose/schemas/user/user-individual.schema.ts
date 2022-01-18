@@ -1,6 +1,6 @@
 import { Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Types } from 'mongoose';
-import { Account } from './account.schema';
+import { Account } from '../account/account.schema';
 
 export type UserIndividualDocument = UserIndividual & Document;
 

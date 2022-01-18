@@ -29,6 +29,7 @@ export * from './pipes/validation.pipe';
 //Policies
 export * from './policies/membership/plan.policy';
 export * from './policies/membership/user.policy';
+export * from './policies/public/payment.policy';
 export * from './policies/public/plan.policy';
 export * from './policies/public/user.policy';
 //Strategies

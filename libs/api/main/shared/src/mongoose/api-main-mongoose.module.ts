@@ -4,14 +4,14 @@ import mongoosePaginateV2 from 'mongoose-paginate-v2';
 import {
   AccountCorporate,
   AccountCorporateSchema,
-} from './schemas/account-corporate.schema';
+} from './schemas/account/account-corporate.schema';
 import {
   AccountIndividual,
   AccountIndividualSchema,
-} from './schemas/account-individual.schema';
-import { Account, AccountSchema } from './schemas/account.schema';
-import { AdDetail, AdDetailSchema } from './schemas/ad-detail.schema';
-import { Ad, AdSchema } from './schemas/ad.schema';
+} from './schemas/account/account-individual.schema';
+import { Account, AccountSchema } from './schemas/account/account.schema';
+import { AdDetail, AdDetailSchema } from './schemas/ad-detail/ad-detail.schema';
+import { Ad, AdSchema } from './schemas/ad/ad.schema';
 import { Image, ImageSchema } from './schemas/image.schema';
 import { Invoice, InvoiceSchema } from './schemas/invoice.schema';
 import { Payment, PaymentSchema } from './schemas/payment.schema';
@@ -20,12 +20,12 @@ import { Profile, ProfileSchema } from './schemas/profile.schema';
 import {
   UserCorporate,
   UserCorporateSchema,
-} from './schemas/user-corporate.schema';
+} from './schemas/user/user-corporate.schema';
 import {
   UserIndividual,
   UserIndividualSchema,
-} from './schemas/user-individual.schema';
-import { User, UserSchema } from './schemas/user.schema';
+} from './schemas/user/user-individual.schema';
+import { User, UserSchema } from './schemas/user/user.schema';
 
 @Module({
   imports: [
