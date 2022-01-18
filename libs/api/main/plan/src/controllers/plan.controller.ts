@@ -1,4 +1,13 @@
-import { Plan } from '@hepsikredili/api/main/shared';
+import {
+  CheckPolicies,
+  CreatePlanPolicyHandler,
+  DeletePlanPolicyHandler,
+  JwtAuthGuard,
+  Plan,
+  PoliciesAccountGuard,
+  ReadPlanPolicyHandler,
+  UpdatePlanPolicyHandler,
+} from '@hepsikredili/api/main/shared';
 import {
   BadRequestException,
   Body,
@@ -8,22 +17,27 @@ import {
   Param,
   Patch,
   Post,
-  Query
+  Query,
+  UseGuards,
 } from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { CreatePlanDto } from '../dtos/create-plan.dto';
 import { QueryPlanDto } from '../dtos/query-plan.dto';
 import { UpdatePlanDto } from '../dtos/update-plan.dto';
-import { PlanService } from '../services/plan.service';
+import { ApiMainPlanService } from '../services/plan.service';
 
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesAccountGuard)
 @Controller('plans')
-export class PlanController {
-  constructor(private readonly planService: PlanService) {}
+export class ApiMainPlanController {
+  constructor(private readonly planService: ApiMainPlanService) {}
 
+  @CheckPolicies(new ReadPlanPolicyHandler())
   @Get()
   async readAll(@Query() queryPlanDto: QueryPlanDto): Promise<Plan[]> {
     return await this.planService.findAll(queryPlanDto);
   }
 
+  @CheckPolicies(new ReadPlanPolicyHandler())
   @Get(':id')
   async readOneById(@Param('id') id: string): Promise<Plan> {
     const plan = await this.planService.findOneById(id);
@@ -32,6 +46,7 @@ export class PlanController {
     return plan;
   }
 
+  @CheckPolicies(new CreatePlanPolicyHandler())
   @Post()
   async create(@Body() createPlanDto: CreatePlanDto): Promise<Plan> {
     const plan = await this.planService.create(createPlanDto);
@@ -39,20 +54,28 @@ export class PlanController {
     return plan;
   }
 
+  @CheckPolicies(new UpdatePlanPolicyHandler())
   @Patch(':id')
   async update(
     @Param('id') id: string,
     @Body() updatePlanDto: UpdatePlanDto
   ): Promise<Plan> {
     const plan = await this.planService.update(id, updatePlanDto);
-    if (!plan) throw new BadRequestException(`Resource could not updated with id: ${id}`);
+    if (!plan)
+      throw new BadRequestException(
+        `Resource could not updated with id: ${id}`
+      );
     return plan;
   }
 
+  @CheckPolicies(new DeletePlanPolicyHandler())
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<Plan> {
     const plan = await this.planService.remove(id);
-    if (!plan) throw new BadRequestException(`Resource could not deleted with id: ${id}`);
+    if (!plan)
+      throw new BadRequestException(
+        `Resource could not deleted with id: ${id}`
+      );
     return plan;
   }
 }

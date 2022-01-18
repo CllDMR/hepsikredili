@@ -1,4 +1,8 @@
 export * from './casl/api-main-casl.module';
+export * from './casl/policy-handler';
+export * from './guards/jwt-auth.guard';
+export * from './guards/local-auth.guard';
+export * from './guards/policies-account.guard';
 export * from './mongoose/api-main-mongoose.module';
 export * from './mongoose/schemas/account-corporate.schema';
 export * from './mongoose/schemas/account-individual.schema';
@@ -14,3 +18,8 @@ export * from './mongoose/schemas/user-corporate.schema';
 export * from './mongoose/schemas/user-individual.schema';
 export * from './mongoose/schemas/user.schema';
 export * from './pipes/validation.pipe';
+export * from './policies/plan.policy';
+export * from './policies/user.policy';
+export * from './strategies/jwt.strategy';
+export * from './strategies/local.strategy';
+export * from './typings';

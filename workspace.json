@@ -5,6 +5,7 @@
     "api-main-account": "libs/api/main/account",
     "api-main-ad": "libs/api/main/ad",
     "api-main-ad-detail": "libs/api/main/ad-detail",
+    "api-main-auth": "libs/api/main/auth",
     "api-main-cloudinary": "libs/api/main/cloudinary",
     "api-main-image": "libs/api/main/image",
     "api-main-invoice": "libs/api/main/invoice",

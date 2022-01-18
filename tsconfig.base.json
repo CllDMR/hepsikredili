@@ -20,6 +20,7 @@
       "@hepsikredili/api/main/ad-detail": [
         "libs/api/main/ad-detail/src/index.ts"
       ],
+      "@hepsikredili/api/main/auth": ["libs/api/main/auth/src/index.ts"],
       "@hepsikredili/api/main/cloudinary": [
         "libs/api/main/cloudinary/src/index.ts"
       ],

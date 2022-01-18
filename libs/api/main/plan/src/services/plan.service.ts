@@ -8,7 +8,7 @@ import { QueryPlanDto } from '../dtos/query-plan.dto';
 import { UpdatePlanDto } from '../dtos/update-plan.dto';
 
 @Injectable()
-export class PlanService {
+export class ApiMainPlanService {
   constructor(
     @InjectModel(Plan.name)
     private readonly planModel: Model<PlanDocument>
