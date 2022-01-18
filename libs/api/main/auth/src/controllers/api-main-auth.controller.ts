@@ -2,7 +2,7 @@ import {
   JwtAuthGuard,
   LocalAuthGuard,
   MyRequest,
-  PoliciesAccountGuard,
+  PoliciesMembershipGuard,
 } from '@hepsikredili/api/main/shared';
 import {
   Body,
@@ -21,7 +21,7 @@ import { ApiMainAuthService } from '../services/api-main-auth.service';
 export class ApiMainAuthController {
   constructor(private readonly apiMainAuthService: ApiMainAuthService) {}
 
-  @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesAccountGuard)
+  @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
   @Get('verify-token')
   profile(@Req() reg: MyRequest) {
     return reg.user;

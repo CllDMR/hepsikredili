@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
+import { Types } from 'mongoose';
 import { ExtractJwt, Strategy } from 'passport-jwt';
 import { JWTPayload, MyRequest } from '../typings';
 
@@ -15,7 +16,11 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JWTPayload) {
-    const reqUser: Partial<MyRequest['user']> = {};
+    const reqUser: Partial<MyRequest['user']> = {
+      account_id: payload.acc,
+      user_id: new Types.ObjectId(payload.usr),
+      user_kind: payload.knd,
+    };
     return reqUser;
   }
 }

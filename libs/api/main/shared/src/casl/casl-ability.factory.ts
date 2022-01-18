@@ -49,8 +49,29 @@ type MetaData = {
 
 @Injectable()
 export class CaslAbilityFactory {
-  createForMembership(
-    _jwtPayload: Partial<MyRequest['jwtPayload']>,
+  createForMembership(user: Partial<MyRequest['user']>, metaData: MetaData) {
+    const { can, cannot, build } = new AbilityBuilder<
+      Ability<[Action, Subjects]>
+    >(Ability as AbilityClass<AppAbility>);
+
+    can(Action.Manage, 'all'); // read-only access to everything
+
+    if (
+      !metaData.accountId ||
+      !user.account_id ||
+      metaData.accountId !== user.account_id
+    )
+      cannot(Action.Manage, 'all');
+
+    return build({
+      // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
+      detectSubjectType: (item) =>
+        item.constructor as unknown as ExtractSubjectType<Subjects>,
+    });
+  }
+
+  createForPublic(
+    _jwtPayload: Partial<MyRequest['user']>,
     _metaData?: MetaData
   ) {
     const { can, build } = new AbilityBuilder<Ability<[Action, Subjects]>>(

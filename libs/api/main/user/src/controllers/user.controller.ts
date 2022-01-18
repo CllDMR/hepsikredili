@@ -1,11 +1,11 @@
 import {
   CheckPolicies,
-  CreateUserPolicyHandler,
-  DeleteUserPolicyHandler,
+  CreatePublicUserPolicyHandler,
+  DeletePublicUserPolicyHandler,
   JwtAuthGuard,
-  PoliciesAccountGuard,
-  ReadUserPolicyHandler,
-  UpdateUserPolicyHandler,
+  PoliciesPublicGuard,
+  ReadPublicUserPolicyHandler,
+  UpdatePublicUserPolicyHandler,
   User,
 } from '@hepsikredili/api/main/shared';
 import {
@@ -26,18 +26,18 @@ import { QueryUserDto } from '../dtos/query-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { ApiMainUserService } from '../services/user.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesAccountGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesPublicGuard)
 @Controller('users')
 export class ApiMainUserController {
   constructor(private readonly userService: ApiMainUserService) {}
 
-  @CheckPolicies(new ReadUserPolicyHandler())
+  @CheckPolicies(new ReadPublicUserPolicyHandler())
   @Get()
   async readAll(@Query() queryUserDto: QueryUserDto): Promise<User[]> {
     return await this.userService.findAll(queryUserDto);
   }
 
-  @CheckPolicies(new ReadUserPolicyHandler())
+  @CheckPolicies(new ReadPublicUserPolicyHandler())
   @Get(':id')
   async readOneById(@Param('id') id: string): Promise<User> {
     const user = await this.userService.findOneById(id);
@@ -46,7 +46,7 @@ export class ApiMainUserController {
     return user;
   }
 
-  @CheckPolicies(new CreateUserPolicyHandler())
+  @CheckPolicies(new CreatePublicUserPolicyHandler())
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     const user = await this.userService.create(createUserDto);
@@ -54,7 +54,7 @@ export class ApiMainUserController {
     return user;
   }
 
-  @CheckPolicies(new UpdateUserPolicyHandler())
+  @CheckPolicies(new UpdatePublicUserPolicyHandler())
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -68,7 +68,7 @@ export class ApiMainUserController {
     return user;
   }
 
-  @CheckPolicies(new DeleteUserPolicyHandler())
+  @CheckPolicies(new DeletePublicUserPolicyHandler())
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<User> {
     const user = await this.userService.remove(id);
