@@ -1,10 +1,11 @@
 import { Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type AccountCorporateDocument = AccountCorporate & Document;
 
 @Schema()
 export class AccountCorporate {
+  _id!: Types.ObjectId;
   name!: string;
 }
 

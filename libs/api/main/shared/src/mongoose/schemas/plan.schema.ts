@@ -1,10 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, Types } from 'mongoose';
 
 export type PlanDocument = Plan & Document;
 
 @Schema()
 export class Plan {
+  _id!: Types.ObjectId;
+
   @Prop({ required: true, index: 'text' })
   name!: string;
 

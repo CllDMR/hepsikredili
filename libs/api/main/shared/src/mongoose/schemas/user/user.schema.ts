@@ -29,6 +29,7 @@ export class User {
   @Prop({ required: true, select: false })
   password!: string;
 
+  //TODO: Add Profile into schema, service and controller
   // @Prop({ type: ProfileSchema, required: true, select: false })
   // profile!: Profile;
 }

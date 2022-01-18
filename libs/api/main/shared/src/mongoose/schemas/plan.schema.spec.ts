@@ -1,6 +1,6 @@
 import { Plan } from './plan.schema';
 
-describe('Payment Data-access', () => {
+describe('Plan Data-access', () => {
   it('should be defined', () => {
     expect(new Plan()).toBeDefined();
   });
