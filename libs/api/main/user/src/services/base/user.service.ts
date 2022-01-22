@@ -6,7 +6,7 @@ import {
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as $ from 'mongo-dot-notation';
-import { FilterQuery, Model, Types } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { CreateUserBaseDto } from '../../dtos/base/create-user.dto';
 import { QueryUserBaseDto } from '../../dtos/base/query-user.dto';
 import { UpdateUserBaseDto } from '../../dtos/base/update-user.dto';
@@ -18,7 +18,7 @@ export class ApiMainUserBaseService {
     private readonly userBaseModel: Model<UserBaseDocument>
   ) {}
 
-  async findAll(queryUserBaseDto: QueryUserBaseDto): Promise<UserBase[]> {
+  async findAll(_queryUserBaseDto: QueryUserBaseDto): Promise<UserBase[]> {
     // const { search } = queryUserDto;
 
     const filter: FilterQuery<UserBaseDocument> = {};
@@ -42,7 +42,6 @@ export class ApiMainUserBaseService {
     //TODO: Change Kind
     const userBase = new this.userBaseModel({
       ...createUserBaseDto,
-      account: new Types.ObjectId(),
       kind: UserIndividual.name,
     });
     return await userBase.save();

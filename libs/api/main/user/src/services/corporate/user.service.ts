@@ -5,7 +5,7 @@ import {
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as $ from 'mongo-dot-notation';
-import { FilterQuery, Model, Types } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { CreateUserCorporateDto } from '../../dtos/corporate/create-user.dto';
 import { QueryUserCorporateDto } from '../../dtos/corporate/query-user.dto';
 import { UpdateUserCorporateDto } from '../../dtos/corporate/update-user.dto';
@@ -18,7 +18,7 @@ export class ApiMainUserCorporateService {
   ) {}
 
   async findAll(
-    queryUserCorporateDto: QueryUserCorporateDto
+    _queryUserCorporateDto: QueryUserCorporateDto
   ): Promise<UserCorporate[]> {
     // const { search } = queryUserDto;
 
@@ -45,7 +45,6 @@ export class ApiMainUserCorporateService {
     //TODO: Change Kind
     const userCorporate = new this.userCorporateModel({
       ...createUserCorporateDto,
-      account: new Types.ObjectId(),
       kind: UserCorporate.name,
     });
     return await userCorporate.save();

@@ -1,6 +1,10 @@
-import { IsAlphanumeric, IsEmail, IsString } from 'class-validator';
+import { IsAlphanumeric, IsEmail, IsMongoId, IsString } from 'class-validator';
 
 export class CreateUserIndividualDto {
+  @IsString()
+  @IsMongoId()
+  account!: string;
+
   @IsString()
   @IsEmail()
   email!: string;

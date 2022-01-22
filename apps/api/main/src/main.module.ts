@@ -1,7 +1,7 @@
+import { ApiMainAuthModule } from '@hepsikredili/api-main-shared-auth';
 import { ApiMainAccountModule } from '@hepsikredili/api/main/account';
 import { ApiMainAdModule } from '@hepsikredili/api/main/ad';
 import { ApiMainAdDetailModule } from '@hepsikredili/api/main/ad-detail';
-import { ApiMainAuthModule } from '@hepsikredili/api/main/auth';
 import { ApiMainCloudinaryModule } from '@hepsikredili/api/main/cloudinary';
 import { ApiMainImageModule } from '@hepsikredili/api/main/image';
 import { ApiMainInvoiceModule } from '@hepsikredili/api/main/invoice';

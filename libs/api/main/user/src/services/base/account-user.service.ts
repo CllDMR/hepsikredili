@@ -20,7 +20,7 @@ export class ApiMainAccountUserBaseService {
 
   async findAll(
     accountId: string,
-    queryUserDto: QueryUserBaseDto
+    _queryUserDto: QueryUserBaseDto
   ): Promise<UserBase[]> {
     // const { search } = queryUserDto;
 

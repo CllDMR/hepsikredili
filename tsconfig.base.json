@@ -15,12 +15,14 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@hepsikredili/api-main-shared-auth": [
+        "libs/api/main/shared/auth/src/index.ts"
+      ],
       "@hepsikredili/api/main/account": ["libs/api/main/account/src/index.ts"],
       "@hepsikredili/api/main/ad": ["libs/api/main/ad/src/index.ts"],
       "@hepsikredili/api/main/ad-detail": [
         "libs/api/main/ad-detail/src/index.ts"
       ],
-      "@hepsikredili/api/main/auth": ["libs/api/main/auth/src/index.ts"],
       "@hepsikredili/api/main/cloudinary": [
         "libs/api/main/cloudinary/src/index.ts"
       ],

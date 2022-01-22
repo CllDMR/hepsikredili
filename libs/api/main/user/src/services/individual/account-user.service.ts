@@ -19,7 +19,7 @@ export class ApiMainAccountUserIndividualService {
 
   async findAll(
     accountId: string,
-    queryUserIndividualDto: QueryUserIndividualDto
+    _queryUserIndividualDto: QueryUserIndividualDto
   ): Promise<UserIndividual[]> {
     // const { search } = queryUserDto;
 

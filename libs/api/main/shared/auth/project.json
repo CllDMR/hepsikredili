@@ -1,0 +1,23 @@
+{
+  "root": "libs/api/main/shared/auth",
+  "sourceRoot": "libs/api/main/shared/auth/src",
+  "projectType": "library",
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/api/main/shared/auth/**/*.ts"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/api/main/shared/auth"],
+      "options": {
+        "jestConfig": "libs/api/main/shared/auth/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": ["scope:api", "scope:main", "scope:auth", "tag:lib"]
+}

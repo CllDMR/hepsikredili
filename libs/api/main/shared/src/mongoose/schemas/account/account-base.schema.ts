@@ -3,7 +3,7 @@ import { Document, Types } from 'mongoose';
 import { AccountCorporate } from './account-corporate.schema';
 import { AccountIndividual } from './account-individual.schema';
 
-export type AccountDocument = AccountBase & Document;
+export type AccountBaseDocument = AccountBase & Document;
 
 @Schema({ discriminatorKey: 'kind' })
 export class AccountBase {
