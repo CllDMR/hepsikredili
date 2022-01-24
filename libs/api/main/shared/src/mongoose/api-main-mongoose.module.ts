@@ -20,15 +20,7 @@ import { Invoice, InvoiceSchema } from './schemas/invoice.schema';
 import { Payment, PaymentSchema } from './schemas/payment.schema';
 import { Plan, PlanSchema } from './schemas/plan.schema';
 import { Profile, ProfileSchema } from './schemas/profile.schema';
-import { UserBase, UserBaseSchema } from './schemas/user/user-base.schema';
-import {
-  UserCorporate,
-  UserCorporateSchema,
-} from './schemas/user/user-corporate.schema';
-import {
-  UserIndividual,
-  UserIndividualSchema,
-} from './schemas/user/user-individual.schema';
+import { User, UserSchema } from './schemas/user/user-base.schema';
 
 @Module({
   imports: [
@@ -44,12 +36,8 @@ import {
     ]),
     MongooseModule.forFeature([
       {
-        name: UserBase.name,
-        schema: UserBaseSchema,
-        discriminators: [
-          { name: UserIndividual.name, schema: UserIndividualSchema },
-          { name: UserCorporate.name, schema: UserCorporateSchema },
-        ],
+        name: User.name,
+        schema: UserSchema,
       },
     ]),
     MongooseModule.forFeature([

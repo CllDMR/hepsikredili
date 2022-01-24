@@ -6,6 +6,8 @@ export type AccountCorporateDocument = AccountCorporate & Document;
 @Schema()
 export class AccountCorporate {
   _id!: Types.ObjectId;
+  emailVerified!: boolean;
+  email!: string;
   name!: string;
 }
 

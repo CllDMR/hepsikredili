@@ -6,11 +6,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { ApiMainUserCorporateService } from '../../services/corporate/user.service';
-import { ApiMainUserCorporateController } from './user.controller';
+import { ApiMainAccountUserService } from '../services/account-user.service';
+import { ApiMainAccountUserController } from './account-user.controller';
 
-describe('ApiMainUserCorporateController', () => {
-  let controller: ApiMainUserCorporateController;
+describe('ApiMainAccountUserController', () => {
+  let controller: ApiMainAccountUserController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -44,12 +44,12 @@ describe('ApiMainUserCorporateController', () => {
         ApiMainSharedMongooseModule,
         ApiMainSharedCaslModule,
       ],
-      controllers: [ApiMainUserCorporateController],
-      providers: [ApiMainUserCorporateService],
+      controllers: [ApiMainAccountUserController],
+      providers: [ApiMainAccountUserService],
     }).compile();
 
-    controller = module.get<ApiMainUserCorporateController>(
-      ApiMainUserCorporateController
+    controller = module.get<ApiMainAccountUserController>(
+      ApiMainAccountUserController
     );
   });
 

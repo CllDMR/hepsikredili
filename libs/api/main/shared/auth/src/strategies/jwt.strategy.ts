@@ -17,9 +17,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(payload: JWTPayload) {
     const reqUser: Partial<MyRequest['user']> = {
-      account_id: payload.acc,
+      account_ids: payload.accs,
       user_id: new Types.ObjectId(payload.usr),
-      user_kind: payload.knd,
     };
     return reqUser;
   }

@@ -16,9 +16,7 @@ import {
   Payment,
   Plan,
   Profile,
-  UserBase,
-  UserCorporate,
-  UserIndividual,
+  User,
 } from '..';
 import { MyRequest } from '../typings';
 import { Action } from './action.enum';
@@ -34,9 +32,7 @@ type Subjects =
       | typeof Payment
       | typeof Plan
       | typeof Profile
-      | typeof UserBase
-      | typeof UserCorporate
-      | typeof UserIndividual
+      | typeof User
     >
   | 'all';
 
@@ -58,8 +54,15 @@ export class CaslAbilityFactory {
 
     if (
       !metaData.accountId ||
-      !user.account_id ||
-      metaData.accountId !== user.account_id
+      !user.account_ids ||
+      !(user.account_ids as string[]).includes(metaData.accountId)
+    )
+      cannot(Action.Manage, 'all');
+
+    if (
+      !metaData.userId ||
+      !user.user_id ||
+      user.user_id.toHexString() !== metaData.userId
     )
       cannot(Action.Manage, 'all');
 

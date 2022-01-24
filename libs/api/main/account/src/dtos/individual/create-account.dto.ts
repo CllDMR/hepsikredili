@@ -1,4 +1,4 @@
-import { IsAlphanumeric, IsEmail, IsString } from 'class-validator';
+import { IsEmail, IsString } from 'class-validator';
 
 export class CreateAccountIndividualDto {
   @IsString()
@@ -6,6 +6,5 @@ export class CreateAccountIndividualDto {
   email!: string;
 
   @IsString()
-  @IsAlphanumeric()
-  password!: string;
+  name!: string;
 }

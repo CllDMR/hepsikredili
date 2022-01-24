@@ -50,6 +50,6 @@ export class ApiMainAuthController {
   registerCorporate(
     @Body() registerCorporateAuthDto: RegisterCorporateAuthDto
   ) {
-    return this.apiMainAuthService.registerIndividual(registerCorporateAuthDto);
+    return this.apiMainAuthService.registerCorporate(registerCorporateAuthDto);
   }
 }
