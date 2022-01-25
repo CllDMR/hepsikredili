@@ -6,6 +6,8 @@ export type AccountIndividualDocument = AccountIndividual & Document;
 @Schema()
 export class AccountIndividual {
   _id!: Types.ObjectId;
+  emailVerified!: boolean;
+  email!: string;
   name!: string;
 }
 

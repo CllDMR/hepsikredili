@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
+import { User } from '../user/user-base.schema';
 import { AccountCorporate } from './account-corporate.schema';
 import { AccountIndividual } from './account-individual.schema';
 
@@ -15,6 +16,13 @@ export class AccountBase {
     enum: [AccountIndividual.name, AccountCorporate.name],
   })
   kind!: string;
+
+  @Prop({
+    type: [MongooseSchema.Types.ObjectId],
+    ref: 'User',
+    required: true,
+  })
+  users!: [string] | [User];
 
   @Prop({ required: true, default: false })
   emailVerified!: boolean;

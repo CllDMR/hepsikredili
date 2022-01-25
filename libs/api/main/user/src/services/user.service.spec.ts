@@ -6,10 +6,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { ApiMainAccountUserIndividualService } from './account-user.service';
+import { ApiMainUserService } from './user.service';
 
-describe('ApiMainAccountUserIndividualService', () => {
-  let service: ApiMainAccountUserIndividualService;
+describe('ApiMainUserService', () => {
+  let service: ApiMainUserService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -43,12 +43,10 @@ describe('ApiMainAccountUserIndividualService', () => {
         ApiMainSharedMongooseModule,
         ApiMainSharedCaslModule,
       ],
-      providers: [ApiMainAccountUserIndividualService],
+      providers: [ApiMainUserService],
     }).compile();
 
-    service = module.get<ApiMainAccountUserIndividualService>(
-      ApiMainAccountUserIndividualService
-    );
+    service = module.get<ApiMainUserService>(ApiMainUserService);
   });
 
   it('should be defined', () => {

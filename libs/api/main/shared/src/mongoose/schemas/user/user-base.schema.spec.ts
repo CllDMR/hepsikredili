@@ -1,7 +1,7 @@
-import { UserBase } from './user-base.schema';
+import { User } from './user-base.schema';
 
 describe('UserBase Data-access', () => {
   it('should be defined', () => {
-    expect(new UserBase()).toBeDefined();
+    expect(new User()).toBeDefined();
   });
 });

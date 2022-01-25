@@ -1,24 +1,19 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 import { AccountBase } from '../account/account-base.schema';
-import { UserCorporate } from './user-corporate.schema';
-import { UserIndividual } from './user-individual.schema';
 
-export type UserBaseDocument = UserBase & Document;
+export type UserDocument = User & Document;
 
 @Schema({ discriminatorKey: 'kind' })
-export class UserBase {
+export class User {
   _id!: Types.ObjectId;
 
   @Prop({
-    type: String,
+    type: [MongooseSchema.Types.ObjectId],
+    ref: 'Account',
     required: true,
-    enum: [UserIndividual.name, UserCorporate.name],
   })
-  kind!: string;
-
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Account', required: true })
-  account!: string | AccountBase;
+  accounts!: string[] | AccountBase[];
 
   @Prop({ required: true, default: false })
   emailVerified!: boolean;
@@ -34,4 +29,4 @@ export class UserBase {
   // profile!: Profile;
 }
 
-export const UserBaseSchema = SchemaFactory.createForClass(UserBase);
+export const UserSchema = SchemaFactory.createForClass(User);

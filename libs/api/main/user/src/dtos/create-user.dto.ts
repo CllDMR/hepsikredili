@@ -1,6 +1,6 @@
 import { IsAlphanumeric, IsEmail, IsMongoId, IsString } from 'class-validator';
 
-export class CreateUserCorporateDto {
+export class CreateUserDto {
   @IsString()
   @IsMongoId()
   account!: string;

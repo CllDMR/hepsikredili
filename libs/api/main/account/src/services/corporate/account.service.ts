@@ -44,8 +44,10 @@ export class ApiMainAccountCorporateService {
   ): Promise<AccountCorporate> {
     //TODO: Change Kind
     const accountCorporate = new this.accountCorporateModel({
-      ...createAccountCorporateDto,
       kind: AccountCorporate.name,
+      emailVerified: false,
+      email: createAccountCorporateDto.email,
+      name: createAccountCorporateDto.name,
     });
     return await accountCorporate.save();
   }
