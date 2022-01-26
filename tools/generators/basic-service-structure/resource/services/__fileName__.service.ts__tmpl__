@@ -1,0 +1,59 @@
+import { <%= className %>, <%= className %>Document } from '@hepsikredili/api/main/shared';
+import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import * as $ from 'mongo-dot-notation';
+import { FilterQuery, Model } from 'mongoose';
+import { Create<%= className %>Dto } from '../dtos/create-<%= fileName %>.dto';
+import { Query<%= className %>Dto } from '../dtos/query-<%= fileName %>.dto';
+import { Update<%= className %>Dto } from '../dtos/update-<%= fileName %>.dto';
+
+@Injectable()
+export class ApiMain<%= className %>Service {
+  constructor(
+    @InjectModel(<%= className %>.name)
+    private readonly <%= fileName %>Model: Model<<%= className %>Document>
+  ) {}
+
+  async findAll(query<%= className %>Dto: Query<%= className %>Dto): Promise<<%= className %>[]> {
+    const { search, name, adLimitGt, adLimitLte, priceGt, priceLte } =
+      query<%= className %>Dto;
+
+    const filter: FilterQuery<<%= className %>Document> = {};
+
+    if (name) filter.name = name;
+    if (adLimitGt || adLimitLte) {
+      filter.adLimit = {};
+      if (adLimitGt) filter.adLimit.$gt = adLimitGt;
+      if (adLimitLte) filter.adLimit.$lte = adLimitLte;
+    }
+    if (priceGt || priceLte) {
+      filter.price = {};
+      if (priceGt) filter.price.$gt = priceGt;
+      if (priceLte) filter.price.$lte = priceLte;
+    }
+    if (search) filter.$text = { $search: search?.trim() };
+
+    return await this.<%= fileName %>Model.find(filter).exec();
+  }
+
+  async findOneById(id: string): Promise<<%= className %> | null> {
+    return await this.<%= fileName %>Model.findById(id).exec();
+  }
+
+  async create(create<%= className %>Dto: Create<%= className %>Dto): Promise<<%= className %>> {
+    const <%= fileName %> = new this.<%= fileName %>Model(create<%= className %>Dto);
+    return await <%= fileName %>.save();
+  }
+
+  async update(id: string, update<%= className %>Dto: Update<%= className %>Dto) {
+    const instructions = $.flatten(update<%= className %>Dto);
+
+    return await this.<%= fileName %>Model
+      .findByIdAndUpdate(id, instructions, { new: true })
+      .exec();
+  }
+
+  async remove(id: string) {
+    return await this.<%= fileName %>Model.findByIdAndRemove(id, { new: true }).exec();
+  }
+}

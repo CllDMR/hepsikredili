@@ -44,6 +44,7 @@
     "@nestjs/testing": "^8.0.0",
     "@nrwl/cli": "13.4.4",
     "@nrwl/cypress": "13.4.4",
+    "@nrwl/devkit": "13.4.4",
     "@nrwl/eslint-plugin-nx": "13.4.4",
     "@nrwl/jest": "13.4.4",
     "@nrwl/linter": "13.4.4",
