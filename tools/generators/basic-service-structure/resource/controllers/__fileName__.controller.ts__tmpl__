@@ -1,0 +1,81 @@
+import {
+  CheckPolicies,
+  CreateGeneral<%= className %>PolicyHandler,
+  DeleteGeneral<%= className %>PolicyHandler,
+  JwtAuthGuard,
+  <%= className %>,
+  PoliciesGeneralGuard,
+  ReadGeneral<%= className %>PolicyHandler,
+  UpdateGeneral<%= className %>PolicyHandler,
+} from '@hepsikredili/api/main/shared';
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
+import { Create<%= className %>Dto } from '../dtos/create-<%= fileName %>.dto';
+import { Query<%= className %>Dto } from '../dtos/query-<%= fileName %>.dto';
+import { Update<%= className %>Dto } from '../dtos/update-<%= fileName %>.dto';
+import { ApiMain<%= className %>Service } from '../services/<%= fileName %>.service';
+
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@Controller('<%= fileName %>s')
+export class ApiMain<%= className %>Controller {
+  constructor(private readonly <%= fileName %>Service: ApiMain<%= className %>Service) {}
+
+  @CheckPolicies(new ReadGeneral<%= className %>PolicyHandler())
+  @Get()
+  async readAll(@Query() query<%= className %>Dto: Query<%= className %>Dto): Promise<<%= className %>[]> {
+    return await this.<%= fileName %>Service.findAll(query<%= className %>Dto);
+  }
+
+  @CheckPolicies(new ReadGeneral<%= className %>PolicyHandler())
+  @Get(':id')
+  async readOneById(@Param('id') id: string): Promise<<%= className %>> {
+    const <%= fileName %> = await this.<%= fileName %>Service.findOneById(id);
+    if (!<%= fileName %>)
+      throw new BadRequestException(`Resource not found with id: ${id}`);
+    return <%= fileName %>;
+  }
+
+  @CheckPolicies(new CreateGeneral<%= className %>PolicyHandler())
+  @Post()
+  async create(@Body() create<%= className %>Dto: Create<%= className %>Dto): Promise<<%= className %>> {
+    const <%= fileName %> = await this.<%= fileName %>Service.create(create<%= className %>Dto);
+    if (!<%= fileName %>) throw new BadRequestException(`Resource could not created`);
+    return <%= fileName %>;
+  }
+
+  @CheckPolicies(new UpdateGeneral<%= className %>PolicyHandler())
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() update<%= className %>Dto: Update<%= className %>Dto
+  ): Promise<<%= className %>> {
+    const <%= fileName %> = await this.<%= fileName %>Service.update(id, update<%= className %>Dto);
+    if (!<%= fileName %>)
+      throw new BadRequestException(
+        `Resource could not updated with id: ${id}`
+      );
+    return <%= fileName %>;
+  }
+
+  @CheckPolicies(new DeleteGeneral<%= className %>PolicyHandler())
+  @Delete(':id')
+  async delete(@Param('id') id: string): Promise<<%= className %>> {
+    const <%= fileName %> = await this.<%= fileName %>Service.remove(id);
+    if (!<%= fileName %>)
+      throw new BadRequestException(
+        `Resource could not deleted with id: ${id}`
+      );
+    return <%= fileName %>;
+  }
+}

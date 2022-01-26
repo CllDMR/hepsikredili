@@ -1,0 +1,60 @@
+import {
+  ApiMainSharedCaslModule,
+  ApiMainSharedMongooseModule,
+} from '@hepsikredili/api/main/shared';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Test, TestingModule } from '@nestjs/testing';
+import { ThrottlerModule } from '@nestjs/throttler';
+import { ApiMainAccount<%= className %>Service } from '../services/account-<%= fileName %>.service';
+import { ApiMainAccount<%= className %>Controller } from './account-<%= fileName %>.controller';
+
+describe('ApiMainAccount<%= className %>Controller', () => {
+  let controller: ApiMainAccount<%= className %>Controller;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        ConfigModule.forRoot({
+          isGlobal: true,
+          expandVariables: true,
+          cache: true,
+          envFilePath: `${process.cwd()}/apps/api/main/.env`,
+        }),
+        ThrottlerModule.forRootAsync({
+          imports: [ConfigModule],
+          inject: [ConfigService],
+          useFactory: async (config: ConfigService) => ({
+            ttl: config.get('RATE_LIMIT_TTL'),
+            limit: config.get('RATE_LIMIT_LIMIT'),
+          }),
+        }),
+        MongooseModule.forRootAsync({
+          imports: [ConfigModule],
+          inject: [ConfigService],
+          useFactory: async (config: ConfigService) => ({
+            uri: config.get('MONGO_URI'),
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            // useCreateIndex: true,
+            // useFindAndModify: false,
+          }),
+        }),
+
+        ApiMainSharedMongooseModule,
+        ApiMainSharedCaslModule,
+      ],
+
+      controllers: [ApiMainAccount<%= className %>Controller],
+      providers: [ApiMainAccount<%= className %>Service],
+    }).compile();
+
+    controller = module.get<ApiMainAccount<%= className %>Controller>(
+      ApiMainAccount<%= className %>Controller
+    );
+  });
+
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
+  });
+});

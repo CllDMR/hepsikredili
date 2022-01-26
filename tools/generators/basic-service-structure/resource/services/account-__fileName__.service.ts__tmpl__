@@ -1,0 +1,9 @@
+import { Injectable } from '@nestjs/common';
+
+// TODO: What is actually <%= fileName %> is and what is the relationship between account and <%= fileName %>
+
+@Injectable()
+export class ApiMainAccount<%= className %>Service {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  constructor() {}
+}
