@@ -9,5 +9,5 @@ import { ApiMainAccount<%= className %>Service } from '../services/account-<%= f
 @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
 @Controller('accounts/:accountId/<%= fileName %>s')
 export class ApiMainAccount<%= className %>Controller {
-  constructor(private readonly account<%= className %>Service: ApiMainAccount<%= className %>Service) {}
+  constructor(private readonly account<%= propertyName %>Service: ApiMainAccount<%= className %>Service) {}
 }

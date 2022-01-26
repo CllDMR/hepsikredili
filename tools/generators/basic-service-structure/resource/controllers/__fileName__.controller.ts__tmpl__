@@ -29,29 +29,29 @@ import { ApiMain<%= className %>Service } from '../services/<%= fileName %>.serv
 @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
 @Controller('<%= fileName %>s')
 export class ApiMain<%= className %>Controller {
-  constructor(private readonly <%= fileName %>Service: ApiMain<%= className %>Service) {}
+  constructor(private readonly <%= propertyName %>Service: ApiMain<%= className %>Service) {}
 
   @CheckPolicies(new ReadGeneral<%= className %>PolicyHandler())
   @Get()
   async readAll(@Query() query<%= className %>Dto: Query<%= className %>Dto): Promise<<%= className %>[]> {
-    return await this.<%= fileName %>Service.findAll(query<%= className %>Dto);
+    return await this.<%= propertyName %>Service.findAll(query<%= className %>Dto);
   }
 
   @CheckPolicies(new ReadGeneral<%= className %>PolicyHandler())
   @Get(':id')
   async readOneById(@Param('id') id: string): Promise<<%= className %>> {
-    const <%= fileName %> = await this.<%= fileName %>Service.findOneById(id);
-    if (!<%= fileName %>)
+    const <%= propertyName %> = await this.<%= propertyName %>Service.findOneById(id);
+    if (!<%= propertyName %>)
       throw new BadRequestException(`Resource not found with id: ${id}`);
-    return <%= fileName %>;
+    return <%= propertyName %>;
   }
 
   @CheckPolicies(new CreateGeneral<%= className %>PolicyHandler())
   @Post()
   async create(@Body() create<%= className %>Dto: Create<%= className %>Dto): Promise<<%= className %>> {
-    const <%= fileName %> = await this.<%= fileName %>Service.create(create<%= className %>Dto);
-    if (!<%= fileName %>) throw new BadRequestException(`Resource could not created`);
-    return <%= fileName %>;
+    const <%= propertyName %> = await this.<%= propertyName %>Service.create(create<%= className %>Dto);
+    if (!<%= propertyName %>) throw new BadRequestException(`Resource could not created`);
+    return <%= propertyName %>;
   }
 
   @CheckPolicies(new UpdateGeneral<%= className %>PolicyHandler())
@@ -60,22 +60,22 @@ export class ApiMain<%= className %>Controller {
     @Param('id') id: string,
     @Body() update<%= className %>Dto: Update<%= className %>Dto
   ): Promise<<%= className %>> {
-    const <%= fileName %> = await this.<%= fileName %>Service.update(id, update<%= className %>Dto);
-    if (!<%= fileName %>)
+    const <%= propertyName %> = await this.<%= propertyName %>Service.update(id, update<%= className %>Dto);
+    if (!<%= propertyName %>)
       throw new BadRequestException(
         `Resource could not updated with id: ${id}`
       );
-    return <%= fileName %>;
+    return <%= propertyName %>;
   }
 
   @CheckPolicies(new DeleteGeneral<%= className %>PolicyHandler())
   @Delete(':id')
   async delete(@Param('id') id: string): Promise<<%= className %>> {
-    const <%= fileName %> = await this.<%= fileName %>Service.remove(id);
-    if (!<%= fileName %>)
+    const <%= propertyName %> = await this.<%= propertyName %>Service.remove(id);
+    if (!<%= propertyName %>)
       throw new BadRequestException(
         `Resource could not deleted with id: ${id}`
       );
-    return <%= fileName %>;
+    return <%= propertyName %>;
   }
 }

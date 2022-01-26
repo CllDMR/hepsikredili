@@ -11,7 +11,7 @@ import { Update<%= className %>Dto } from '../dtos/update-<%= fileName %>.dto';
 export class ApiMain<%= className %>Service {
   constructor(
     @InjectModel(<%= className %>.name)
-    private readonly <%= fileName %>Model: Model<<%= className %>Document>
+    private readonly <%= propertyName %>Model: Model<<%= className %>Document>
   ) {}
 
   async findAll(query<%= className %>Dto: Query<%= className %>Dto): Promise<<%= className %>[]> {
@@ -33,27 +33,27 @@ export class ApiMain<%= className %>Service {
     }
     if (search) filter.$text = { $search: search?.trim() };
 
-    return await this.<%= fileName %>Model.find(filter).exec();
+    return await this.<%= propertyName %>Model.find(filter).exec();
   }
 
   async findOneById(id: string): Promise<<%= className %> | null> {
-    return await this.<%= fileName %>Model.findById(id).exec();
+    return await this.<%= propertyName %>Model.findById(id).exec();
   }
 
   async create(create<%= className %>Dto: Create<%= className %>Dto): Promise<<%= className %>> {
-    const <%= fileName %> = new this.<%= fileName %>Model(create<%= className %>Dto);
-    return await <%= fileName %>.save();
+    const <%= propertyName %> = new this.<%= propertyName %>Model(create<%= className %>Dto);
+    return await <%= propertyName %>.save();
   }
 
   async update(id: string, update<%= className %>Dto: Update<%= className %>Dto) {
     const instructions = $.flatten(update<%= className %>Dto);
 
-    return await this.<%= fileName %>Model
+    return await this.<%= propertyName %>Model
       .findByIdAndUpdate(id, instructions, { new: true })
       .exec();
   }
 
   async remove(id: string) {
-    return await this.<%= fileName %>Model.findByIdAndRemove(id, { new: true }).exec();
+    return await this.<%= propertyName %>Model.findByIdAndRemove(id, { new: true }).exec();
   }
 }
