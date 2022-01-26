@@ -1,4 +1,5 @@
 //Casl
+
 export * from './casl/api-main-casl.module';
 export * from './casl/policy-handler';
 //Guards
@@ -23,17 +24,19 @@ export * from './mongoose/schemas/profile.schema';
 export * from './mongoose/schemas/user/user-base.schema';
 //Pipes
 export * from './pipes/validation.pipe';
+//Policies - General
 export * from './policies/general/account-base.policy';
 export * from './policies/general/account-corporate.policy';
 export * from './policies/general/account-individual.policy';
-//Policies - General
+export * from './policies/general/image.policy';
+export * from './policies/general/invoice.policy';
 export * from './policies/general/payment.policy';
 export * from './policies/general/plan.policy';
 export * from './policies/general/user-base.policy';
+//Policies - Membership
 export * from './policies/membership/account-base.policy';
 export * from './policies/membership/account-corporate.policy';
 export * from './policies/membership/account-individual.policy';
-//Policies - Membership
 export * from './policies/membership/plan.policy';
 export * from './policies/membership/user-base.policy';
 //Typings
