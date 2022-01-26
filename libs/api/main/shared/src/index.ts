@@ -25,6 +25,8 @@ export * from './mongoose/schemas/user/user-base.schema';
 //Pipes
 export * from './pipes/validation.pipe';
 //Policies - General
+export * from './policies/general/ad-detail.policy';
+export * from './policies/general/ad.policy';
 export * from './policies/general/account-base.policy';
 export * from './policies/general/account-corporate.policy';
 export * from './policies/general/account-individual.policy';
