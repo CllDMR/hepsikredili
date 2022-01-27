@@ -40,6 +40,8 @@ export * from './policies/general/payment.policy';
 export * from './policies/general/plan.policy';
 export * from './policies/general/user-base.policy';
 //Policies - Membership
+export * from './policies/membership/ad/satilik-daire.policy';
+export * from './policies/membership/ad-detail/satilik-daire.policy';
 export * from './policies/membership/account-base.policy';
 export * from './policies/membership/account-corporate.policy';
 export * from './policies/membership/account-individual.policy';
