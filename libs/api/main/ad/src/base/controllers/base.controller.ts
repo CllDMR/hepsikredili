@@ -8,6 +8,7 @@ import {
   ReadGeneralAdBasePolicyHandler,
   UpdateGeneralAdBasePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -39,7 +40,9 @@ export class BaseController {
 
   @CheckPolicies(new ReadGeneralAdBasePolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<AdBase> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AdBase> {
     const adBase = await this.baseService.findOneById(id);
     if (!adBase)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -57,7 +60,7 @@ export class BaseController {
   @CheckPolicies(new UpdateGeneralAdBasePolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateBaseDto: UpdateBaseDto
   ): Promise<AdBase> {
     const adBase = await this.baseService.update(id, updateBaseDto);
@@ -70,7 +73,9 @@ export class BaseController {
 
   @CheckPolicies(new DeleteGeneralAdBasePolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<AdBase> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AdBase> {
     const adBase = await this.baseService.remove(id);
     if (!adBase)
       throw new BadRequestException(

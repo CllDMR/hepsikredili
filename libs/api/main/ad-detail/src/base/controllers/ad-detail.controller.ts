@@ -1,13 +1,14 @@
 import {
+  AdDetailBase,
   CheckPolicies,
-  CreateGeneralAdDetailPolicyHandler,
-  DeleteGeneralAdDetailPolicyHandler,
+  CreateGeneralAdDetailBasePolicyHandler,
+  DeleteGeneralAdDetailBasePolicyHandler,
   JwtAuthGuard,
-  AdDetail,
   PoliciesGeneralGuard,
-  ReadGeneralAdDetailPolicyHandler,
-  UpdateGeneralAdDetailPolicyHandler,
+  ReadGeneralAdDetailBasePolicyHandler,
+  UpdateGeneralAdDetailBasePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -31,39 +32,41 @@ import { ApiMainAdDetailService } from '../services/ad-detail.service';
 export class ApiMainAdDetailController {
   constructor(private readonly adDetailService: ApiMainAdDetailService) {}
 
-  @CheckPolicies(new ReadGeneralAdDetailPolicyHandler())
+  @CheckPolicies(new ReadGeneralAdDetailBasePolicyHandler())
   @Get()
   async readAll(
     @Query() queryAdDetailDto: QueryAdDetailDto
-  ): Promise<AdDetail[]> {
+  ): Promise<AdDetailBase[]> {
     return await this.adDetailService.findAll(queryAdDetailDto);
   }
 
-  @CheckPolicies(new ReadGeneralAdDetailPolicyHandler())
+  @CheckPolicies(new ReadGeneralAdDetailBasePolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<AdDetail> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AdDetailBase> {
     const adDetail = await this.adDetailService.findOneById(id);
     if (!adDetail)
       throw new BadRequestException(`Resource not found with id: ${id}`);
     return adDetail;
   }
 
-  @CheckPolicies(new CreateGeneralAdDetailPolicyHandler())
+  @CheckPolicies(new CreateGeneralAdDetailBasePolicyHandler())
   @Post()
   async create(
     @Body() createAdDetailDto: CreateAdDetailDto
-  ): Promise<AdDetail> {
+  ): Promise<AdDetailBase> {
     const adDetail = await this.adDetailService.create(createAdDetailDto);
     if (!adDetail) throw new BadRequestException(`Resource could not created`);
     return adDetail;
   }
 
-  @CheckPolicies(new UpdateGeneralAdDetailPolicyHandler())
+  @CheckPolicies(new UpdateGeneralAdDetailBasePolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateAdDetailDto: UpdateAdDetailDto
-  ): Promise<AdDetail> {
+  ): Promise<AdDetailBase> {
     const adDetail = await this.adDetailService.update(id, updateAdDetailDto);
     if (!adDetail)
       throw new BadRequestException(
@@ -72,9 +75,11 @@ export class ApiMainAdDetailController {
     return adDetail;
   }
 
-  @CheckPolicies(new DeleteGeneralAdDetailPolicyHandler())
+  @CheckPolicies(new DeleteGeneralAdDetailBasePolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<AdDetail> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AdDetailBase> {
     const adDetail = await this.adDetailService.remove(id);
     if (!adDetail)
       throw new BadRequestException(

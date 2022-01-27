@@ -7,6 +7,7 @@ import {
   PoliciesMembershipGuard,
   ReadMembershipAccountImagePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Controller,
@@ -32,13 +33,17 @@ export class ApiMainAccountImageController {
 
   @CheckPolicies(new ReadMembershipAccountImagePolicyHandler())
   @Get()
-  findAll(@Param('accountId') accountIdParam: string) {
+  findAll(
+    @Param('accountId', ValidateMongooseObjectIdPipe) accountIdParam: string
+  ) {
     return this.accountImageService.findAll(accountIdParam);
   }
 
   @CheckPolicies(new ReadMembershipAccountImagePolicyHandler())
   @Get(`:id`)
-  async findOne(@Param('id') imageIdParam: string) {
+  async findOne(
+    @Param('id', ValidateMongooseObjectIdPipe) imageIdParam: string
+  ) {
     const image = await this.accountImageService.findOneById(imageIdParam);
     if (!image) throw new BadRequestException('Resource could not found');
     return image;
@@ -49,7 +54,7 @@ export class ApiMainAccountImageController {
   @Post()
   async create(
     @UploadedFile() file: Express.Multer.File,
-    @Param('accountId') accountIdParam: string
+    @Param('accountId', ValidateMongooseObjectIdPipe) accountIdParam: string
   ) {
     const image = await this.cloudinaryService.uploadImage(file);
 
@@ -62,7 +67,9 @@ export class ApiMainAccountImageController {
 
   @CheckPolicies(new DeleteMembershipAccountImagePolicyHandler())
   @Delete(`:id`)
-  async remove(@Param('id') imageIdParam: string) {
+  async remove(
+    @Param('id', ValidateMongooseObjectIdPipe) imageIdParam: string
+  ) {
     const image = await this.accountImageService.findOneById(imageIdParam);
     if (!image) throw new BadRequestException('Resource could not found');
     await this.cloudinaryService.destroyImage(image.cloudinaryId);

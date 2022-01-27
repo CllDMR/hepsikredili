@@ -2,12 +2,13 @@ import {
   CheckPolicies,
   CreateGeneralInvoicePolicyHandler,
   DeleteGeneralInvoicePolicyHandler,
-  JwtAuthGuard,
   Invoice,
+  JwtAuthGuard,
   PoliciesGeneralGuard,
   ReadGeneralInvoicePolicyHandler,
   UpdateGeneralInvoicePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -39,7 +40,9 @@ export class ApiMainInvoiceController {
 
   @CheckPolicies(new ReadGeneralInvoicePolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<Invoice> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<Invoice> {
     const invoice = await this.invoiceService.findOneById(id);
     if (!invoice)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -57,7 +60,7 @@ export class ApiMainInvoiceController {
   @CheckPolicies(new UpdateGeneralInvoicePolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateInvoiceDto: UpdateInvoiceDto
   ): Promise<Invoice> {
     const invoice = await this.invoiceService.update(id, updateInvoiceDto);
@@ -70,7 +73,9 @@ export class ApiMainInvoiceController {
 
   @CheckPolicies(new DeleteGeneralInvoicePolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<Invoice> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<Invoice> {
     const invoice = await this.invoiceService.remove(id);
     if (!invoice)
       throw new BadRequestException(

@@ -5,6 +5,7 @@ import {
   PoliciesGeneralGuard,
   ReadGeneralImagePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Controller,
@@ -22,7 +23,9 @@ export class ApiMainImageController {
 
   @CheckPolicies(new ReadGeneralImagePolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<Image> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<Image> {
     const image = await this.imageService.findOneById(id);
     if (!image)
       throw new BadRequestException(`Resource not found with id: ${id}`);

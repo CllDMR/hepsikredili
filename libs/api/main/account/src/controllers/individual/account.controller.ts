@@ -8,6 +8,7 @@ import {
   ReadGeneralAccountIndividualPolicyHandler,
   UpdateGeneralAccountIndividualPolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -45,7 +46,9 @@ export class ApiMainAccountIndividualController {
 
   @CheckPolicies(new ReadGeneralAccountIndividualPolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<AccountIndividual> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AccountIndividual> {
     const accountIndividual = await this.accountIndividualService.findOneById(
       id
     );
@@ -70,7 +73,7 @@ export class ApiMainAccountIndividualController {
   @CheckPolicies(new UpdateGeneralAccountIndividualPolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateAccountIndividualDto: UpdateAccountIndividualDto
   ): Promise<AccountIndividual> {
     const accountIndividual = await this.accountIndividualService.update(
@@ -86,7 +89,9 @@ export class ApiMainAccountIndividualController {
 
   @CheckPolicies(new DeleteGeneralAccountIndividualPolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<AccountIndividual> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AccountIndividual> {
     const accountIndividual = await this.accountIndividualService.remove(id);
     if (!accountIndividual)
       throw new BadRequestException(

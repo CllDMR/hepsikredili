@@ -8,6 +8,7 @@ import {
   ReadGeneralAccountCorporatePolicyHandler,
   UpdateGeneralAccountCorporatePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -43,7 +44,9 @@ export class ApiMainAccountCorporateController {
 
   @CheckPolicies(new ReadGeneralAccountCorporatePolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<AccountCorporate> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AccountCorporate> {
     const accountCorporate = await this.accountCorporateService.findOneById(id);
     if (!accountCorporate)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -66,7 +69,7 @@ export class ApiMainAccountCorporateController {
   @CheckPolicies(new UpdateGeneralAccountCorporatePolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateAccountCorporateDto: UpdateAccountCorporateDto
   ): Promise<AccountCorporate> {
     const accountCorporate = await this.accountCorporateService.update(
@@ -82,7 +85,9 @@ export class ApiMainAccountCorporateController {
 
   @CheckPolicies(new DeleteGeneralAccountCorporatePolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<AccountCorporate> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AccountCorporate> {
     const accountCorporate = await this.accountCorporateService.remove(id);
     if (!accountCorporate)
       throw new BadRequestException(

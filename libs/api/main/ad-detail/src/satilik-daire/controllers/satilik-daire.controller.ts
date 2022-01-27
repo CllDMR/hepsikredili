@@ -8,6 +8,7 @@ import {
   ReadGeneralAdDetailSatilikDairePolicyHandler,
   UpdateGeneralAdDetailSatilikDairePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -41,7 +42,9 @@ export class SatilikDaireController {
 
   @CheckPolicies(new ReadGeneralAdDetailSatilikDairePolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<AdDetailSatilikDaire> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AdDetailSatilikDaire> {
     const satilikDaire = await this.satilikDaireService.findOneById(id);
     if (!satilikDaire)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -64,7 +67,7 @@ export class SatilikDaireController {
   @CheckPolicies(new UpdateGeneralAdDetailSatilikDairePolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateSatilikDaireDto: UpdateSatilikDaireDto
   ): Promise<AdDetailSatilikDaire> {
     const satilikDaire = await this.satilikDaireService.update(
@@ -80,7 +83,9 @@ export class SatilikDaireController {
 
   @CheckPolicies(new DeleteGeneralAdDetailSatilikDairePolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<AdDetailSatilikDaire> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AdDetailSatilikDaire> {
     const satilikDaire = await this.satilikDaireService.remove(id);
     if (!satilikDaire)
       throw new BadRequestException(
