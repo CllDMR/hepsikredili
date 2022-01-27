@@ -1,11 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
-import { Ad } from '../ad/ad.schema';
+import { AdBase } from '../ad/base.schema';
 
-export type AdDetailDocument = AdDetail & Document;
+export type AdDetailBaseDocument = AdDetailBase & Document;
 
 @Schema()
-export class AdDetail {
+export class AdDetailBase {
   _id!: Types.ObjectId;
 
   @Prop({
@@ -16,10 +16,10 @@ export class AdDetail {
   kind!: string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Ad', required: true })
-  ad!: string | Ad;
+  ad!: string | AdBase;
 
   @Prop({ required: true })
   description!: string;
 }
 
-export const AdDetailSchema = SchemaFactory.createForClass(AdDetail);
+export const AdDetailBaseSchema = SchemaFactory.createForClass(AdDetailBase);

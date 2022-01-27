@@ -1,0 +1,15 @@
+import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document, Types } from 'mongoose';
+import { Ad<%= className %> } from '../ad/<%= fileName %>.schema';
+
+export type AdDetail<%= className %>Document = AdDetail<%= className %> & Document;
+
+@Schema()
+export class AdDetail<%= className %> {
+  _id!: Types.ObjectId;
+  kind!: string;
+  ad!: string | Ad<%= className %>;
+  description!: string;
+}
+
+export const AdDetail<%= className %>Schema = SchemaFactory.createForClass(AdDetail<%= className %>);

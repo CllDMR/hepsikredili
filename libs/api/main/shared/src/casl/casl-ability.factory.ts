@@ -10,7 +10,7 @@ import {
   AccountBase,
   AccountCorporate,
   AccountIndividual,
-  Ad,
+  AdBase,
   Image,
   Invoice,
   Payment,
@@ -26,7 +26,7 @@ type Subjects =
       | typeof AccountBase
       | typeof AccountCorporate
       | typeof AccountIndividual
-      | typeof Ad
+      | typeof AdBase
       | typeof Image
       | typeof Invoice
       | typeof Payment

@@ -1,16 +1,16 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
 import { AccountBase } from '../account/account-base.schema';
-import { AdDetail } from '../ad-detail/ad-detail.schema';
+import { AdDetailBase } from '../ad-detail/base.schema';
 import { Address, AddressSchema } from '../address.schema';
 import { ImageShrinked, ImageShrinkedSchema } from '../image-shrinked.schema';
 
-export type AdDocument = Ad & Document;
+export type AdBaseDocument = AdBase & Document;
 
 @Schema({
   timestamps: true,
 })
-export class Ad {
+export class AdBase {
   @Prop({
     type: String,
     required: true,
@@ -35,7 +35,7 @@ export class Ad {
     ref: 'AdDetail',
     required: true,
   })
-  detail!: string | AdDetail;
+  detail!: string | AdDetailBase;
 
   @Prop({ required: true })
   name!: string;
@@ -56,4 +56,4 @@ export class Ad {
   images!: ImageShrinked[];
 }
 
-export const AdSchema = SchemaFactory.createForClass(Ad);
+export const AdBaseSchema = SchemaFactory.createForClass(AdBase);

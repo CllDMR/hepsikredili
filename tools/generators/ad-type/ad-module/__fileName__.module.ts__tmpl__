@@ -1,0 +1,16 @@
+import {
+  ApiMainSharedCaslModule,
+  ApiMainSharedMongooseModule,
+} from '@hepsikredili/api/main/shared';
+import { Module } from '@nestjs/common';
+import { Account<%= className %>Controller } from './controllers/account-<%= fileName %>.controller';
+import { <%= className %>Controller } from './controllers/<%= fileName %>.controller';
+import { Account<%= className %>Service } from './services/account-<%= fileName %>.service';
+import { <%= className %>Service } from './services/<%= fileName %>.service';
+
+@Module({
+  imports: [ApiMainSharedMongooseModule, ApiMainSharedCaslModule],
+  controllers: [<%= className %>Controller, Account<%= className %>Controller],
+  providers: [<%= className %>Service, Account<%= className %>Service],
+})
+export class <%= className %>Module {}

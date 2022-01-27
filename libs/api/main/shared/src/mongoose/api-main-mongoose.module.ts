@@ -13,8 +13,19 @@ import {
   AccountIndividual,
   AccountIndividualSchema,
 } from './schemas/account/account-individual.schema';
-import { AdDetail, AdDetailSchema } from './schemas/ad-detail/ad-detail.schema';
-import { Ad, AdSchema } from './schemas/ad/ad.schema';
+import {
+  AdDetailBase,
+  AdDetailBaseSchema,
+} from './schemas/ad-detail/base.schema';
+import {
+  AdDetailSatilikDaire,
+  AdDetailSatilikDaireSchema,
+} from './schemas/ad-detail/satilik-daire.schema';
+import { AdBase, AdBaseSchema } from './schemas/ad/base.schema';
+import {
+  AdSatilikDaire,
+  AdSatilikDaireSchema,
+} from './schemas/ad/satilik-daire.schema';
 import { Image, ImageSchema } from './schemas/image.schema';
 import { Invoice, InvoiceSchema } from './schemas/invoice.schema';
 import { Payment, PaymentSchema } from './schemas/payment.schema';
@@ -48,18 +59,31 @@ import { User, UserSchema } from './schemas/user/user-base.schema';
     ]),
     MongooseModule.forFeatureAsync([
       {
-        name: Ad.name,
+        name: AdBase.name,
+        discriminators: [
+          { name: AdSatilikDaire.name, schema: AdSatilikDaireSchema },
+        ],
         useFactory: () => {
-          const schema = AdSchema;
+          const schema = AdBaseSchema;
           schema.plugin(mongoosePaginateV2);
           return schema;
         },
       },
     ]),
-    MongooseModule.forFeature([
+    MongooseModule.forFeatureAsync([
       {
-        name: AdDetail.name,
-        schema: AdDetailSchema,
+        name: AdDetailBase.name,
+        discriminators: [
+          {
+            name: AdDetailSatilikDaire.name,
+            schema: AdDetailSatilikDaireSchema,
+          },
+        ],
+        useFactory: () => {
+          const schema = AdDetailBaseSchema;
+          schema.plugin(mongoosePaginateV2);
+          return schema;
+        },
       },
     ]),
     MongooseModule.forFeature([

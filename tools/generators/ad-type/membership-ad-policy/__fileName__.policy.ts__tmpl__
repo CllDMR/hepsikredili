@@ -1,0 +1,27 @@
+import { Ad<%= className %>, IPolicyHandler } from '../../..';
+import { Action } from '../../../casl/action.enum';
+import { AppAbility } from '../../../casl/casl-ability.factory';
+
+export class CreateMembershipAd<%= className %>PolicyHandler implements IPolicyHandler {
+  handle(ability: AppAbility) {
+    return ability.can(Action.Create, Ad<%= className %>);
+  }
+}
+
+export class ReadMembershipAd<%= className %>PolicyHandler implements IPolicyHandler {
+  handle(ability: AppAbility) {
+    return ability.can(Action.Read, Ad<%= className %>);
+  }
+}
+
+export class UpdateMembershipAd<%= className %>PolicyHandler implements IPolicyHandler {
+  handle(ability: AppAbility) {
+    return ability.can(Action.Update, Ad<%= className %>);
+  }
+}
+
+export class DeleteMembershipAd<%= className %>PolicyHandler implements IPolicyHandler {
+  handle(ability: AppAbility) {
+    return ability.can(Action.Delete, Ad<%= className %>);
+  }
+}

@@ -1,7 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 import { AccountBase } from './account/account-base.schema';
-import { Ad } from './ad/ad.schema';
+import { AdBase } from './ad/base.schema';
 
 export type ImageDocument = Image & Document;
 
@@ -19,7 +19,7 @@ export class Image {
   owner!: AccountBase | string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Ad', required: false })
-  ad!: Ad | string;
+  ad!: AdBase | string;
 }
 
 export const ImageSchema = SchemaFactory.createForClass(Image);
