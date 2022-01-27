@@ -14,25 +14,8 @@ export class ApiMainInvoiceService {
     private readonly invoiceModel: Model<InvoiceDocument>
   ) {}
 
-  async findAll(queryInvoiceDto: QueryInvoiceDto): Promise<Invoice[]> {
-    const { search, name, adLimitGt, adLimitLte, priceGt, priceLte } =
-      queryInvoiceDto;
-
+  async findAll(_queryInvoiceDto: QueryInvoiceDto): Promise<Invoice[]> {
     const filter: FilterQuery<InvoiceDocument> = {};
-
-    if (name) filter.name = name;
-    if (adLimitGt || adLimitLte) {
-      filter.adLimit = {};
-      if (adLimitGt) filter.adLimit.$gt = adLimitGt;
-      if (adLimitLte) filter.adLimit.$lte = adLimitLte;
-    }
-    if (priceGt || priceLte) {
-      filter.price = {};
-      if (priceGt) filter.price.$gt = priceGt;
-      if (priceLte) filter.price.$lte = priceLte;
-    }
-    if (search) filter.$text = { $search: search?.trim() };
-
     return await this.invoiceModel.find(filter).exec();
   }
 
