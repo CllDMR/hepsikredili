@@ -4,14 +4,16 @@
   "$id": "ad-type",
   "type": "object",
   "properties": {
-    "name": {
+    "adType": {
       "type": "string",
-      "description": "Library name",
+      "description": "The name of the adType.",
+      "alias": "n",
       "$default": {
         "$source": "argv",
         "index": 0
-      }
+      },
+      "x-prompt": "What name would you like to use for the adType?"
     }
   },
-  "required": ["name"]
+  "required": ["adType"]
 }

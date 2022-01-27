@@ -1,0 +1,7 @@
+import { Ad<%= className %> } from './<%= fileName %>.schema';
+
+describe('Ad<%= className %> Data-access', () => {
+  it('should be defined', () => {
+    expect(new Ad<%= className %>()).toBeDefined();
+  });
+});
