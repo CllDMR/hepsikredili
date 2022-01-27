@@ -8,6 +8,7 @@ import {
   ReadGeneralPaymentPolicyHandler,
   UpdateGeneralPaymentPolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -39,7 +40,9 @@ export class ApiMainPaymentController {
 
   @CheckPolicies(new ReadGeneralPaymentPolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<Payment> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<Payment> {
     const payment = await this.paymentService.findOneById(id);
     if (!payment)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -57,7 +60,7 @@ export class ApiMainPaymentController {
   @CheckPolicies(new UpdateGeneralPaymentPolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updatePaymentDto: UpdatePaymentDto
   ): Promise<Payment> {
     const payment = await this.paymentService.update(id, updatePaymentDto);
@@ -70,7 +73,9 @@ export class ApiMainPaymentController {
 
   @CheckPolicies(new DeleteGeneralPaymentPolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<Payment> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<Payment> {
     const payment = await this.paymentService.remove(id);
     if (!payment)
       throw new BadRequestException(

@@ -8,6 +8,7 @@ import {
   ReadGeneralAccountBasePolicyHandler,
   UpdateGeneralAccountBasePolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -41,7 +42,9 @@ export class ApiMainAccountBaseController {
 
   @CheckPolicies(new ReadGeneralAccountBasePolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<AccountBase> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AccountBase> {
     const accountBase = await this.accountBaseService.findOneById(id);
     if (!accountBase)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -64,7 +67,7 @@ export class ApiMainAccountBaseController {
   @CheckPolicies(new UpdateGeneralAccountBasePolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateAccountBaseDto: UpdateAccountBaseDto
   ): Promise<AccountBase> {
     const accountBase = await this.accountBaseService.update(
@@ -80,7 +83,9 @@ export class ApiMainAccountBaseController {
 
   @CheckPolicies(new DeleteGeneralAccountBasePolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<AccountBase> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<AccountBase> {
     const accountBase = await this.accountBaseService.remove(id);
     if (!accountBase)
       throw new BadRequestException(

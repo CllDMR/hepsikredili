@@ -7,6 +7,7 @@ import {
   UpdateMembershipUserPolicyHandler,
   User,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -31,7 +32,7 @@ export class ApiMainAccountUserController {
   @CheckPolicies(new ReadMembershipUserPolicyHandler())
   @Get()
   async readAll(
-    @Param('accountId') accountId: string,
+    @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
     @Query() queryUserDto: QueryUserDto
   ): Promise<User[]> {
     return await this.accountUserService.findAll(accountId, queryUserDto);
@@ -40,8 +41,8 @@ export class ApiMainAccountUserController {
   @CheckPolicies(new ReadMembershipUserPolicyHandler())
   @Get(':userId')
   async readOneById(
-    @Param('accountId') accountId: string,
-    @Param('userId') userId: string
+    @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
+    @Param('userId', ValidateMongooseObjectIdPipe) userId: string
   ): Promise<User> {
     const user = await this.accountUserService.findOneById(accountId, userId);
     if (!user)
@@ -52,8 +53,8 @@ export class ApiMainAccountUserController {
   @CheckPolicies(new UpdateMembershipUserPolicyHandler())
   @Patch(':userId')
   async update(
-    @Param('accountId') accountId: string,
-    @Param('userId') userId: string,
+    @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
+    @Param('userId', ValidateMongooseObjectIdPipe) userId: string,
     @Body() updateUserDto: UpdateUserDto
   ): Promise<User> {
     const user = await this.accountUserService.update(
@@ -71,8 +72,8 @@ export class ApiMainAccountUserController {
   @CheckPolicies(new DeleteMembershipUserPolicyHandler())
   @Delete(':userId')
   async delete(
-    @Param('accountId') accountId: string,
-    @Param('userId') userId: string
+    @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
+    @Param('userId', ValidateMongooseObjectIdPipe) userId: string
   ): Promise<User> {
     const user = await this.accountUserService.remove(accountId, userId);
     if (!user)

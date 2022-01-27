@@ -8,6 +8,7 @@ import {
   UpdateGeneralUserPolicyHandler,
   User,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -39,7 +40,9 @@ export class ApiMainUserController {
 
   @CheckPolicies(new ReadGeneralUserPolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<User> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<User> {
     const user = await this.userService.findOneById(id);
     if (!user)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -57,7 +60,7 @@ export class ApiMainUserController {
   @CheckPolicies(new UpdateGeneralUserPolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateUserDto: UpdateUserDto
   ): Promise<User> {
     const user = await this.userService.update(id, updateUserDto);
@@ -70,7 +73,9 @@ export class ApiMainUserController {
 
   @CheckPolicies(new DeleteGeneralUserPolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<User> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<User> {
     const user = await this.userService.remove(id);
     if (!user)
       throw new BadRequestException(

@@ -8,6 +8,7 @@ import {
   ReadGeneralPlanPolicyHandler,
   UpdateGeneralPlanPolicyHandler,
 } from '@hepsikredili/api/main/shared';
+import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
   BadRequestException,
   Body,
@@ -39,7 +40,9 @@ export class ApiMainPlanController {
 
   @CheckPolicies(new ReadGeneralPlanPolicyHandler())
   @Get(':id')
-  async readOneById(@Param('id') id: string): Promise<Plan> {
+  async readOneById(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<Plan> {
     const plan = await this.planService.findOneById(id);
     if (!plan)
       throw new BadRequestException(`Resource not found with id: ${id}`);
@@ -57,7 +60,7 @@ export class ApiMainPlanController {
   @CheckPolicies(new UpdateGeneralPlanPolicyHandler())
   @Patch(':id')
   async update(
-    @Param('id') id: string,
+    @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updatePlanDto: UpdatePlanDto
   ): Promise<Plan> {
     const plan = await this.planService.update(id, updatePlanDto);
@@ -70,7 +73,9 @@ export class ApiMainPlanController {
 
   @CheckPolicies(new DeleteGeneralPlanPolicyHandler())
   @Delete(':id')
-  async delete(@Param('id') id: string): Promise<Plan> {
+  async delete(
+    @Param('id', ValidateMongooseObjectIdPipe) id: string
+  ): Promise<Plan> {
     const plan = await this.planService.remove(id);
     if (!plan)
       throw new BadRequestException(
