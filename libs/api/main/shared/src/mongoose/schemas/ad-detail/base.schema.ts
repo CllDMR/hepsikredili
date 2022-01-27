@@ -15,7 +15,7 @@ export class AdDetailBase {
   })
   kind!: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Ad', required: true })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'AdBase', required: true })
   ad!: string | AdBase;
 
   @Prop({ required: true })

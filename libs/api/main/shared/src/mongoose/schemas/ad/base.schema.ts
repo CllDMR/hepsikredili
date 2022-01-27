@@ -24,7 +24,11 @@ export class AdBase {
   })
   published!: boolean;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Account', required: true })
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'AccountBase',
+    required: true,
+  })
   owner!: string | AccountBase;
 
   @Prop({ required: true })
@@ -32,7 +36,7 @@ export class AdBase {
 
   @Prop({
     type: MongooseSchema.Types.ObjectId,
-    ref: 'AdDetail',
+    ref: 'AdDetailBase',
     required: true,
   })
   detail!: string | AdDetailBase;

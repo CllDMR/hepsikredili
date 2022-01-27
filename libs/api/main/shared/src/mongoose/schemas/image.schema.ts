@@ -15,10 +15,14 @@ export class Image {
   @Prop({ required: true })
   url!: string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Account', required: true })
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'AccountBase',
+    required: true,
+  })
   owner!: AccountBase | string;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Ad', required: false })
+  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'AdBase', required: false })
   ad!: AdBase | string;
 }
 

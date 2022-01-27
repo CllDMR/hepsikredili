@@ -8,7 +8,11 @@ export type PaymentDocument = Payment & Document;
 export class Payment {
   _id!: Types.ObjectId;
 
-  @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'Account', required: true })
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'AccountBase',
+    required: true,
+  })
   owner!: string | AccountBase;
 
   @Prop({ required: true })
