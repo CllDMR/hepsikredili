@@ -1,14 +1,10 @@
-import { IsAlphanumericWithSpaces } from '@hepsikredili/api/shared';
-import { IsNumber, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateAccountImageDto {
   @IsString()
-  @IsAlphanumericWithSpaces()
-  name!: string;
-
-  @IsNumber()
-  price!: number;
-
-  @IsNumber()
-  adLimit!: number;
+  url!: string;
+  @IsString()
+  cloudinaryId!: string;
+  @IsString()
+  owner!: string;
 }

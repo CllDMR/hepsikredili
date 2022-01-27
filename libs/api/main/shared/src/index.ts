@@ -28,6 +28,7 @@ export * from './pipes/validation.pipe';
 //Policies - General
 export * from './policies/general/account-base.policy';
 export * from './policies/general/account-corporate.policy';
+export * from './policies/general/account-image.policy';
 export * from './policies/general/account-individual.policy';
 export * from './policies/general/ad-detail/base.policy';
 export * from './policies/general/ad-detail/satilik-daire.policy';
@@ -41,6 +42,7 @@ export * from './policies/general/user-base.policy';
 //Policies - Membership
 export * from './policies/membership/account-base.policy';
 export * from './policies/membership/account-corporate.policy';
+export * from './policies/membership/account-image.policy';
 export * from './policies/membership/account-individual.policy';
 export * from './policies/membership/ad-detail/base.policy';
 export * from './policies/membership/ad-detail/satilik-daire.policy';

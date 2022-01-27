@@ -59,12 +59,9 @@ export class CaslAbilityFactory {
     )
       cannot(Action.Manage, 'all');
 
-    if (
-      !metaData.userId ||
-      !user.user_id ||
-      user.user_id.toHexString() !== metaData.userId
-    )
-      cannot(Action.Manage, 'all');
+    if (metaData.userId)
+      if (!user.user_id || user.user_id.toHexString() !== metaData.userId)
+        cannot(Action.Manage, 'all');
 
     return build({
       // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details

@@ -1,13 +1,11 @@
-import {
-  ApiMainSharedCaslModule,
-  ApiMainSharedMongooseModule,
-} from '@hepsikredili/api/main/shared';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { CloudinaryProvider } from './cloudinary.provider';
+import { CloudinaryService } from './cloudinary.service';
 
 @Module({
-  imports: [ApiMainSharedMongooseModule, ApiMainSharedCaslModule],
-  controllers: [],
-  providers: [],
-  exports: [],
+  imports: [ConfigModule],
+  providers: [CloudinaryService, CloudinaryProvider],
+  exports: [CloudinaryService, CloudinaryProvider],
 })
 export class ApiMainCloudinaryModule {}

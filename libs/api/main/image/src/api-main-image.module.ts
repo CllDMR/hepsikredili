@@ -1,3 +1,4 @@
+import { ApiMainCloudinaryModule } from '@hepsikredili/api/main/cloudinary';
 import {
   ApiMainSharedCaslModule,
   ApiMainSharedMongooseModule,
@@ -9,7 +10,11 @@ import { ApiMainAccountImageService } from './services/account-image.service';
 import { ApiMainImageService } from './services/image.service';
 
 @Module({
-  imports: [ApiMainSharedMongooseModule, ApiMainSharedCaslModule],
+  imports: [
+    ApiMainSharedMongooseModule,
+    ApiMainSharedCaslModule,
+    ApiMainCloudinaryModule,
+  ],
   controllers: [ApiMainImageController, ApiMainAccountImageController],
   providers: [ApiMainImageService, ApiMainAccountImageService],
   exports: [ApiMainImageService, ApiMainAccountImageService],
