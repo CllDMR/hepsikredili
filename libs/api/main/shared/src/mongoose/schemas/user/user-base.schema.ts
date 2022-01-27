@@ -10,7 +10,7 @@ export class User {
 
   @Prop({
     type: [MongooseSchema.Types.ObjectId],
-    ref: 'Account',
+    ref: 'AccountBase',
     required: true,
   })
   accounts!: string[] | AccountBase[];
