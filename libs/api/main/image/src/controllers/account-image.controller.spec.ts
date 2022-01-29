@@ -1,3 +1,4 @@
+import { ApiMainCloudinaryModule } from '@hepsikredili/api/main/cloudinary';
 import {
   ApiMainSharedCaslModule,
   ApiMainSharedMongooseModule,
@@ -43,6 +44,7 @@ describe('ApiMainAccountImageController', () => {
 
         ApiMainSharedMongooseModule,
         ApiMainSharedCaslModule,
+        ApiMainCloudinaryModule,
       ],
 
       controllers: [ApiMainAccountImageController],

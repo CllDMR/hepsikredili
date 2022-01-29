@@ -6,10 +6,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { ApiMainAdDetailService } from './ad-detail.service';
+import { AccountBaseService } from '../services/account-base.service';
+import { AccountBaseController } from './account-base-detail.controller';
 
-describe('ApiMainAdDetailService', () => {
-  let service: ApiMainAdDetailService;
+describe('ApiMainAccountAdDetailController', () => {
+  let controller: AccountBaseController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -44,13 +45,14 @@ describe('ApiMainAdDetailService', () => {
         ApiMainSharedCaslModule,
       ],
 
-      providers: [ApiMainAdDetailService],
+      controllers: [AccountBaseController],
+      providers: [AccountBaseService],
     }).compile();
 
-    service = module.get<ApiMainAdDetailService>(ApiMainAdDetailService);
+    controller = module.get<AccountBaseController>(AccountBaseController);
   });
 
   it('should be defined', () => {
-    expect(service).toBeDefined();
+    expect(controller).toBeDefined();
   });
 });
