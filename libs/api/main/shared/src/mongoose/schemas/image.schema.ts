@@ -20,7 +20,7 @@ export class Image {
     ref: 'AccountBase',
     required: true,
   })
-  owner!: AccountBase | string;
+  account!: AccountBase | string;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'AdBase', required: false })
   ad!: AdBase | string;

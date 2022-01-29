@@ -13,7 +13,7 @@ export type Ad<%= className %>Document = Ad<%= className %> & Document;
 export class Ad<%= className %> {
   kind!: string;
   published!: boolean;
-  owner!: string | AccountBase;
+  account!: string | AccountBase;
   no!: string;
   detail!: string | AdDetail<%= className %>;
   name!: string;

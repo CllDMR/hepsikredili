@@ -13,7 +13,7 @@ export class Invoice {
     ref: 'AccountBase',
     required: true,
   })
-  owner!: AccountBase | string;
+  account!: AccountBase | string;
 }
 
 export const InvoiceSchema = SchemaFactory.createForClass(Invoice);

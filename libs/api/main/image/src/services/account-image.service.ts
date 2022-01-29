@@ -17,7 +17,7 @@ export class ApiMainAccountImageService {
   }
 
   async findAll(accountId: string) {
-    return await this.imageModel.find({ owner: accountId }).exec();
+    return await this.imageModel.find({ account: accountId }).exec();
   }
 
   async findOneById(id: string) {

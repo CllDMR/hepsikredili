@@ -13,7 +13,7 @@ export class Payment {
     ref: 'AccountBase',
     required: true,
   })
-  owner!: string | AccountBase;
+  account!: string | AccountBase;
 
   @Prop({ required: true })
   price!: number;

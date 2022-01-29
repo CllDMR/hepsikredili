@@ -13,7 +13,7 @@ export type AdSatilikDaireDocument = AdSatilikDaire & Document;
 export class AdSatilikDaire {
   kind!: string;
   published!: boolean;
-  owner!: string | AccountBase;
+  account!: string | AccountBase;
   no!: string;
   detail!: string | AdDetailSatilikDaire;
   name!: string;

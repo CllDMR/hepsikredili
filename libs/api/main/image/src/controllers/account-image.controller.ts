@@ -61,7 +61,7 @@ export class ApiMainAccountImageController {
     return this.accountImageService.create({
       url: image.secure_url,
       cloudinaryId: image.public_id,
-      owner: accountIdParam,
+      account: accountIdParam,
     });
   }
 
