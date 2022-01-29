@@ -10,8 +10,7 @@ import { Observable, tap } from 'rxjs';
 import { MyRequest } from '..';
 
 export interface Response {
-  //TODO: change owner properties to account
-  owner: Types.ObjectId;
+  account: Types.ObjectId;
 }
 
 @Injectable()
@@ -34,7 +33,7 @@ export class CheckUserAccessForbiddenToAccountInterceptor
         if (
           accountId &&
           (!(user.account_ids as string[]).includes(accountId) ||
-            res.owner.toHexString() !== accountId)
+            res.account.toHexString() !== accountId)
         )
           throw new ForbiddenException();
         return res;

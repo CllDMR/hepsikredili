@@ -18,13 +18,13 @@ export class ApiMainAccountInvoiceService {
     accountId: string,
     _queryInvoiceDto: QueryInvoiceDto
   ): Promise<Invoice[]> {
-    const filter: FilterQuery<InvoiceDocument> = { owner: accountId };
+    const filter: FilterQuery<InvoiceDocument> = { account: accountId };
     return await this.invoiceModel.find(filter).exec();
   }
 
   async findOneById(accountId: string, id: string): Promise<Invoice | null> {
     return await this.invoiceModel
-      .findOne({ _id: id, owner: accountId })
+      .findOne({ _id: id, account: accountId })
       .exec();
   }
 
@@ -34,7 +34,7 @@ export class ApiMainAccountInvoiceService {
   ): Promise<Invoice> {
     const invoice = new this.invoiceModel({
       ...createInvoiceDto,
-      owner: accountId,
+      account: accountId,
     });
     return await invoice.save();
   }
@@ -47,7 +47,7 @@ export class ApiMainAccountInvoiceService {
     const instructions = $.flatten(updateInvoiceDto);
 
     return await this.invoiceModel
-      .findOneAndUpdate({ _id: id, owner: accountId }, instructions, {
+      .findOneAndUpdate({ _id: id, account: accountId }, instructions, {
         new: true,
       })
       .exec();
@@ -55,7 +55,7 @@ export class ApiMainAccountInvoiceService {
 
   async remove(accountId: string, id: string) {
     return await this.invoiceModel
-      .findOneAndRemove({ _id: id, owner: accountId }, { new: true })
+      .findOneAndRemove({ _id: id, account: accountId }, { new: true })
       .exec();
   }
 }

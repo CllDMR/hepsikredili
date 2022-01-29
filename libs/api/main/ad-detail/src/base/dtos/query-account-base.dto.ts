@@ -2,7 +2,7 @@ import { IsAlphanumericWithSpaces } from '@hepsikredili/api/shared';
 import { Type } from 'class-transformer';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class QueryAdDetailDto {
+export class QueryAccountBaseDto {
   @IsOptional()
   @IsString()
   @IsAlphanumericWithSpaces()

@@ -8,5 +8,5 @@ export class CreateAccountImageDto {
   cloudinaryId!: string;
 
   @IsString()
-  owner!: string;
+  account!: string;
 }

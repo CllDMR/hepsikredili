@@ -29,7 +29,7 @@ export class AdBase {
     ref: 'AccountBase',
     required: true,
   })
-  owner!: string | AccountBase;
+  account!: string | AccountBase;
 
   @Prop({ required: true })
   no!: string;

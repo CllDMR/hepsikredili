@@ -4,12 +4,10 @@ import {
 } from '@hepsikredili/api/main/shared';
 import { Controller, UseGuards } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
-import { ApiMainAccountAdDetailService } from '../services/account-ad-detail.service';
+import { AccountBaseService } from '../services/account-base.service';
 
 @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
 @Controller('accounts/:accountId/ad-details')
-export class ApiMainAccountAdDetailController {
-  constructor(
-    private readonly accountadDetailService: ApiMainAccountAdDetailService
-  ) {}
+export class AccountBaseController {
+  constructor(private readonly accountBaseService: AccountBaseService) {}
 }

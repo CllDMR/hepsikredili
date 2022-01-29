@@ -22,22 +22,20 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
-import { CreateAdDetailDto } from '../dtos/create-ad-detail.dto';
-import { QueryAdDetailDto } from '../dtos/query-ad-detail.dto';
-import { UpdateAdDetailDto } from '../dtos/update-ad-detail.dto';
-import { ApiMainAdDetailService } from '../services/ad-detail.service';
+import { CreateBaseDto } from '../dtos/create-base.dto';
+import { QueryBaseDto } from '../dtos/query-base.dto';
+import { UpdateBaseDto } from '../dtos/update-base.dto';
+import { BaseService } from '../services/base.service';
 
 @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
 @Controller('ad-details')
-export class ApiMainAdDetailController {
-  constructor(private readonly adDetailService: ApiMainAdDetailService) {}
+export class BaseController {
+  constructor(private readonly baseService: BaseService) {}
 
   @CheckPolicies(new ReadGeneralAdDetailBasePolicyHandler())
   @Get()
-  async readAll(
-    @Query() queryAdDetailDto: QueryAdDetailDto
-  ): Promise<AdDetailBase[]> {
-    return await this.adDetailService.findAll(queryAdDetailDto);
+  async readAll(@Query() queryBaseDto: QueryBaseDto): Promise<AdDetailBase[]> {
+    return await this.baseService.findAll(queryBaseDto);
   }
 
   @CheckPolicies(new ReadGeneralAdDetailBasePolicyHandler())
@@ -45,34 +43,33 @@ export class ApiMainAdDetailController {
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
   ): Promise<AdDetailBase> {
-    const adDetail = await this.adDetailService.findOneById(id);
-    if (!adDetail)
+    const adDetailBase = await this.baseService.findOneById(id);
+    if (!adDetailBase)
       throw new BadRequestException(`Resource not found with id: ${id}`);
-    return adDetail;
+    return adDetailBase;
   }
 
   @CheckPolicies(new CreateGeneralAdDetailBasePolicyHandler())
   @Post()
-  async create(
-    @Body() createAdDetailDto: CreateAdDetailDto
-  ): Promise<AdDetailBase> {
-    const adDetail = await this.adDetailService.create(createAdDetailDto);
-    if (!adDetail) throw new BadRequestException(`Resource could not created`);
-    return adDetail;
+  async create(@Body() createBaseDto: CreateBaseDto): Promise<AdDetailBase> {
+    const adDetailBase = await this.baseService.create(createBaseDto);
+    if (!adDetailBase)
+      throw new BadRequestException(`Resource could not created`);
+    return adDetailBase;
   }
 
   @CheckPolicies(new UpdateGeneralAdDetailBasePolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
-    @Body() updateAdDetailDto: UpdateAdDetailDto
+    @Body() updateBaseDto: UpdateBaseDto
   ): Promise<AdDetailBase> {
-    const adDetail = await this.adDetailService.update(id, updateAdDetailDto);
-    if (!adDetail)
+    const adDetailBase = await this.baseService.update(id, updateBaseDto);
+    if (!adDetailBase)
       throw new BadRequestException(
         `Resource could not updated with id: ${id}`
       );
-    return adDetail;
+    return adDetailBase;
   }
 
   @CheckPolicies(new DeleteGeneralAdDetailBasePolicyHandler())
@@ -80,11 +77,11 @@ export class ApiMainAdDetailController {
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
   ): Promise<AdDetailBase> {
-    const adDetail = await this.adDetailService.remove(id);
-    if (!adDetail)
+    const adDetailBase = await this.baseService.remove(id);
+    if (!adDetailBase)
       throw new BadRequestException(
         `Resource could not deleted with id: ${id}`
       );
-    return adDetail;
+    return adDetailBase;
   }
 }
