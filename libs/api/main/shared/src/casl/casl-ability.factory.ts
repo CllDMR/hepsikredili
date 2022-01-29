@@ -11,6 +11,9 @@ import {
   AccountCorporate,
   AccountIndividual,
   AdBase,
+  AdDetailBase,
+  AdDetailSatilikDaire,
+  AdSatilikDaire,
   Image,
   Invoice,
   Payment,
@@ -27,6 +30,9 @@ type Subjects =
       | typeof AccountCorporate
       | typeof AccountIndividual
       | typeof AdBase
+      | typeof AdSatilikDaire
+      | typeof AdDetailBase
+      | typeof AdDetailSatilikDaire
       | typeof Image
       | typeof Invoice
       | typeof Payment
