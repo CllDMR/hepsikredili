@@ -1,4 +1,4 @@
-import { User } from './user-base.schema';
+import { User } from './user.schema';
 
 describe('UserBase Data-access', () => {
   it('should be defined', () => {

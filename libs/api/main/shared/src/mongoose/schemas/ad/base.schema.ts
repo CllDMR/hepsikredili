@@ -1,6 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema } from 'mongoose';
-import { AccountBase } from '../account/account-base.schema';
+import { AccountBase } from '../account/base.schema';
 import { AdDetailBase } from '../ad-detail/base.schema';
 import { Address, AddressSchema } from '../address.schema';
 import { ImageShrinked, ImageShrinkedSchema } from '../image-shrinked.schema';

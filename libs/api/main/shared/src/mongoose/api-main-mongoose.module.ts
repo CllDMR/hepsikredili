@@ -1,18 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import mongoosePaginateV2 from 'mongoose-paginate-v2';
-import {
-  AccountBase,
-  AccountSchema,
-} from './schemas/account/account-base.schema';
+import { AccountBase, AccountSchema } from './schemas/account/base.schema';
 import {
   AccountCorporate,
   AccountCorporateSchema,
-} from './schemas/account/account-corporate.schema';
+} from './schemas/account/corporate.schema';
 import {
   AccountIndividual,
   AccountIndividualSchema,
-} from './schemas/account/account-individual.schema';
+} from './schemas/account/individual.schema';
 import {
   AdDetailBase,
   AdDetailBaseSchema,
@@ -30,8 +27,7 @@ import { Image, ImageSchema } from './schemas/image.schema';
 import { Invoice, InvoiceSchema } from './schemas/invoice.schema';
 import { Payment, PaymentSchema } from './schemas/payment.schema';
 import { Plan, PlanSchema } from './schemas/plan.schema';
-import { Profile, ProfileSchema } from './schemas/profile.schema';
-import { User, UserSchema } from './schemas/user/user-base.schema';
+import { User, UserSchema } from './schemas/user.schema';
 
 @Module({
   imports: [
@@ -49,12 +45,6 @@ import { User, UserSchema } from './schemas/user/user-base.schema';
       {
         name: User.name,
         schema: UserSchema,
-      },
-    ]),
-    MongooseModule.forFeature([
-      {
-        name: Profile.name,
-        schema: ProfileSchema,
       },
     ]),
     MongooseModule.forFeatureAsync([

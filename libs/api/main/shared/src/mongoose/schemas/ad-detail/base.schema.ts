@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
+import { AccountBase } from '../account/base.schema';
 import { AdBase } from '../ad/base.schema';
 
 export type AdDetailBaseDocument = AdDetailBase & Document;
@@ -14,6 +15,13 @@ export class AdDetailBase {
     enum: ['SatılıkDaire', 'SatılıkResidence'],
   })
   kind!: string;
+
+  @Prop({
+    type: MongooseSchema.Types.ObjectId,
+    ref: 'AccountBase',
+    required: true,
+  })
+  account!: string | AccountBase;
 
   @Prop({ type: MongooseSchema.Types.ObjectId, ref: 'AdBase', required: true })
   ad!: string | AdBase;
