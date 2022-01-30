@@ -6,16 +6,18 @@ import {
 import { ApiMainUserModule } from '@hepsikredili/api/main/user';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
-import { MongooseModule } from '@nestjs/mongoose';
+import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
 import { PassportModule } from '@nestjs/passport';
 import { Test } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { Connection } from 'mongoose';
 import { ApiMainAuthService } from './auth.service';
 
 describe('ApiMainAuthService', () => {
   let service: ApiMainAuthService;
+  let connection: Connection;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
@@ -33,10 +35,8 @@ describe('ApiMainAuthService', () => {
           }),
         }),
         MongooseModule.forRootAsync({
-          imports: [ConfigModule],
-          inject: [ConfigService],
-          useFactory: async (config: ConfigService) => ({
-            uri: config.get('MONGO_URI'),
+          useFactory: async () => ({
+            uri: process.env.MONGO_URI_TEST,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // useCreateIndex: true,
@@ -65,6 +65,11 @@ describe('ApiMainAuthService', () => {
     }).compile();
 
     service = module.get(ApiMainAuthService);
+    connection = module.get(getConnectionToken());
+  });
+
+  afterAll(async () => {
+    await connection.close();
   });
 
   it('should be defined', () => {

@@ -11,7 +11,7 @@ import { Account<%= className %>Service } from './account-<%= fileName %>.servic
 describe('Account<%= className %>Service', () => {
   let service: Account<%= className %>Service;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
@@ -29,10 +29,8 @@ describe('Account<%= className %>Service', () => {
           }),
         }),
         MongooseModule.forRootAsync({
-          imports: [ConfigModule],
-          inject: [ConfigService],
-          useFactory: async (config: ConfigService) => ({
-            uri: config.get('MONGO_URI'),
+          useFactory: async () => ({
+            uri: process.env.MONGO_URI_TEST,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // useCreateIndex: true,

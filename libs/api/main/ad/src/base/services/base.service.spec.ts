@@ -3,15 +3,17 @@ import {
   ApiMainSharedMongooseModule,
 } from '@hepsikredili/api/main/shared';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
+import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { Connection } from 'mongoose';
 import { BaseService } from './base.service';
 
 describe('BaseService', () => {
   let service: BaseService;
+  let connection: Connection;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
@@ -29,10 +31,8 @@ describe('BaseService', () => {
           }),
         }),
         MongooseModule.forRootAsync({
-          imports: [ConfigModule],
-          inject: [ConfigService],
-          useFactory: async (config: ConfigService) => ({
-            uri: config.get('MONGO_URI'),
+          useFactory: async () => ({
+            uri: process.env.MONGO_URI_TEST,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // useCreateIndex: true,
@@ -48,6 +48,11 @@ describe('BaseService', () => {
     }).compile();
 
     service = module.get<BaseService>(BaseService);
+    connection = module.get(getConnectionToken());
+  });
+
+  afterAll(async () => {
+    await connection.close();
   });
 
   it('should be defined', () => {
