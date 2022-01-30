@@ -12,7 +12,7 @@ export class AdDetailBase {
   @Prop({
     type: String,
     required: true,
-    enum: ['SatılıkDaire', 'SatılıkResidence'],
+    enum: ['AdDetailSatilikDaire'],
   })
   kind!: string;
 
