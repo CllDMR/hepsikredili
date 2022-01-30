@@ -14,7 +14,7 @@ export class AdBase {
   @Prop({
     type: String,
     required: true,
-    enum: ['SatılıkDaire', 'SatılıkResidence'],
+    enum: ['AdSatilikDaire'],
   })
   kind!: string;
 
