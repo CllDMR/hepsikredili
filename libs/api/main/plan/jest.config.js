@@ -12,4 +12,7 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../../../coverage/libs/api/main/plan',
+  globalSetup: '../../../../test/globalSetup.ts',
+  globalTeardown: '../../../../test/globalTeardown.ts',
+  setupFilesAfterEnv: ['../../../../test/setupFile.ts'],
 };
