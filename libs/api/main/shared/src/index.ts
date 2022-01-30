@@ -24,7 +24,7 @@ export * from './mongoose/schemas/invoice.schema';
 export * from './mongoose/schemas/payment.schema';
 export * from './mongoose/schemas/plan.schema';
 export * from './mongoose/schemas/profile.schema';
-export * from './mongoose/schemas/user/user-base.schema';
+export * from './mongoose/schemas/user.schema';
 //Pipes
 export * from './pipes/validation.pipe';
 //Policies - General
