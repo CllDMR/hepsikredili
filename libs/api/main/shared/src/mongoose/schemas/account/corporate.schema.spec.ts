@@ -1,4 +1,4 @@
-import { AccountCorporate } from './account-corporate.schema';
+import { AccountCorporate } from './corporate.schema';
 
 describe('AccountCorporate Data-access', () => {
   it('should be defined', () => {

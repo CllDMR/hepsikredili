@@ -1,18 +1,15 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import mongoosePaginateV2 from 'mongoose-paginate-v2';
-import {
-  AccountBase,
-  AccountSchema,
-} from './schemas/account/account-base.schema';
+import { AccountBase, AccountSchema } from './schemas/account/base.schema';
 import {
   AccountCorporate,
   AccountCorporateSchema,
-} from './schemas/account/account-corporate.schema';
+} from './schemas/account/corporate.schema';
 import {
   AccountIndividual,
   AccountIndividualSchema,
-} from './schemas/account/account-individual.schema';
+} from './schemas/account/individual.schema';
 import {
   AdDetailBase,
   AdDetailBaseSchema,

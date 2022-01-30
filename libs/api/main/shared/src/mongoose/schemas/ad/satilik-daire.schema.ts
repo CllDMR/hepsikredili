@@ -1,6 +1,6 @@
 import { Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { AccountBase } from '../account/account-base.schema';
+import { AccountBase } from '../account/base.schema';
 import { AdDetailSatilikDaire } from '../ad-detail/satilik-daire.schema';
 import { Address } from '../address.schema';
 import { ImageShrinked } from '../image-shrinked.schema';

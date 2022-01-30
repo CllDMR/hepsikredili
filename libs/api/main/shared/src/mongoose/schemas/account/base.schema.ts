@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 import { User } from '../user/user-base.schema';
-import { AccountCorporate } from './account-corporate.schema';
-import { AccountIndividual } from './account-individual.schema';
+import { AccountCorporate } from './corporate.schema';
+import { AccountIndividual } from './individual.schema';
 
 export type AccountBaseDocument = AccountBase & Document;
 

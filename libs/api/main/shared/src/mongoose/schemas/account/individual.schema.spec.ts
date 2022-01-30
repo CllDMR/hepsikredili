@@ -1,4 +1,4 @@
-import { AccountIndividual } from './account-individual.schema';
+import { AccountIndividual } from './individual.schema';
 
 describe('AccountIndividual Data-access', () => {
   it('should be defined', () => {

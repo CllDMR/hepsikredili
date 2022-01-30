@@ -10,9 +10,9 @@ export * from './guards/policies-membership.guard';
 export * from './interceptors/check-user-access-forbidden-to-account.interceptor';
 //Mongoose
 export * from './mongoose/api-main-mongoose.module';
-export * from './mongoose/schemas/account/account-base.schema';
-export * from './mongoose/schemas/account/account-corporate.schema';
-export * from './mongoose/schemas/account/account-individual.schema';
+export * from './mongoose/schemas/account/base.schema';
+export * from './mongoose/schemas/account/corporate.schema';
+export * from './mongoose/schemas/account/individual.schema';
 export * from './mongoose/schemas/ad-detail/base.schema';
 export * from './mongoose/schemas/ad-detail/satilik-daire.schema';
 export * from './mongoose/schemas/ad/base.schema';
