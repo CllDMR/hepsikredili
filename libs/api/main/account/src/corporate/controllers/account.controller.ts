@@ -22,10 +22,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
-import { CreateAccountCorporateDto } from '../../dtos/corporate/create-account.dto';
-import { QueryAccountCorporateDto } from '../../dtos/corporate/query-account.dto';
-import { UpdateAccountCorporateDto } from '../../dtos/corporate/update-account.dto';
-import { ApiMainAccountCorporateService } from '../../services/corporate/account.service';
+import { CreateAccountCorporateDto } from '../dtos/create-account.dto';
+import { QueryAccountCorporateDto } from '../dtos/query-account.dto';
+import { UpdateAccountCorporateDto } from '../dtos/update-account.dto';
+import { ApiMainAccountCorporateService } from '../services/account.service';
 
 @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
 @Controller('accounts-corporate')

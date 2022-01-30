@@ -6,9 +6,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as $ from 'mongo-dot-notation';
 import { FilterQuery, Model } from 'mongoose';
-import { CreateAccountCorporateDto } from '../../dtos/corporate/create-account.dto';
-import { QueryAccountCorporateDto } from '../../dtos/corporate/query-account.dto';
-import { UpdateAccountCorporateDto } from '../../dtos/corporate/update-account.dto';
+import { CreateAccountCorporateDto } from '../dtos/create-account.dto';
+import { QueryAccountCorporateDto } from '../dtos/query-account.dto';
+import { UpdateAccountCorporateDto } from '../dtos/update-account.dto';
 
 @Injectable()
 export class ApiMainAccountCorporateService {

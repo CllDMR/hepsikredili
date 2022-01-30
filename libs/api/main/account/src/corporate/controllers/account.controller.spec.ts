@@ -7,7 +7,7 @@ import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { Connection } from 'mongoose';
-import { ApiMainAccountCorporateService } from '../../services/corporate/account.service';
+import { ApiMainAccountCorporateService } from '../services/account.service';
 import { ApiMainAccountCorporateController } from './account.controller';
 
 describe('ApiMainAccountCorporateController', () => {

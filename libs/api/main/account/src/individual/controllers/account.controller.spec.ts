@@ -7,11 +7,11 @@ import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { Connection } from 'mongoose';
-import { ApiMainAccountBaseService } from '../../services/base/account.service';
-import { ApiMainAccountBaseController } from './account.controller';
+import { ApiMainAccountIndividualService } from '../services/account.service';
+import { ApiMainAccountIndividualController } from './account.controller';
 
-describe('ApiMainAccountBaseController', () => {
-  let controller: ApiMainAccountBaseController;
+describe('ApiMainAccountIndividualController', () => {
+  let controller: ApiMainAccountIndividualController;
   let connection: Connection;
 
   beforeAll(async () => {
@@ -45,12 +45,12 @@ describe('ApiMainAccountBaseController', () => {
         ApiMainSharedCaslModule,
       ],
 
-      controllers: [ApiMainAccountBaseController],
-      providers: [ApiMainAccountBaseService],
+      controllers: [ApiMainAccountIndividualController],
+      providers: [ApiMainAccountIndividualService],
     }).compile();
 
-    controller = module.get<ApiMainAccountBaseController>(
-      ApiMainAccountBaseController
+    controller = module.get<ApiMainAccountIndividualController>(
+      ApiMainAccountIndividualController
     );
     connection = module.get(getConnectionToken());
   });
