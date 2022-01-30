@@ -27,7 +27,6 @@ import { Image, ImageSchema } from './schemas/image.schema';
 import { Invoice, InvoiceSchema } from './schemas/invoice.schema';
 import { Payment, PaymentSchema } from './schemas/payment.schema';
 import { Plan, PlanSchema } from './schemas/plan.schema';
-import { Profile, ProfileSchema } from './schemas/profile.schema';
 import { User, UserSchema } from './schemas/user.schema';
 
 @Module({
@@ -46,12 +45,6 @@ import { User, UserSchema } from './schemas/user.schema';
       {
         name: User.name,
         schema: UserSchema,
-      },
-    ]),
-    MongooseModule.forFeature([
-      {
-        name: Profile.name,
-        schema: ProfileSchema,
       },
     ]),
     MongooseModule.forFeatureAsync([
