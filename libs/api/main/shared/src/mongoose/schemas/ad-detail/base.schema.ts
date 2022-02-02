@@ -5,14 +5,17 @@ import { AdBase } from '../ad/base.schema';
 
 export type AdDetailBaseDocument = AdDetailBase & Document;
 
-@Schema()
+@Schema({
+  timestamps: true,
+  discriminatorKey: 'kind',
+})
 export class AdDetailBase {
   _id!: Types.ObjectId;
 
   @Prop({
     type: String,
     required: true,
-    enum: ['AdDetailSatilikDaire'],
+    enum: ['AdDetailBase', 'AdDetailSatilikDaire'],
   })
   kind!: string;
 
