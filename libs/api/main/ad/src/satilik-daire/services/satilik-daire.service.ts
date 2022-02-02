@@ -1,11 +1,16 @@
 import {
+  AdDetailSatilikDaire,
+  AdDetailSatilikDaireDocument,
   AdSatilikDaire,
   AdSatilikDaireDocument,
+  PaymentEnum,
 } from '@hepsikredili/api/main/shared';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as $ from 'mongo-dot-notation';
 import { FilterQuery, Model } from 'mongoose';
+import { v4 as uuidV4 } from 'uuid';
+import { CreateSatilikDaireDetailDto } from '../dtos/create-satilik-daire-detail.dto';
 import { CreateSatilikDaireDto } from '../dtos/create-satilik-daire.dto';
 import { QuerySatilikDaireDto } from '../dtos/query-satilik-daire.dto';
 import { UpdateSatilikDaireDto } from '../dtos/update-satilik-daire.dto';
@@ -14,7 +19,9 @@ import { UpdateSatilikDaireDto } from '../dtos/update-satilik-daire.dto';
 export class SatilikDaireService {
   constructor(
     @InjectModel(AdSatilikDaire.name)
-    private readonly adSatilikDaireModel: Model<AdSatilikDaireDocument>
+    private readonly adSatilikDaireModel: Model<AdSatilikDaireDocument>,
+    @InjectModel(AdDetailSatilikDaire.name)
+    private readonly adDetailSatilikDaireModel: Model<AdDetailSatilikDaireDocument>
   ) {}
 
   async findAll(
@@ -46,10 +53,27 @@ export class SatilikDaireService {
   }
 
   async create(
-    createSatilikDaireDto: CreateSatilikDaireDto
-  ): Promise<AdSatilikDaire> {
-    const adSatilikDaire = new this.adSatilikDaireModel(createSatilikDaireDto);
-    return await adSatilikDaire.save();
+    createSatilikDaireDto: CreateSatilikDaireDto,
+    createSatilikDaireDetailDto: CreateSatilikDaireDetailDto
+  ): Promise<{ ad: AdSatilikDaire; adDetail: AdDetailSatilikDaire }> {
+    const newAdDetail = new this.adDetailSatilikDaireModel({
+      ...createSatilikDaireDetailDto,
+      kind: 'AdDetailSatilikDaire',
+    });
+    const newAd = new this.adSatilikDaireModel({
+      ...createSatilikDaireDto,
+      kind: 'AdSatilikDaire',
+      published: false,
+      no: uuidV4(),
+      payment: PaymentEnum.NotDefined,
+    });
+
+    newAd.detail = newAdDetail.id;
+    newAdDetail.ad = newAd.id;
+
+    const ad = await newAd.save();
+    const adDetail = await newAdDetail.save();
+    return { ad, adDetail };
   }
 
   async update(id: string, updateSatilikDaireDto: UpdateSatilikDaireDto) {
