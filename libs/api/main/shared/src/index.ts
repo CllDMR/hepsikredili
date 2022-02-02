@@ -26,6 +26,7 @@ export * from './mongoose/schemas/ad-detail/satilik-daire.schema';
 export * from './mongoose/schemas/ad/base.schema';
 export * from './mongoose/schemas/ad/satilik-daire.schema';
 export * from './mongoose/schemas/address.schema';
+export * from './mongoose/schemas/cephe.schema';
 export * from './mongoose/schemas/image-shrinked.schema';
 export * from './mongoose/schemas/image.schema';
 export * from './mongoose/schemas/invoice.schema';
