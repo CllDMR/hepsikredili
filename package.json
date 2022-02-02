@@ -40,7 +40,8 @@
     "reflect-metadata": "^0.1.13",
     "regenerator-runtime": "0.13.7",
     "rxjs": "^7.0.0",
-    "tslib": "^2.0.0"
+    "tslib": "^2.0.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nestjs/schematics": "^8.0.0",
@@ -68,6 +69,7 @@
     "@types/passport-local": "^1.0.34",
     "@types/react": "17.0.30",
     "@types/react-dom": "17.0.9",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "~5.3.0",
     "@typescript-eslint/parser": "~5.3.0",
     "babel-jest": "27.2.3",
