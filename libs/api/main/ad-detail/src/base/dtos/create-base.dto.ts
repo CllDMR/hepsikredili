@@ -1,14 +1,30 @@
-import { IsAlphanumericWithSpaces } from '@hepsikredili/api/shared';
-import { IsNumber, IsString } from 'class-validator';
+import { CreateCepheDto } from '@hepsikredili/api/main/shared';
+import { Type } from 'class-transformer';
+import {
+  IsDefined,
+  IsMongoId,
+  IsNotEmptyObject,
+  IsObject,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 export class CreateBaseDto {
   @IsString()
-  @IsAlphanumericWithSpaces()
-  name!: string;
+  @IsMongoId()
+  account!: string;
 
-  @IsNumber()
-  price!: number;
+  @IsString()
+  @IsMongoId()
+  ad!: string;
 
-  @IsNumber()
-  adLimit!: number;
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateCepheDto)
+  cephe!: CreateCepheDto;
+
+  @IsString()
+  description!: string;
 }

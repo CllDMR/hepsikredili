@@ -18,26 +18,9 @@ export class SatilikDaireService {
   ) {}
 
   async findAll(
-    querySatilikDaireDto: QuerySatilikDaireDto
+    _querySatilikDaireDto: QuerySatilikDaireDto
   ): Promise<AdDetailSatilikDaire[]> {
-    const { search, name, adLimitGt, adLimitLte, priceGt, priceLte } =
-      querySatilikDaireDto;
-
     const filter: FilterQuery<AdDetailSatilikDaireDocument> = {};
-
-    if (name) filter.name = name;
-    if (adLimitGt || adLimitLte) {
-      filter.adLimit = {};
-      if (adLimitGt) filter.adLimit.$gt = adLimitGt;
-      if (adLimitLte) filter.adLimit.$lte = adLimitLte;
-    }
-    if (priceGt || priceLte) {
-      filter.price = {};
-      if (priceGt) filter.price.$gt = priceGt;
-      if (priceLte) filter.price.$lte = priceLte;
-    }
-    if (search) filter.$text = { $search: search?.trim() };
-
     return await this.adDetailSatilikDaireModel.find(filter).exec();
   }
 
@@ -48,9 +31,10 @@ export class SatilikDaireService {
   async create(
     createSatilikDaireDto: CreateSatilikDaireDto
   ): Promise<AdDetailSatilikDaire> {
-    const adDetailSatilikDaire = new this.adDetailSatilikDaireModel(
-      createSatilikDaireDto
-    );
+    const adDetailSatilikDaire = new this.adDetailSatilikDaireModel({
+      ...createSatilikDaireDto,
+      kind: 'AdDetailSatilikDaire',
+    });
     return await adDetailSatilikDaire.save();
   }
 

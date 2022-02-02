@@ -1,17 +1,35 @@
-import { IsAlphanumericWithSpaces } from '@hepsikredili/api/shared';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { UpdateCepheDto } from '@hepsikredili/api/main/shared';
+import { Type } from 'class-transformer';
+import {
+  IsDefined,
+  IsMongoId,
+  IsNotEmptyObject,
+  IsObject,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 export class UpdateBaseDto {
   @IsOptional()
   @IsString()
-  @IsAlphanumericWithSpaces()
-  name?: string;
+  @IsMongoId()
+  account?: string;
 
   @IsOptional()
-  @IsNumber()
-  price?: number;
+  @IsString()
+  @IsMongoId()
+  ad?: string;
 
   @IsOptional()
-  @IsNumber()
-  adLimit?: number;
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => UpdateCepheDto)
+  cephe?: UpdateCepheDto;
+
+  @IsOptional()
+  @IsString()
+  description?: string;
 }

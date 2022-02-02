@@ -14,4 +14,4 @@ import { BaseService } from './services/base.service';
   providers: [BaseService, AccountBaseService],
   exports: [BaseService, AccountBaseService],
 })
-export class ApiMainAdDetailModule {}
+export class BaseModule {}
