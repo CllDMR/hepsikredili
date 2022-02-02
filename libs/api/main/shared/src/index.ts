@@ -1,6 +1,14 @@
 //Casl
 export * from './casl/api-main-casl.module';
 export * from './casl/policy-handler';
+//Dtos
+export * from './dtos/create-address.dto';
+export * from './dtos/create-cephe.dto';
+export * from './dtos/update-address.dto';
+export * from './dtos/update-cephe.dto';
+//Filters
+export * from './filters/cast-error.filter';
+export * from './filters/validation-error.filter';
 //Guards
 export * from './guards/jwt-auth.guard';
 export * from './guards/local-auth.guard';
@@ -54,4 +62,5 @@ export * from './policies/membership/invoice.policy';
 export * from './policies/membership/plan.policy';
 export * from './policies/membership/user-base.policy';
 //Typings
-export * from './typings';
+export * from './typings/ad.types';
+export * from './typings/typings';

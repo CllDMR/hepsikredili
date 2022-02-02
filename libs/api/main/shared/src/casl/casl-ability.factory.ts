@@ -21,7 +21,7 @@ import {
   Profile,
   User,
 } from '..';
-import { MyRequest } from '../typings';
+import { MyRequest } from '../typings/typings';
 import { Action } from './action.enum';
 
 type Subjects =
