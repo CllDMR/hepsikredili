@@ -1,6 +1,6 @@
-import { AccountCorporate, IPolicyHandler } from '../..';
-import { Action } from '../../casl/action.enum';
-import { AppAbility } from '../../casl/casl-ability.factory';
+import { AccountCorporate, IPolicyHandler } from '..';
+import { Action } from '../casl/action.enum';
+import { AppAbility } from '../casl/casl-ability.factory';
 
 export class CreateGeneralAccountCorporatePolicyHandler
   implements IPolicyHandler

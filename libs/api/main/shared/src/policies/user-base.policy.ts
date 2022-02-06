@@ -1,6 +1,6 @@
-import { IPolicyHandler, User } from '../..';
-import { Action } from '../../casl/action.enum';
-import { AppAbility } from '../../casl/casl-ability.factory';
+import { IPolicyHandler, User } from '..';
+import { Action } from '../casl/action.enum';
+import { AppAbility } from '../casl/casl-ability.factory';
 
 export class CreateGeneralUserPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {

@@ -1,6 +1,6 @@
-import { AccountBase, IPolicyHandler } from '../..';
-import { Action } from '../../casl/action.enum';
-import { AppAbility } from '../../casl/casl-ability.factory';
+import { AccountBase, IPolicyHandler } from '..';
+import { Action } from '../casl/action.enum';
+import { AppAbility } from '../casl/casl-ability.factory';
 
 export class CreateGeneralAccountBasePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {

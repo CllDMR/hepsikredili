@@ -1,6 +1,6 @@
-import { IPolicyHandler, Payment } from '../..';
-import { Action } from '../../casl/action.enum';
-import { AppAbility } from '../../casl/casl-ability.factory';
+import { IPolicyHandler, Payment } from '..';
+import { Action } from '../casl/action.enum';
+import { AppAbility } from '../casl/casl-ability.factory';
 
 export class CreateGeneralPaymentPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {

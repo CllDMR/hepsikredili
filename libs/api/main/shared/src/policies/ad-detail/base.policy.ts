@@ -1,6 +1,6 @@
-import { AdDetailBase, IPolicyHandler } from '../../..';
-import { Action } from '../../../casl/action.enum';
-import { AppAbility } from '../../../casl/casl-ability.factory';
+import { AdDetailBase, IPolicyHandler } from '../..';
+import { Action } from '../../casl/action.enum';
+import { AppAbility } from '../../casl/casl-ability.factory';
 
 export class CreateGeneralAdDetailBasePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {

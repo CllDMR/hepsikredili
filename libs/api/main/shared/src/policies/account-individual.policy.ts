@@ -1,8 +1,8 @@
-import { AccountIndividual, IPolicyHandler } from '../..';
-import { Action } from '../../casl/action.enum';
-import { AppAbility } from '../../casl/casl-ability.factory';
+import { AccountIndividual, IPolicyHandler } from '..';
+import { Action } from '../casl/action.enum';
+import { AppAbility } from '../casl/casl-ability.factory';
 
-export class CreateMembershipAccountIndividualPolicyHandler
+export class CreateGeneralAccountIndividualPolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {
@@ -10,7 +10,7 @@ export class CreateMembershipAccountIndividualPolicyHandler
   }
 }
 
-export class ReadMembershipAccountIndividualPolicyHandler
+export class ReadGeneralAccountIndividualPolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {
@@ -18,7 +18,7 @@ export class ReadMembershipAccountIndividualPolicyHandler
   }
 }
 
-export class UpdateMembershipAccountIndividualPolicyHandler
+export class UpdateGeneralAccountIndividualPolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {
@@ -26,7 +26,7 @@ export class UpdateMembershipAccountIndividualPolicyHandler
   }
 }
 
-export class DeleteMembershipAccountIndividualPolicyHandler
+export class DeleteGeneralAccountIndividualPolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {

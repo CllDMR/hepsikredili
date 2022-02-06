@@ -1,8 +1,8 @@
-import { AdDetailSatilikDaire, IPolicyHandler } from '../../..';
-import { Action } from '../../../casl/action.enum';
-import { AppAbility } from '../../../casl/casl-ability.factory';
+import { AdDetailSatilikDaire, IPolicyHandler } from '../..';
+import { Action } from '../../casl/action.enum';
+import { AppAbility } from '../../casl/casl-ability.factory';
 
-export class CreateMembershipAdDetailSatilikDairePolicyHandler
+export class CreateGeneralAdDetailSatilikDairePolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {
@@ -10,7 +10,7 @@ export class CreateMembershipAdDetailSatilikDairePolicyHandler
   }
 }
 
-export class ReadMembershipAdDetailSatilikDairePolicyHandler
+export class ReadGeneralAdDetailSatilikDairePolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {
@@ -18,7 +18,7 @@ export class ReadMembershipAdDetailSatilikDairePolicyHandler
   }
 }
 
-export class UpdateMembershipAdDetailSatilikDairePolicyHandler
+export class UpdateGeneralAdDetailSatilikDairePolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {
@@ -26,7 +26,7 @@ export class UpdateMembershipAdDetailSatilikDairePolicyHandler
   }
 }
 
-export class DeleteMembershipAdDetailSatilikDairePolicyHandler
+export class DeleteGeneralAdDetailSatilikDairePolicyHandler
   implements IPolicyHandler
 {
   handle(ability: AppAbility) {
