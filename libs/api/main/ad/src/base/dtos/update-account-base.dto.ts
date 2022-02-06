@@ -1,5 +1,15 @@
+import { UpdateAddressDto } from '@hepsikredili/api/main/shared';
 import { IsAlphanumericWithSpaces } from '@hepsikredili/api/shared';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsDefined,
+  IsNotEmptyObject,
+  IsNumber,
+  IsObject,
+  IsOptional,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 export class UpdateAccountBaseDto {
   @IsOptional()
@@ -12,6 +22,10 @@ export class UpdateAccountBaseDto {
   price?: number;
 
   @IsOptional()
-  @IsNumber()
-  adLimit?: number;
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => UpdateAddressDto)
+  address?: UpdateAddressDto;
 }

@@ -9,12 +9,13 @@ export type AdBaseDocument = AdBase & Document;
 
 @Schema({
   timestamps: true,
+  discriminatorKey: 'kind',
 })
 export class AdBase {
   @Prop({
     type: String,
     required: true,
-    enum: ['SatılıkDaire', 'SatılıkResidence'],
+    enum: ['AdBase', 'AdSatilikDaire'],
   })
   kind!: string;
 

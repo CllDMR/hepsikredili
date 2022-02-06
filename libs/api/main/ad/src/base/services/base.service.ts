@@ -1,8 +1,16 @@
-import { AdBase, AdBaseDocument } from '@hepsikredili/api/main/shared';
+import {
+  AdBase,
+  AdBaseDocument,
+  AdDetailBase,
+  AdDetailBaseDocument,
+  PaymentEnum,
+} from '@hepsikredili/api/main/shared';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import * as $ from 'mongo-dot-notation';
 import { FilterQuery, Model } from 'mongoose';
+import { v4 as uuidV4 } from 'uuid';
+import { CreateBaseDetailDto } from '../dtos/create-base-detail.dto';
 import { CreateBaseDto } from '../dtos/create-base.dto';
 import { QueryBaseDto } from '../dtos/query-base.dto';
 import { UpdateBaseDto } from '../dtos/update-base.dto';
@@ -11,7 +19,9 @@ import { UpdateBaseDto } from '../dtos/update-base.dto';
 export class BaseService {
   constructor(
     @InjectModel(AdBase.name)
-    private readonly adBaseModel: Model<AdBaseDocument>
+    private readonly adBaseModel: Model<AdBaseDocument>,
+    @InjectModel(AdDetailBase.name)
+    private readonly adDetailBaseModel: Model<AdDetailBaseDocument>
   ) {}
 
   async findAll(queryBaseDto: QueryBaseDto): Promise<AdBase[]> {
@@ -40,9 +50,28 @@ export class BaseService {
     return await this.adBaseModel.findById(id).exec();
   }
 
-  async create(createBaseDto: CreateBaseDto): Promise<AdBase> {
-    const adBase = new this.adBaseModel(createBaseDto);
-    return await adBase.save();
+  async create(
+    createBaseDto: CreateBaseDto,
+    createBaseDetailDto: CreateBaseDetailDto
+  ): Promise<{ ad: AdBase; adDetail: AdDetailBase }> {
+    const newAdDetail = new this.adDetailBaseModel({
+      ...createBaseDetailDto,
+      kind: 'AdDetailBase',
+    });
+    const newAd = new this.adBaseModel({
+      ...createBaseDto,
+      kind: 'AdBase',
+      published: false,
+      no: uuidV4(),
+      payment: PaymentEnum.NotDefined,
+    });
+
+    newAd.detail = newAdDetail.id;
+    newAdDetail.ad = newAd.id;
+
+    const ad = await newAd.save();
+    const adDetail = await newAdDetail.save();
+    return { ad, adDetail };
   }
 
   async update(id: string, updateBaseDto: UpdateBaseDto) {

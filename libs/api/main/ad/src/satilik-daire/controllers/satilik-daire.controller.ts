@@ -1,4 +1,5 @@
 import {
+  AdDetailSatilikDaire,
   AdSatilikDaire,
   CheckPolicies,
   CreateGeneralAdSatilikDairePolicyHandler,
@@ -22,6 +23,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
+import { CreateSatilikDaireDetailDto } from '../dtos/create-satilik-daire-detail.dto';
 import { CreateSatilikDaireDto } from '../dtos/create-satilik-daire.dto';
 import { QuerySatilikDaireDto } from '../dtos/query-satilik-daire.dto';
 import { UpdateSatilikDaireDto } from '../dtos/update-satilik-daire.dto';
@@ -45,23 +47,24 @@ export class SatilikDaireController {
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
   ): Promise<AdSatilikDaire> {
-    const satilikDaire = await this.satilikDaireService.findOneById(id);
-    if (!satilikDaire)
+    const adSatilikDaire = await this.satilikDaireService.findOneById(id);
+    if (!adSatilikDaire)
       throw new BadRequestException(`Resource not found with id: ${id}`);
-    return satilikDaire;
+    return adSatilikDaire;
   }
 
   @CheckPolicies(new CreateGeneralAdSatilikDairePolicyHandler())
   @Post()
   async create(
-    @Body() createSatilikDaireDto: CreateSatilikDaireDto
-  ): Promise<AdSatilikDaire> {
-    const satilikDaire = await this.satilikDaireService.create(
-      createSatilikDaireDto
+    @Body('ad') createSatilikDaireDto: CreateSatilikDaireDto,
+    @Body('adDetail') createSatilikDaireDetailDto: CreateSatilikDaireDetailDto
+  ): Promise<{ ad: AdSatilikDaire; adDetail: AdDetailSatilikDaire }> {
+    const data = await this.satilikDaireService.create(
+      createSatilikDaireDto,
+      createSatilikDaireDetailDto
     );
-    if (!satilikDaire)
-      throw new BadRequestException(`Resource could not created`);
-    return satilikDaire;
+    if (!data) throw new BadRequestException(`Resource could not created`);
+    return data;
   }
 
   @CheckPolicies(new UpdateGeneralAdSatilikDairePolicyHandler())
@@ -70,15 +73,15 @@ export class SatilikDaireController {
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
     @Body() updateSatilikDaireDto: UpdateSatilikDaireDto
   ): Promise<AdSatilikDaire> {
-    const satilikDaire = await this.satilikDaireService.update(
+    const adSatilikDaire = await this.satilikDaireService.update(
       id,
       updateSatilikDaireDto
     );
-    if (!satilikDaire)
+    if (!adSatilikDaire)
       throw new BadRequestException(
         `Resource could not updated with id: ${id}`
       );
-    return satilikDaire;
+    return adSatilikDaire;
   }
 
   @CheckPolicies(new DeleteGeneralAdSatilikDairePolicyHandler())
@@ -86,11 +89,11 @@ export class SatilikDaireController {
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
   ): Promise<AdSatilikDaire> {
-    const satilikDaire = await this.satilikDaireService.remove(id);
-    if (!satilikDaire)
+    const adSatilikDaire = await this.satilikDaireService.remove(id);
+    if (!adSatilikDaire)
       throw new BadRequestException(
         `Resource could not deleted with id: ${id}`
       );
-    return satilikDaire;
+    return adSatilikDaire;
   }
 }

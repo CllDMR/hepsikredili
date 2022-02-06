@@ -1,5 +1,6 @@
 import {
   AdBase,
+  AdDetailBase,
   CheckPolicies,
   CreateGeneralAdBasePolicyHandler,
   DeleteGeneralAdBasePolicyHandler,
@@ -22,6 +23,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ThrottlerGuard } from '@nestjs/throttler';
+import { CreateBaseDetailDto } from '../dtos/create-base-detail.dto';
 import { CreateBaseDto } from '../dtos/create-base.dto';
 import { QueryBaseDto } from '../dtos/query-base.dto';
 import { UpdateBaseDto } from '../dtos/update-base.dto';
@@ -51,10 +53,16 @@ export class BaseController {
 
   @CheckPolicies(new CreateGeneralAdBasePolicyHandler())
   @Post()
-  async create(@Body() createBaseDto: CreateBaseDto): Promise<AdBase> {
-    const adBase = await this.baseService.create(createBaseDto);
-    if (!adBase) throw new BadRequestException(`Resource could not created`);
-    return adBase;
+  async create(
+    @Body('ad') createBaseDto: CreateBaseDto,
+    @Body('adDetail') createBaseDetailDto: CreateBaseDetailDto
+  ): Promise<{ ad: AdBase; adDetail: AdDetailBase }> {
+    const data = await this.baseService.create(
+      createBaseDto,
+      createBaseDetailDto
+    );
+    if (!data) throw new BadRequestException(`Resource could not created`);
+    return data;
   }
 
   @CheckPolicies(new UpdateGeneralAdBasePolicyHandler())

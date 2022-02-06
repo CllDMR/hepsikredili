@@ -1,5 +1,5 @@
 import type { Request } from 'express';
-import { User } from './mongoose/schemas/user.schema';
+import { User } from '../mongoose/schemas/user.schema';
 
 export type MyRequest = Request & {
   user: {

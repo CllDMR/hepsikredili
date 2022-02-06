@@ -1,7 +1,21 @@
+import { CreateAddressDto } from '@hepsikredili/api/main/shared';
 import { IsAlphanumericWithSpaces } from '@hepsikredili/api/shared';
-import { IsNumber, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsDefined,
+  IsMongoId,
+  IsNotEmptyObject,
+  IsNumber,
+  IsObject,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 export class CreateBaseDto {
+  @IsString()
+  @IsMongoId()
+  account!: string;
+
   @IsString()
   @IsAlphanumericWithSpaces()
   name!: string;
@@ -9,6 +23,10 @@ export class CreateBaseDto {
   @IsNumber()
   price!: number;
 
-  @IsNumber()
-  adLimit!: number;
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateAddressDto)
+  address!: CreateAddressDto;
 }

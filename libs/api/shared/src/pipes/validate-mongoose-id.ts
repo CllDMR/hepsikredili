@@ -13,7 +13,7 @@ export class ValidateMongooseObjectIdPipe
   transform(value: string, metaData: ArgumentMetadata) {
     if (!Types.ObjectId.isValid(value))
       throw new BadRequestException(
-        `${metaData.data} needs to be Mongoose ObjectId`
+        `${metaData.data} parameter needs to be Mongoose ObjectId`
       );
     return value;
   }

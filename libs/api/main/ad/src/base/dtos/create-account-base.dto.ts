@@ -1,5 +1,14 @@
+import { CreateAddressDto } from '@hepsikredili/api/main/shared';
 import { IsAlphanumericWithSpaces } from '@hepsikredili/api/shared';
-import { IsNumber, IsString } from 'class-validator';
+import { Type } from 'class-transformer';
+import {
+  IsDefined,
+  IsNotEmptyObject,
+  IsNumber,
+  IsObject,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 export class CreateAccountBaseDto {
   @IsString()
@@ -9,6 +18,10 @@ export class CreateAccountBaseDto {
   @IsNumber()
   price!: number;
 
-  @IsNumber()
-  adLimit!: number;
+  @IsDefined()
+  @IsNotEmptyObject()
+  @IsObject()
+  @ValidateNested()
+  @Type(() => CreateAddressDto)
+  address!: CreateAddressDto;
 }

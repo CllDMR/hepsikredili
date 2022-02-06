@@ -9,14 +9,10 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-export class CreateBaseDto {
+export class CreateBaseDetailDto {
   @IsString()
   @IsMongoId()
   account!: string;
-
-  @IsString()
-  @IsMongoId()
-  ad!: string;
 
   @IsDefined()
   @IsNotEmptyObject()

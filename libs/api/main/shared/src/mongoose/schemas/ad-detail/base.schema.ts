@@ -2,17 +2,21 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 import { AccountBase } from '../account/base.schema';
 import { AdBase } from '../ad/base.schema';
+import { Cephe, CepheSchema } from '../cephe.schema';
 
 export type AdDetailBaseDocument = AdDetailBase & Document;
 
-@Schema()
+@Schema({
+  timestamps: true,
+  discriminatorKey: 'kind',
+})
 export class AdDetailBase {
   _id!: Types.ObjectId;
 
   @Prop({
     type: String,
     required: true,
-    enum: ['SatılıkDaire', 'SatılıkResidence'],
+    enum: ['AdDetailBase', 'AdDetailSatilikDaire'],
   })
   kind!: string;
 
@@ -28,6 +32,12 @@ export class AdDetailBase {
 
   @Prop({ required: true })
   description!: string;
+
+  @Prop({
+    type: CepheSchema,
+    required: true,
+  })
+  cephe!: Cephe;
 }
 
 export const AdDetailBaseSchema = SchemaFactory.createForClass(AdDetailBase);

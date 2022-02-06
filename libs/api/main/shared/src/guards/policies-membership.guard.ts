@@ -2,7 +2,7 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AppAbility, CaslAbilityFactory } from '../casl/casl-ability.factory';
 import { CHECK_POLICIES_KEY, PolicyHandler } from '../casl/policy-handler';
-import { MyRequest } from '../typings';
+import { MyRequest } from '../typings/typings';
 
 @Injectable()
 export class PoliciesMembershipGuard implements CanActivate {
