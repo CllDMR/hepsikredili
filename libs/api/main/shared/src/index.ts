@@ -12,8 +12,7 @@ export * from './filters/validation-error.filter';
 //Guards
 export * from './guards/jwt-auth.guard';
 export * from './guards/local-auth.guard';
-export * from './guards/policies-general.guard';
-export * from './guards/policies-membership.guard';
+export * from './guards/policies.guard';
 //Interceptors
 export * from './interceptors/check-user-access-forbidden-to-account.interceptor';
 //Mongoose
@@ -36,32 +35,20 @@ export * from './mongoose/schemas/profile.schema';
 export * from './mongoose/schemas/user.schema';
 //Pipes
 export * from './pipes/validation.pipe';
-//Policies - General
-export * from './policies/general/account-base.policy';
-export * from './policies/general/account-corporate.policy';
-export * from './policies/general/account-image.policy';
-export * from './policies/general/account-individual.policy';
-export * from './policies/general/ad-detail/base.policy';
-export * from './policies/general/ad-detail/satilik-daire.policy';
-export * from './policies/general/ad/base.policy';
-export * from './policies/general/ad/satilik-daire.policy';
-export * from './policies/general/image.policy';
-export * from './policies/general/invoice.policy';
-export * from './policies/general/payment.policy';
-export * from './policies/general/plan.policy';
-export * from './policies/general/user-base.policy';
-//Policies - Membership
-export * from './policies/membership/account-base.policy';
-export * from './policies/membership/account-corporate.policy';
-export * from './policies/membership/account-image.policy';
-export * from './policies/membership/account-individual.policy';
-export * from './policies/membership/ad-detail/base.policy';
-export * from './policies/membership/ad-detail/satilik-daire.policy';
-export * from './policies/membership/ad/base.policy';
-export * from './policies/membership/ad/satilik-daire.policy';
-export * from './policies/membership/invoice.policy';
-export * from './policies/membership/plan.policy';
-export * from './policies/membership/user-base.policy';
+//Policies
+export * from './policies/account-base.policy';
+export * from './policies/account-corporate.policy';
+export * from './policies/account-image.policy';
+export * from './policies/account-individual.policy';
+export * from './policies/ad-detail/base.policy';
+export * from './policies/ad-detail/satilik-daire.policy';
+export * from './policies/ad/base.policy';
+export * from './policies/ad/satilik-daire.policy';
+export * from './policies/image.policy';
+export * from './policies/invoice.policy';
+export * from './policies/payment.policy';
+export * from './policies/plan.policy';
+export * from './policies/user-base.policy';
 //Typings
 export * from './typings/ad.types';
 export * from './typings/typings';

@@ -1,12 +1,12 @@
 import {
   CheckPolicies,
-  CreateGeneralPaymentPolicyHandler,
-  DeleteGeneralPaymentPolicyHandler,
+  CreatePaymentPolicyHandler,
+  DeletePaymentPolicyHandler,
   JwtAuthGuard,
   Payment,
-  PoliciesGeneralGuard,
-  ReadGeneralPaymentPolicyHandler,
-  UpdateGeneralPaymentPolicyHandler,
+  PoliciesGuard,
+  ReadPaymentPolicyHandler,
+  UpdatePaymentPolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,18 +27,18 @@ import { QueryPaymentDto } from '../dtos/query-payment.dto';
 import { UpdatePaymentDto } from '../dtos/update-payment.dto';
 import { ApiMainPaymentService } from '../services/payment.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('payments')
 export class ApiMainPaymentController {
   constructor(private readonly paymentService: ApiMainPaymentService) {}
 
-  @CheckPolicies(new ReadGeneralPaymentPolicyHandler())
+  @CheckPolicies(new ReadPaymentPolicyHandler())
   @Get()
   async readAll(@Query() queryPaymentDto: QueryPaymentDto): Promise<Payment[]> {
     return await this.paymentService.findAll(queryPaymentDto);
   }
 
-  @CheckPolicies(new ReadGeneralPaymentPolicyHandler())
+  @CheckPolicies(new ReadPaymentPolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -49,7 +49,7 @@ export class ApiMainPaymentController {
     return payment;
   }
 
-  @CheckPolicies(new CreateGeneralPaymentPolicyHandler())
+  @CheckPolicies(new CreatePaymentPolicyHandler())
   @Post()
   async create(@Body() createPaymentDto: CreatePaymentDto): Promise<Payment> {
     const payment = await this.paymentService.create(createPaymentDto);
@@ -57,7 +57,7 @@ export class ApiMainPaymentController {
     return payment;
   }
 
-  @CheckPolicies(new UpdateGeneralPaymentPolicyHandler())
+  @CheckPolicies(new UpdatePaymentPolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -71,7 +71,7 @@ export class ApiMainPaymentController {
     return payment;
   }
 
-  @CheckPolicies(new DeleteGeneralPaymentPolicyHandler())
+  @CheckPolicies(new DeletePaymentPolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

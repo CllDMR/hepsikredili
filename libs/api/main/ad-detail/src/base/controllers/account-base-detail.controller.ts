@@ -1,11 +1,11 @@
 import {
   AdDetailBase,
   CheckPolicies,
-  DeleteMembershipAdDetailBasePolicyHandler,
+  DeleteAdDetailBasePolicyHandler,
   JwtAuthGuard,
-  PoliciesMembershipGuard,
-  ReadMembershipAdDetailBasePolicyHandler,
-  UpdateMembershipAdDetailBasePolicyHandler,
+  PoliciesGuard,
+  ReadAdDetailBasePolicyHandler,
+  UpdateAdDetailBasePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -24,12 +24,12 @@ import { QueryAccountBaseDto } from '../dtos/query-account-base.dto';
 import { UpdateAccountBaseDto } from '../dtos/update-account-base.dto';
 import { AccountBaseService } from '../services/account-base.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts/:accountId/ad-details')
 export class AccountBaseController {
   constructor(private readonly accountBaseService: AccountBaseService) {}
 
-  @CheckPolicies(new ReadMembershipAdDetailBasePolicyHandler())
+  @CheckPolicies(new ReadAdDetailBasePolicyHandler())
   @Get()
   async readAll(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -41,7 +41,7 @@ export class AccountBaseController {
     );
   }
 
-  @CheckPolicies(new ReadMembershipAdDetailBasePolicyHandler())
+  @CheckPolicies(new ReadAdDetailBasePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -56,7 +56,7 @@ export class AccountBaseController {
     return adDetailBase;
   }
 
-  @CheckPolicies(new UpdateMembershipAdDetailBasePolicyHandler())
+  @CheckPolicies(new UpdateAdDetailBasePolicyHandler())
   @Patch(':id')
   async update(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -75,7 +75,7 @@ export class AccountBaseController {
     return adDetailBase;
   }
 
-  @CheckPolicies(new DeleteMembershipAdDetailBasePolicyHandler())
+  @CheckPolicies(new DeleteAdDetailBasePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,

@@ -1,12 +1,12 @@
 import {
   CheckPolicies,
-  CreateGeneralPlanPolicyHandler,
-  DeleteGeneralPlanPolicyHandler,
+  CreatePlanPolicyHandler,
+  DeletePlanPolicyHandler,
   JwtAuthGuard,
   Plan,
-  PoliciesGeneralGuard,
-  ReadGeneralPlanPolicyHandler,
-  UpdateGeneralPlanPolicyHandler,
+  PoliciesGuard,
+  ReadPlanPolicyHandler,
+  UpdatePlanPolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,18 +27,18 @@ import { QueryPlanDto } from '../dtos/query-plan.dto';
 import { UpdatePlanDto } from '../dtos/update-plan.dto';
 import { ApiMainPlanService } from '../services/plan.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('plans')
 export class ApiMainPlanController {
   constructor(private readonly planService: ApiMainPlanService) {}
 
-  @CheckPolicies(new ReadGeneralPlanPolicyHandler())
+  @CheckPolicies(new ReadPlanPolicyHandler())
   @Get()
   async readAll(@Query() queryPlanDto: QueryPlanDto): Promise<Plan[]> {
     return await this.planService.findAll(queryPlanDto);
   }
 
-  @CheckPolicies(new ReadGeneralPlanPolicyHandler())
+  @CheckPolicies(new ReadPlanPolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -49,7 +49,7 @@ export class ApiMainPlanController {
     return plan;
   }
 
-  @CheckPolicies(new CreateGeneralPlanPolicyHandler())
+  @CheckPolicies(new CreatePlanPolicyHandler())
   @Post()
   async create(@Body() createPlanDto: CreatePlanDto): Promise<Plan> {
     const plan = await this.planService.create(createPlanDto);
@@ -57,7 +57,7 @@ export class ApiMainPlanController {
     return plan;
   }
 
-  @CheckPolicies(new UpdateGeneralPlanPolicyHandler())
+  @CheckPolicies(new UpdatePlanPolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -71,7 +71,7 @@ export class ApiMainPlanController {
     return plan;
   }
 
-  @CheckPolicies(new DeleteGeneralPlanPolicyHandler())
+  @CheckPolicies(new DeletePlanPolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

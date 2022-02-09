@@ -1,10 +1,10 @@
 import {
   CheckPolicies,
-  DeleteMembershipUserPolicyHandler,
+  DeleteUserPolicyHandler,
   JwtAuthGuard,
-  PoliciesMembershipGuard,
-  ReadMembershipUserPolicyHandler,
-  UpdateMembershipUserPolicyHandler,
+  PoliciesGuard,
+  ReadUserPolicyHandler,
+  UpdateUserPolicyHandler,
   User,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
@@ -24,12 +24,12 @@ import { QueryUserDto } from '../dtos/query-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { ApiMainAccountUserService } from '../services/account-user.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts/:accountId/users')
 export class ApiMainAccountUserController {
   constructor(private readonly accountUserService: ApiMainAccountUserService) {}
 
-  @CheckPolicies(new ReadMembershipUserPolicyHandler())
+  @CheckPolicies(new ReadUserPolicyHandler())
   @Get()
   async readAll(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -38,7 +38,7 @@ export class ApiMainAccountUserController {
     return await this.accountUserService.findAll(accountId, queryUserDto);
   }
 
-  @CheckPolicies(new ReadMembershipUserPolicyHandler())
+  @CheckPolicies(new ReadUserPolicyHandler())
   @Get(':userId')
   async readOneById(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -50,7 +50,7 @@ export class ApiMainAccountUserController {
     return user;
   }
 
-  @CheckPolicies(new UpdateMembershipUserPolicyHandler())
+  @CheckPolicies(new UpdateUserPolicyHandler())
   @Patch(':userId')
   async update(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -69,7 +69,7 @@ export class ApiMainAccountUserController {
     return user;
   }
 
-  @CheckPolicies(new DeleteMembershipUserPolicyHandler())
+  @CheckPolicies(new DeleteUserPolicyHandler())
   @Delete(':userId')
   async delete(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,

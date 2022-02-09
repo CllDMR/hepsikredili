@@ -45,6 +45,7 @@ export class ApiMainUserService {
       emailVerified: false,
       email: createUserDto.email,
       password: createUserDto.password,
+      role: createUserDto.role,
     });
     return await user.save();
   }

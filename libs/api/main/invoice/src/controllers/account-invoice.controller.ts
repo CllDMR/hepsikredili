@@ -1,12 +1,12 @@
 import {
   CheckPolicies,
-  CreateMembershipInvoicePolicyHandler,
-  DeleteMembershipInvoicePolicyHandler,
+  CreateInvoicePolicyHandler,
+  DeleteInvoicePolicyHandler,
   Invoice,
   JwtAuthGuard,
-  PoliciesMembershipGuard,
-  ReadMembershipInvoicePolicyHandler,
-  UpdateMembershipInvoicePolicyHandler,
+  PoliciesGuard,
+  ReadInvoicePolicyHandler,
+  UpdateInvoicePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,14 +27,14 @@ import { QueryAccountInvoiceDto } from '../dtos/query-account-invoice.dto';
 import { UpdateAccountInvoiceDto } from '../dtos/update-account-invoice.dto';
 import { ApiMainAccountInvoiceService } from '../services/account-invoice.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts/:accountId/invoices')
 export class ApiMainAccountInvoiceController {
   constructor(
     private readonly accountInvoiceService: ApiMainAccountInvoiceService
   ) {}
 
-  @CheckPolicies(new ReadMembershipInvoicePolicyHandler())
+  @CheckPolicies(new ReadInvoicePolicyHandler())
   @Get()
   async readAll(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -46,7 +46,7 @@ export class ApiMainAccountInvoiceController {
     );
   }
 
-  @CheckPolicies(new ReadMembershipInvoicePolicyHandler())
+  @CheckPolicies(new ReadInvoicePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -58,7 +58,7 @@ export class ApiMainAccountInvoiceController {
     return invoice;
   }
 
-  @CheckPolicies(new CreateMembershipInvoicePolicyHandler())
+  @CheckPolicies(new CreateInvoicePolicyHandler())
   @Post()
   async create(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -72,7 +72,7 @@ export class ApiMainAccountInvoiceController {
     return invoice;
   }
 
-  @CheckPolicies(new UpdateMembershipInvoicePolicyHandler())
+  @CheckPolicies(new UpdateInvoicePolicyHandler())
   @Patch(':id')
   async update(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -91,7 +91,7 @@ export class ApiMainAccountInvoiceController {
     return invoice;
   }
 
-  @CheckPolicies(new DeleteMembershipInvoicePolicyHandler())
+  @CheckPolicies(new DeleteInvoicePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,

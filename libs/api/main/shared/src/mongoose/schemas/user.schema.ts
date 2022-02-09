@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document, Schema as MongooseSchema, Types } from 'mongoose';
+import { Role } from '../../typings/typings';
 import { AccountBase } from './account/base.schema';
 
 export type UserDocument = User & Document;
@@ -7,6 +8,13 @@ export type UserDocument = User & Document;
 @Schema({ discriminatorKey: 'kind' })
 export class User {
   _id!: Types.ObjectId;
+
+  @Prop({
+    type: Number,
+    enum: Role,
+    required: true,
+  })
+  role!: Role;
 
   @Prop({
     type: [MongooseSchema.Types.ObjectId],

@@ -1,11 +1,11 @@
 import { CloudinaryService } from '@hepsikredili/api/main/cloudinary';
 import {
   CheckPolicies,
-  CreateMembershipAccountImagePolicyHandler,
-  DeleteMembershipAccountImagePolicyHandler,
+  CreateAccountImagePolicyHandler,
+  DeleteAccountImagePolicyHandler,
   JwtAuthGuard,
-  PoliciesMembershipGuard,
-  ReadMembershipAccountImagePolicyHandler,
+  PoliciesGuard,
+  ReadAccountImagePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -23,7 +23,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { ApiMainAccountImageService } from '../services/account-image.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts/:accountId/images')
 export class ApiMainAccountImageController {
   constructor(
@@ -31,7 +31,7 @@ export class ApiMainAccountImageController {
     private readonly cloudinaryService: CloudinaryService
   ) {}
 
-  @CheckPolicies(new ReadMembershipAccountImagePolicyHandler())
+  @CheckPolicies(new ReadAccountImagePolicyHandler())
   @Get()
   findAll(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountIdParam: string
@@ -39,7 +39,7 @@ export class ApiMainAccountImageController {
     return this.accountImageService.findAll(accountIdParam);
   }
 
-  @CheckPolicies(new ReadMembershipAccountImagePolicyHandler())
+  @CheckPolicies(new ReadAccountImagePolicyHandler())
   @Get(`:id`)
   async findOne(
     @Param('id', ValidateMongooseObjectIdPipe) imageIdParam: string
@@ -49,7 +49,7 @@ export class ApiMainAccountImageController {
     return image;
   }
 
-  @CheckPolicies(new CreateMembershipAccountImagePolicyHandler())
+  @CheckPolicies(new CreateAccountImagePolicyHandler())
   @UseInterceptors(FileInterceptor('file'))
   @Post()
   async create(
@@ -65,7 +65,7 @@ export class ApiMainAccountImageController {
     });
   }
 
-  @CheckPolicies(new DeleteMembershipAccountImagePolicyHandler())
+  @CheckPolicies(new DeleteAccountImagePolicyHandler())
   @Delete(`:id`)
   async remove(
     @Param('id', ValidateMongooseObjectIdPipe) imageIdParam: string

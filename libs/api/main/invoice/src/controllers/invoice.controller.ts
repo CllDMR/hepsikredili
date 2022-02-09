@@ -1,12 +1,12 @@
 import {
   CheckPolicies,
-  CreateGeneralInvoicePolicyHandler,
-  DeleteGeneralInvoicePolicyHandler,
+  CreateInvoicePolicyHandler,
+  DeleteInvoicePolicyHandler,
   Invoice,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralInvoicePolicyHandler,
-  UpdateGeneralInvoicePolicyHandler,
+  PoliciesGuard,
+  ReadInvoicePolicyHandler,
+  UpdateInvoicePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,18 +27,18 @@ import { QueryInvoiceDto } from '../dtos/query-invoice.dto';
 import { UpdateInvoiceDto } from '../dtos/update-invoice.dto';
 import { ApiMainInvoiceService } from '../services/invoice.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('invoices')
 export class ApiMainInvoiceController {
   constructor(private readonly invoiceService: ApiMainInvoiceService) {}
 
-  @CheckPolicies(new ReadGeneralInvoicePolicyHandler())
+  @CheckPolicies(new ReadInvoicePolicyHandler())
   @Get()
   async readAll(@Query() queryInvoiceDto: QueryInvoiceDto): Promise<Invoice[]> {
     return await this.invoiceService.findAll(queryInvoiceDto);
   }
 
-  @CheckPolicies(new ReadGeneralInvoicePolicyHandler())
+  @CheckPolicies(new ReadInvoicePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -49,7 +49,7 @@ export class ApiMainInvoiceController {
     return invoice;
   }
 
-  @CheckPolicies(new CreateGeneralInvoicePolicyHandler())
+  @CheckPolicies(new CreateInvoicePolicyHandler())
   @Post()
   async create(@Body() createInvoiceDto: CreateInvoiceDto): Promise<Invoice> {
     const invoice = await this.invoiceService.create(createInvoiceDto);
@@ -57,7 +57,7 @@ export class ApiMainInvoiceController {
     return invoice;
   }
 
-  @CheckPolicies(new UpdateGeneralInvoicePolicyHandler())
+  @CheckPolicies(new UpdateInvoicePolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -71,7 +71,7 @@ export class ApiMainInvoiceController {
     return invoice;
   }
 
-  @CheckPolicies(new DeleteGeneralInvoicePolicyHandler())
+  @CheckPolicies(new DeleteInvoicePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

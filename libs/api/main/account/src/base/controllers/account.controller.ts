@@ -1,12 +1,12 @@
 import {
   AccountBase,
   CheckPolicies,
-  CreateGeneralAccountBasePolicyHandler,
-  DeleteGeneralAccountBasePolicyHandler,
+  CreateAccountBasePolicyHandler,
+  DeleteAccountBasePolicyHandler,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralAccountBasePolicyHandler,
-  UpdateGeneralAccountBasePolicyHandler,
+  PoliciesGuard,
+  ReadAccountBasePolicyHandler,
+  UpdateAccountBasePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,12 +27,12 @@ import { QueryAccountBaseDto } from '../dtos/query-account.dto';
 import { UpdateAccountBaseDto } from '../dtos/update-account.dto';
 import { ApiMainAccountBaseService } from '../services/account.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts-base')
 export class ApiMainAccountBaseController {
   constructor(private readonly accountBaseService: ApiMainAccountBaseService) {}
 
-  @CheckPolicies(new ReadGeneralAccountBasePolicyHandler())
+  @CheckPolicies(new ReadAccountBasePolicyHandler())
   @Get()
   async readAll(
     @Query() queryAccountBaseDto: QueryAccountBaseDto
@@ -40,7 +40,7 @@ export class ApiMainAccountBaseController {
     return await this.accountBaseService.findAll(queryAccountBaseDto);
   }
 
-  @CheckPolicies(new ReadGeneralAccountBasePolicyHandler())
+  @CheckPolicies(new ReadAccountBasePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -51,7 +51,7 @@ export class ApiMainAccountBaseController {
     return accountBase;
   }
 
-  @CheckPolicies(new CreateGeneralAccountBasePolicyHandler())
+  @CheckPolicies(new CreateAccountBasePolicyHandler())
   @Post()
   async create(
     @Body() createAccountBaseDto: CreateAccountBaseDto
@@ -64,7 +64,7 @@ export class ApiMainAccountBaseController {
     return accountBase;
   }
 
-  @CheckPolicies(new UpdateGeneralAccountBasePolicyHandler())
+  @CheckPolicies(new UpdateAccountBasePolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -81,7 +81,7 @@ export class ApiMainAccountBaseController {
     return accountBase;
   }
 
-  @CheckPolicies(new DeleteGeneralAccountBasePolicyHandler())
+  @CheckPolicies(new DeleteAccountBasePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

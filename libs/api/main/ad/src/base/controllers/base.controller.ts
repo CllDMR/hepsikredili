@@ -2,12 +2,12 @@ import {
   AdBase,
   AdDetailBase,
   CheckPolicies,
-  CreateGeneralAdBasePolicyHandler,
-  DeleteGeneralAdBasePolicyHandler,
+  CreateAdBasePolicyHandler,
+  DeleteAdBasePolicyHandler,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralAdBasePolicyHandler,
-  UpdateGeneralAdBasePolicyHandler,
+  PoliciesGuard,
+  ReadAdBasePolicyHandler,
+  UpdateAdBasePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -29,18 +29,18 @@ import { QueryBaseDto } from '../dtos/query-base.dto';
 import { UpdateBaseDto } from '../dtos/update-base.dto';
 import { BaseService } from '../services/base.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('ads')
 export class BaseController {
   constructor(private readonly baseService: BaseService) {}
 
-  @CheckPolicies(new ReadGeneralAdBasePolicyHandler())
+  @CheckPolicies(new ReadAdBasePolicyHandler())
   @Get()
   async readAll(@Query() queryBaseDto: QueryBaseDto): Promise<AdBase[]> {
     return await this.baseService.findAll(queryBaseDto);
   }
 
-  @CheckPolicies(new ReadGeneralAdBasePolicyHandler())
+  @CheckPolicies(new ReadAdBasePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -51,7 +51,7 @@ export class BaseController {
     return adBase;
   }
 
-  @CheckPolicies(new CreateGeneralAdBasePolicyHandler())
+  @CheckPolicies(new CreateAdBasePolicyHandler())
   @Post()
   async create(
     @Body('ad') createBaseDto: CreateBaseDto,
@@ -65,7 +65,7 @@ export class BaseController {
     return data;
   }
 
-  @CheckPolicies(new UpdateGeneralAdBasePolicyHandler())
+  @CheckPolicies(new UpdateAdBasePolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -79,7 +79,7 @@ export class BaseController {
     return adBase;
   }
 
-  @CheckPolicies(new DeleteGeneralAdBasePolicyHandler())
+  @CheckPolicies(new DeleteAdBasePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
