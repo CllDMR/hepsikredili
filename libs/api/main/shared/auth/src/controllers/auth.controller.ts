@@ -2,7 +2,7 @@ import {
   JwtAuthGuard,
   LocalAuthGuard,
   MyRequest,
-  PoliciesGeneralGuard,
+  PoliciesGuard,
 } from '@hepsikredili/api/main/shared';
 import {
   Body,
@@ -22,7 +22,7 @@ import { ApiMainAuthService } from '../services/auth.service';
 export class ApiMainAuthController {
   constructor(private readonly apiMainAuthService: ApiMainAuthService) {}
 
-  @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+  @UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
   @Get('verify-token')
   profile(@Req() reg: MyRequest) {
     return reg.user;
@@ -50,6 +50,6 @@ export class ApiMainAuthController {
   registerCorporate(
     @Body() registerCorporateAuthDto: RegisterCorporateAuthDto
   ) {
-    return this.apiMainAuthService.registerIndividual(registerCorporateAuthDto);
+    return this.apiMainAuthService.registerCorporate(registerCorporateAuthDto);
   }
 }

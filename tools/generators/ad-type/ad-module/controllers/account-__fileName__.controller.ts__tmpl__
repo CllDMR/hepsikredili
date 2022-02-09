@@ -1,0 +1,13 @@
+import {
+  JwtAuthGuard,
+  PoliciesMembershipGuard,
+} from '@hepsikredili/api/main/shared';
+import { Controller, UseGuards } from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
+import { Account<%= className %>Service } from '../services/account-<%= fileName %>.service';
+
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
+@Controller('accounts/:accountId/ads-<%= fileName %>')
+export class Account<%= className %>Controller {
+  constructor(private readonly account<%= className %>Service: Account<%= className %>Service) {}
+}

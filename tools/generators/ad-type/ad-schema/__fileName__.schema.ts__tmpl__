@@ -1,0 +1,26 @@
+import { Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
+import { AccountBase } from '../account/account-base.schema';
+import { AdDetail<%= className %> } from '../ad-detail/<%= fileName %>.schema';
+import { Address } from '../address.schema';
+import { ImageShrinked } from '../image-shrinked.schema';
+
+export type Ad<%= className %>Document = Ad<%= className %> & Document;
+
+@Schema({
+  timestamps: true,
+})
+export class Ad<%= className %> {
+  kind!: string;
+  published!: boolean;
+  account!: string | AccountBase;
+  no!: string;
+  detail!: string | AdDetail<%= className %>;
+  name!: string;
+  address!: Address;
+  price!: number;
+  // payment: PaymentEnum;
+  images!: ImageShrinked[];
+}
+
+export const Ad<%= className %>Schema = SchemaFactory.createForClass(Ad<%= className %>);

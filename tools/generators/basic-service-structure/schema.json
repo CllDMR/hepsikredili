@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "basic-service-structure",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The project that resource will be generated into.",
+      "alias": "aP",
+      "$default": {
+        "$source": "projectName"
+      },
+      "x-prompt": "What is the name of the project for this resource?"
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the resource.",
+      "alias": "n",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the resource?"
+    },
+    "directory": {
+      "type": "string",
+      "description": "Create the resource under this directory (can be nested). Will be created under './'.",
+      "alias": "d"
+    }
+  },
+  "required": ["name", "project"]
+}

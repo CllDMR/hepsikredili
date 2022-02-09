@@ -10,17 +10,18 @@ import {
   AccountBase,
   AccountCorporate,
   AccountIndividual,
-  Ad,
+  AdBase,
+  AdDetailBase,
+  AdDetailSatilikDaire,
+  AdSatilikDaire,
   Image,
   Invoice,
   Payment,
   Plan,
   Profile,
-  UserBase,
-  UserCorporate,
-  UserIndividual,
+  User,
 } from '..';
-import { MyRequest } from '../typings';
+import { MyRequest } from '../typings/typings';
 import { Action } from './action.enum';
 
 type Subjects =
@@ -28,15 +29,16 @@ type Subjects =
       | typeof AccountBase
       | typeof AccountCorporate
       | typeof AccountIndividual
-      | typeof Ad
+      | typeof AdBase
+      | typeof AdSatilikDaire
+      | typeof AdDetailBase
+      | typeof AdDetailSatilikDaire
       | typeof Image
       | typeof Invoice
       | typeof Payment
       | typeof Plan
       | typeof Profile
-      | typeof UserBase
-      | typeof UserCorporate
-      | typeof UserIndividual
+      | typeof User
     >
   | 'all';
 
@@ -49,36 +51,44 @@ type MetaData = {
 
 @Injectable()
 export class CaslAbilityFactory {
-  createForMembership(user: Partial<MyRequest['user']>, metaData: MetaData) {
+  createForUser(
+    user: Partial<MyRequest['user']>,
+    jwtPayload: Partial<MyRequest['jwtPayload']>,
+    metaData: MetaData
+  ) {
     const { can, cannot, build } = new AbilityBuilder<
       Ability<[Action, Subjects]>
     >(Ability as AbilityClass<AppAbility>);
 
     can(Action.Manage, 'all'); // read-only access to everything
 
+    // JWT payload account and url param account is matching
+
     if (
-      !metaData.accountId ||
-      !user.account_id ||
-      metaData.accountId !== user.account_id
-    )
+      metaData.accountId &&
+      user.account_ids &&
+      !(user.account_ids as string[]).includes(metaData.accountId)
+    ) {
       cannot(Action.Manage, 'all');
+    }
 
-    return build({
-      // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details
-      detectSubjectType: (item) =>
-        item.constructor as unknown as ExtractSubjectType<Subjects>,
-    });
-  }
+    // JWT payload user and url param user is matching
 
-  createForGeneral(
-    _jwtPayload: Partial<MyRequest['user']>,
-    _metaData?: MetaData
-  ) {
-    const { can, build } = new AbilityBuilder<Ability<[Action, Subjects]>>(
-      Ability as AbilityClass<AppAbility>
-    );
+    if (metaData.userId)
+      if (!user.user_id || user.user_id.toHexString() !== metaData.userId) {
+        cannot(Action.Manage, 'all');
+      }
 
-    can(Action.Manage, 'all'); // read-only access to everything
+    // Role Base Authorization Example
+
+    // if (user.role === Role.INDIVIDUAL) {
+    //   cannot(Action.Read, [
+    //     AdBase,
+    //     AdDetailBase,
+    //     AdSatilikDaire,
+    //     AdDetailSatilikDaire,
+    //   ]);
+    // }
 
     return build({
       // Read https://casl.js.org/v5/en/guide/subject-type-detection#use-classes-as-subject-types for details

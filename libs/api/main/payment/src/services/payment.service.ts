@@ -14,25 +14,8 @@ export class ApiMainPaymentService {
     private readonly paymentModel: Model<PaymentDocument>
   ) {}
 
-  async findAll(queryPaymentDto: QueryPaymentDto): Promise<Payment[]> {
-    const { search, name, adLimitGt, adLimitLte, priceGt, priceLte } =
-      queryPaymentDto;
-
+  async findAll(_queryPaymentDto: QueryPaymentDto): Promise<Payment[]> {
     const filter: FilterQuery<PaymentDocument> = {};
-
-    if (name) filter.name = name;
-    if (adLimitGt || adLimitLte) {
-      filter.adLimit = {};
-      if (adLimitGt) filter.adLimit.$gt = adLimitGt;
-      if (adLimitLte) filter.adLimit.$lte = adLimitLte;
-    }
-    if (priceGt || priceLte) {
-      filter.price = {};
-      if (priceGt) filter.price.$gt = priceGt;
-      if (priceLte) filter.price.$lte = priceLte;
-    }
-    if (search) filter.$text = { $search: search?.trim() };
-
     return await this.paymentModel.find(filter).exec();
   }
 

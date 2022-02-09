@@ -15,24 +15,7 @@ export class ApiMainPlanService {
   ) {}
 
   async findAll(queryPlanDto: QueryPlanDto): Promise<Plan[]> {
-    const { search, name, adLimitGt, adLimitLte, priceGt, priceLte } =
-      queryPlanDto;
-
     const filter: FilterQuery<PlanDocument> = {};
-
-    if (name) filter.name = name;
-    if (adLimitGt || adLimitLte) {
-      filter.adLimit = {};
-      if (adLimitGt) filter.adLimit.$gt = adLimitGt;
-      if (adLimitLte) filter.adLimit.$lte = adLimitLte;
-    }
-    if (priceGt || priceLte) {
-      filter.price = {};
-      if (priceGt) filter.price.$gt = priceGt;
-      if (priceLte) filter.price.$lte = priceLte;
-    }
-    if (search) filter.$text = { $search: search?.trim() };
-
     return await this.planModel.find(filter).exec();
   }
 

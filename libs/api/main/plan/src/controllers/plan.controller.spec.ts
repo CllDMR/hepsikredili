@@ -3,16 +3,18 @@ import {
   ApiMainSharedMongooseModule,
 } from '@hepsikredili/api/main/shared';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongooseModule } from '@nestjs/mongoose';
+import { getConnectionToken, MongooseModule } from '@nestjs/mongoose';
 import { Test, TestingModule } from '@nestjs/testing';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { Connection } from 'mongoose';
 import { ApiMainPlanService } from '../services/plan.service';
 import { ApiMainPlanController } from './plan.controller';
 
 describe('ApiMainPlanController', () => {
   let controller: ApiMainPlanController;
+  let connection: Connection;
 
-  beforeEach(async () => {
+  beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         ConfigModule.forRoot({
@@ -30,10 +32,8 @@ describe('ApiMainPlanController', () => {
           }),
         }),
         MongooseModule.forRootAsync({
-          imports: [ConfigModule],
-          inject: [ConfigService],
-          useFactory: async (config: ConfigService) => ({
-            uri: config.get('MONGO_URI'),
+          useFactory: async () => ({
+            uri: process.env.MONGO_URI_TEST,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             // useCreateIndex: true,
@@ -50,6 +50,11 @@ describe('ApiMainPlanController', () => {
     }).compile();
 
     controller = module.get<ApiMainPlanController>(ApiMainPlanController);
+    connection = module.get(getConnectionToken());
+  });
+
+  afterAll(async () => {
+    await connection.close();
   });
 
   it('should be defined', () => {

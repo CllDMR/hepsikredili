@@ -7,11 +7,15 @@ import { ApiMainImageModule } from '@hepsikredili/api/main/image';
 import { ApiMainInvoiceModule } from '@hepsikredili/api/main/invoice';
 import { ApiMainPaymentModule } from '@hepsikredili/api/main/payment';
 import { ApiMainPlanModule } from '@hepsikredili/api/main/plan';
-import { MyValidationPipe } from '@hepsikredili/api/main/shared';
+import {
+  CastErrorFilter,
+  MyValidationPipe,
+  ValidationErrorFilter,
+} from '@hepsikredili/api/main/shared';
 import { ApiMainUserModule } from '@hepsikredili/api/main/user';
 import { Module, Scope } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ThrottlerModule } from '@nestjs/throttler';
 
@@ -58,6 +62,14 @@ import { ThrottlerModule } from '@nestjs/throttler';
       provide: APP_PIPE,
       scope: Scope.REQUEST,
       useClass: MyValidationPipe,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: ValidationErrorFilter,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: CastErrorFilter,
     },
   ],
 })

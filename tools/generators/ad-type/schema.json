@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "ad-type",
+  "type": "object",
+  "properties": {
+    "adType": {
+      "type": "string",
+      "description": "The name of the adType.",
+      "alias": "n",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      },
+      "x-prompt": "What name would you like to use for the adType?"
+    }
+  },
+  "required": ["adType"]
+}

@@ -1,13 +1,8 @@
-import {
-  ApiMainSharedCaslModule,
-  ApiMainSharedMongooseModule,
-} from '@hepsikredili/api/main/shared';
 import { Module } from '@nestjs/common';
+import { BaseModule } from './base/base.module';
+import { SatilikDaireModule } from './satilik-daire/satilik-daire.module';
 
 @Module({
-  imports: [ApiMainSharedMongooseModule, ApiMainSharedCaslModule],
-  controllers: [],
-  providers: [],
-  exports: [],
+  imports: [BaseModule, SatilikDaireModule],
 })
 export class ApiMainAdModule {}
