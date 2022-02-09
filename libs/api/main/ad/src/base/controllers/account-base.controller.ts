@@ -2,12 +2,12 @@ import {
   AdBase,
   AdDetailBase,
   CheckPolicies,
-  CreateMembershipAdBasePolicyHandler,
-  DeleteMembershipAdBasePolicyHandler,
+  CreateAdBasePolicyHandler,
+  DeleteAdBasePolicyHandler,
   JwtAuthGuard,
-  PoliciesMembershipGuard,
-  ReadMembershipAdBasePolicyHandler,
-  UpdateMembershipAdBasePolicyHandler,
+  PoliciesGuard,
+  ReadAdBasePolicyHandler,
+  UpdateAdBasePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -29,12 +29,12 @@ import { QueryAccountBaseDto } from '../dtos/query-account-base.dto';
 import { UpdateAccountBaseDto } from '../dtos/update-account-base.dto';
 import { AccountBaseService } from '../services/account-base.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts/:accountId/ads')
 export class AccountBaseController {
   constructor(private readonly accountBaseService: AccountBaseService) {}
 
-  @CheckPolicies(new ReadMembershipAdBasePolicyHandler())
+  @CheckPolicies(new ReadAdBasePolicyHandler())
   @Get()
   async readAll(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -46,7 +46,7 @@ export class AccountBaseController {
     );
   }
 
-  @CheckPolicies(new ReadMembershipAdBasePolicyHandler())
+  @CheckPolicies(new ReadAdBasePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -58,7 +58,7 @@ export class AccountBaseController {
     return adBase;
   }
 
-  @CheckPolicies(new CreateMembershipAdBasePolicyHandler())
+  @CheckPolicies(new CreateAdBasePolicyHandler())
   @Post()
   async create(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -74,7 +74,7 @@ export class AccountBaseController {
     return data;
   }
 
-  @CheckPolicies(new UpdateMembershipAdBasePolicyHandler())
+  @CheckPolicies(new UpdateAdBasePolicyHandler())
   @Patch(':id')
   async update(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -93,7 +93,7 @@ export class AccountBaseController {
     return adBase;
   }
 
-  @CheckPolicies(new DeleteMembershipAdBasePolicyHandler())
+  @CheckPolicies(new DeleteAdBasePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,

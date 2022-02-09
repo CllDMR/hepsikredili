@@ -19,6 +19,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     return {
       account_ids: user.accounts,
       user_id: user._id,
+      role: user.role,
     };
   }
 }

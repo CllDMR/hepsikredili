@@ -2,25 +2,25 @@ import { Image, IPolicyHandler } from '..';
 import { Action } from '../casl/action.enum';
 import { AppAbility } from '../casl/casl-ability.factory';
 
-export class CreateGeneralImagePolicyHandler implements IPolicyHandler {
+export class CreateImagePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Create, Image);
   }
 }
 
-export class ReadGeneralImagePolicyHandler implements IPolicyHandler {
+export class ReadImagePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Read, Image);
   }
 }
 
-export class UpdateGeneralImagePolicyHandler implements IPolicyHandler {
+export class UpdateImagePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Update, Image);
   }
 }
 
-export class DeleteGeneralImagePolicyHandler implements IPolicyHandler {
+export class DeleteImagePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Delete, Image);
   }

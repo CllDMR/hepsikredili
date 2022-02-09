@@ -2,7 +2,12 @@ import {
   ApiMainAccountCorporateService,
   ApiMainAccountIndividualService,
 } from '@hepsikredili/api/main/account';
-import { JWTPayload, MyRequest, User } from '@hepsikredili/api/main/shared';
+import {
+  JWTPayload,
+  MyRequest,
+  Role,
+  User,
+} from '@hepsikredili/api/main/shared';
 import { ApiMainUserService } from '@hepsikredili/api/main/user';
 import {
   BadRequestException,
@@ -44,12 +49,13 @@ export class ApiMainAuthService {
     if (!user) return null;
     await this.verifyPassword(pass.trim(), user.password.trim());
 
-    const { _id, accounts, email: userEmail, emailVerified } = user;
+    const { _id, accounts, email: userEmail, emailVerified, role } = user;
     return {
       _id,
       accounts,
       email: userEmail,
       emailVerified,
+      role,
     };
   }
 
@@ -59,6 +65,7 @@ export class ApiMainAuthService {
         typeof account === 'string' ? account : account._id.toHexString()
       ),
       usr: user.user_id.toHexString(),
+      role: user.role,
     };
     return {
       accessToken: this.jwtService.sign(payload),
@@ -91,6 +98,7 @@ export class ApiMainAuthService {
       account: newAccountIndividual._id.toHexString(),
       email: registerIndividualAuthDto.userEmail,
       password: registerIndividualAuthDto.password,
+      role: Role.INDIVIDUAL,
     });
 
     const payload: JWTPayload = {
@@ -98,6 +106,7 @@ export class ApiMainAuthService {
         typeof account === 'string' ? account : account._id.toHexString()
       ),
       usr: newUserIndividual._id.toHexString(),
+      role: newUserIndividual.role,
     };
 
     return {
@@ -129,6 +138,7 @@ export class ApiMainAuthService {
       account: newAccountCorporate._id.toHexString(),
       email: registerCorporateAuthDto.userEmail,
       password: registerCorporateAuthDto.password,
+      role: Role.CORPORATE,
     });
 
     const payload: JWTPayload = {
@@ -136,6 +146,7 @@ export class ApiMainAuthService {
         typeof account === 'string' ? account : account._id.toHexString()
       ),
       usr: newUserCorporate._id.toHexString(),
+      role: newUserCorporate.role,
     };
 
     return {

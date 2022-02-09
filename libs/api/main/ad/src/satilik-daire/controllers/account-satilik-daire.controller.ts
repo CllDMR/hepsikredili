@@ -2,12 +2,12 @@ import {
   AdDetailSatilikDaire,
   AdSatilikDaire,
   CheckPolicies,
-  CreateMembershipAdSatilikDairePolicyHandler,
-  DeleteMembershipAdSatilikDairePolicyHandler,
+  CreateAdSatilikDairePolicyHandler,
+  DeleteAdSatilikDairePolicyHandler,
   JwtAuthGuard,
-  PoliciesMembershipGuard,
-  ReadMembershipAdSatilikDairePolicyHandler,
-  UpdateMembershipAdSatilikDairePolicyHandler,
+  PoliciesGuard,
+  ReadAdSatilikDairePolicyHandler,
+  UpdateAdSatilikDairePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -29,14 +29,14 @@ import { QueryAccountSatilikDaireDto } from '../../satilik-daire/dtos/query-acco
 import { UpdateAccountSatilikDaireDto } from '../../satilik-daire/dtos/update-account-satilik-daire.dto';
 import { AccountSatilikDaireService } from '../services/account-satilik-daire.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesMembershipGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts/:accountId/ads-satilik-daire')
 export class AccountSatilikDaireController {
   constructor(
     private readonly accountSatilikDaireService: AccountSatilikDaireService
   ) {}
 
-  @CheckPolicies(new ReadMembershipAdSatilikDairePolicyHandler())
+  @CheckPolicies(new ReadAdSatilikDairePolicyHandler())
   @Get()
   async readAll(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -48,7 +48,7 @@ export class AccountSatilikDaireController {
     );
   }
 
-  @CheckPolicies(new ReadMembershipAdSatilikDairePolicyHandler())
+  @CheckPolicies(new ReadAdSatilikDairePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -63,7 +63,7 @@ export class AccountSatilikDaireController {
     return adSatilikDaire;
   }
 
-  @CheckPolicies(new CreateMembershipAdSatilikDairePolicyHandler())
+  @CheckPolicies(new CreateAdSatilikDairePolicyHandler())
   @Post()
   async create(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -80,7 +80,7 @@ export class AccountSatilikDaireController {
     return data;
   }
 
-  @CheckPolicies(new UpdateMembershipAdSatilikDairePolicyHandler())
+  @CheckPolicies(new UpdateAdSatilikDairePolicyHandler())
   @Patch(':id')
   async update(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,
@@ -99,7 +99,7 @@ export class AccountSatilikDaireController {
     return adSatilikDaire;
   }
 
-  @CheckPolicies(new DeleteMembershipAdSatilikDairePolicyHandler())
+  @CheckPolicies(new DeleteAdSatilikDairePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('accountId', ValidateMongooseObjectIdPipe) accountId: string,

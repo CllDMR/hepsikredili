@@ -2,25 +2,25 @@ import { IPolicyHandler, User } from '..';
 import { Action } from '../casl/action.enum';
 import { AppAbility } from '../casl/casl-ability.factory';
 
-export class CreateGeneralUserPolicyHandler implements IPolicyHandler {
+export class CreateUserPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Create, User);
   }
 }
 
-export class ReadGeneralUserPolicyHandler implements IPolicyHandler {
+export class ReadUserPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Read, User);
   }
 }
 
-export class UpdateGeneralUserPolicyHandler implements IPolicyHandler {
+export class UpdateUserPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Update, User);
   }
 }
 
-export class DeleteGeneralUserPolicyHandler implements IPolicyHandler {
+export class DeleteUserPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Delete, User);
   }

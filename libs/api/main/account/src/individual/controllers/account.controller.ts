@@ -1,12 +1,12 @@
 import {
   AccountIndividual,
   CheckPolicies,
-  CreateGeneralAccountIndividualPolicyHandler,
-  DeleteGeneralAccountIndividualPolicyHandler,
+  CreateAccountIndividualPolicyHandler,
+  DeleteAccountIndividualPolicyHandler,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralAccountIndividualPolicyHandler,
-  UpdateGeneralAccountIndividualPolicyHandler,
+  PoliciesGuard,
+  ReadAccountIndividualPolicyHandler,
+  UpdateAccountIndividualPolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,14 +27,14 @@ import { QueryAccountIndividualDto } from '../dtos/query-account.dto';
 import { UpdateAccountIndividualDto } from '../dtos/update-account.dto';
 import { ApiMainAccountIndividualService } from '../services/account.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts-individual')
 export class ApiMainAccountIndividualController {
   constructor(
     private readonly accountIndividualService: ApiMainAccountIndividualService
   ) {}
 
-  @CheckPolicies(new ReadGeneralAccountIndividualPolicyHandler())
+  @CheckPolicies(new ReadAccountIndividualPolicyHandler())
   @Get()
   async readAll(
     @Query() queryAccountIndividualDto: QueryAccountIndividualDto
@@ -44,7 +44,7 @@ export class ApiMainAccountIndividualController {
     );
   }
 
-  @CheckPolicies(new ReadGeneralAccountIndividualPolicyHandler())
+  @CheckPolicies(new ReadAccountIndividualPolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -57,7 +57,7 @@ export class ApiMainAccountIndividualController {
     return accountIndividual;
   }
 
-  @CheckPolicies(new CreateGeneralAccountIndividualPolicyHandler())
+  @CheckPolicies(new CreateAccountIndividualPolicyHandler())
   @Post()
   async create(
     @Body() createAccountIndividualDto: CreateAccountIndividualDto
@@ -70,7 +70,7 @@ export class ApiMainAccountIndividualController {
     return accountIndividual;
   }
 
-  @CheckPolicies(new UpdateGeneralAccountIndividualPolicyHandler())
+  @CheckPolicies(new UpdateAccountIndividualPolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -87,7 +87,7 @@ export class ApiMainAccountIndividualController {
     return accountIndividual;
   }
 
-  @CheckPolicies(new DeleteGeneralAccountIndividualPolicyHandler())
+  @CheckPolicies(new DeleteAccountIndividualPolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

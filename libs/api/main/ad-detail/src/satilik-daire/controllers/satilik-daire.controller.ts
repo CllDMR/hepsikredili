@@ -1,12 +1,12 @@
 import {
   AdDetailSatilikDaire,
   CheckPolicies,
-  CreateGeneralAdDetailSatilikDairePolicyHandler,
-  DeleteGeneralAdDetailSatilikDairePolicyHandler,
+  CreateAdDetailSatilikDairePolicyHandler,
+  DeleteAdDetailSatilikDairePolicyHandler,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralAdDetailSatilikDairePolicyHandler,
-  UpdateGeneralAdDetailSatilikDairePolicyHandler,
+  PoliciesGuard,
+  ReadAdDetailSatilikDairePolicyHandler,
+  UpdateAdDetailSatilikDairePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,12 +27,12 @@ import { QuerySatilikDaireDto } from '../dtos/query-satilik-daire.dto';
 import { UpdateSatilikDaireDto } from '../dtos/update-satilik-daire.dto';
 import { SatilikDaireService } from '../services/satilik-daire.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('ad-details-satilik-daire')
 export class SatilikDaireController {
   constructor(private readonly satilikDaireService: SatilikDaireService) {}
 
-  @CheckPolicies(new ReadGeneralAdDetailSatilikDairePolicyHandler())
+  @CheckPolicies(new ReadAdDetailSatilikDairePolicyHandler())
   @Get()
   async readAll(
     @Query() querySatilikDaireDto: QuerySatilikDaireDto
@@ -40,7 +40,7 @@ export class SatilikDaireController {
     return await this.satilikDaireService.findAll(querySatilikDaireDto);
   }
 
-  @CheckPolicies(new ReadGeneralAdDetailSatilikDairePolicyHandler())
+  @CheckPolicies(new ReadAdDetailSatilikDairePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -51,7 +51,7 @@ export class SatilikDaireController {
     return satilikDaire;
   }
 
-  @CheckPolicies(new CreateGeneralAdDetailSatilikDairePolicyHandler())
+  @CheckPolicies(new CreateAdDetailSatilikDairePolicyHandler())
   @Post()
   async create(
     @Body() createSatilikDaireDto: CreateSatilikDaireDto
@@ -64,7 +64,7 @@ export class SatilikDaireController {
     return satilikDaire;
   }
 
-  @CheckPolicies(new UpdateGeneralAdDetailSatilikDairePolicyHandler())
+  @CheckPolicies(new UpdateAdDetailSatilikDairePolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -81,7 +81,7 @@ export class SatilikDaireController {
     return satilikDaire;
   }
 
-  @CheckPolicies(new DeleteGeneralAdDetailSatilikDairePolicyHandler())
+  @CheckPolicies(new DeleteAdDetailSatilikDairePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

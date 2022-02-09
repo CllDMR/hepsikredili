@@ -2,10 +2,9 @@ import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { AppAbility, CaslAbilityFactory } from '../casl/casl-ability.factory';
 import { CHECK_POLICIES_KEY, PolicyHandler } from '../casl/policy-handler';
-import { MyRequest } from '../typings/typings';
 
 @Injectable()
-export class PoliciesMembershipGuard implements CanActivate {
+export class PoliciesGuard implements CanActivate {
   constructor(
     private reflector: Reflector,
     private caslAbilityFactory: CaslAbilityFactory
@@ -18,9 +17,9 @@ export class PoliciesMembershipGuard implements CanActivate {
         context.getHandler()
       ) || [];
 
-    const { params, user } = context.switchToHttp().getRequest() as MyRequest;
+    const { jwtPayload, params, user } = context.switchToHttp().getRequest();
 
-    const ability = this.caslAbilityFactory.createForMembership(user, {
+    const ability = this.caslAbilityFactory.createForUser(user, jwtPayload, {
       accountId: params.accountId,
       userId: params.userId,
     });

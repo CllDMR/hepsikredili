@@ -1,12 +1,12 @@
 import {
   AccountCorporate,
   CheckPolicies,
-  CreateGeneralAccountCorporatePolicyHandler,
-  DeleteGeneralAccountCorporatePolicyHandler,
+  CreateAccountCorporatePolicyHandler,
+  DeleteAccountCorporatePolicyHandler,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralAccountCorporatePolicyHandler,
-  UpdateGeneralAccountCorporatePolicyHandler,
+  PoliciesGuard,
+  ReadAccountCorporatePolicyHandler,
+  UpdateAccountCorporatePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -27,14 +27,14 @@ import { QueryAccountCorporateDto } from '../dtos/query-account.dto';
 import { UpdateAccountCorporateDto } from '../dtos/update-account.dto';
 import { ApiMainAccountCorporateService } from '../services/account.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('accounts-corporate')
 export class ApiMainAccountCorporateController {
   constructor(
     private readonly accountCorporateService: ApiMainAccountCorporateService
   ) {}
 
-  @CheckPolicies(new ReadGeneralAccountCorporatePolicyHandler())
+  @CheckPolicies(new ReadAccountCorporatePolicyHandler())
   @Get()
   async readAll(
     @Query() queryAccountCorporateDto: QueryAccountCorporateDto
@@ -42,7 +42,7 @@ export class ApiMainAccountCorporateController {
     return await this.accountCorporateService.findAll(queryAccountCorporateDto);
   }
 
-  @CheckPolicies(new ReadGeneralAccountCorporatePolicyHandler())
+  @CheckPolicies(new ReadAccountCorporatePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -53,7 +53,7 @@ export class ApiMainAccountCorporateController {
     return accountCorporate;
   }
 
-  @CheckPolicies(new CreateGeneralAccountCorporatePolicyHandler())
+  @CheckPolicies(new CreateAccountCorporatePolicyHandler())
   @Post()
   async create(
     @Body() createAccountCorporateDto: CreateAccountCorporateDto
@@ -66,7 +66,7 @@ export class ApiMainAccountCorporateController {
     return accountCorporate;
   }
 
-  @CheckPolicies(new UpdateGeneralAccountCorporatePolicyHandler())
+  @CheckPolicies(new UpdateAccountCorporatePolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -83,7 +83,7 @@ export class ApiMainAccountCorporateController {
     return accountCorporate;
   }
 
-  @CheckPolicies(new DeleteGeneralAccountCorporatePolicyHandler())
+  @CheckPolicies(new DeleteAccountCorporatePolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

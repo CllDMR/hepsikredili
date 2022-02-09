@@ -12,8 +12,7 @@ export * from './filters/validation-error.filter';
 //Guards
 export * from './guards/jwt-auth.guard';
 export * from './guards/local-auth.guard';
-export * from './guards/policies-general.guard';
-export * from './guards/policies-membership.guard';
+export * from './guards/policies.guard';
 //Interceptors
 export * from './interceptors/check-user-access-forbidden-to-account.interceptor';
 //Mongoose

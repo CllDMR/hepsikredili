@@ -2,25 +2,25 @@ import { IPolicyHandler, Payment } from '..';
 import { Action } from '../casl/action.enum';
 import { AppAbility } from '../casl/casl-ability.factory';
 
-export class CreateGeneralPaymentPolicyHandler implements IPolicyHandler {
+export class CreatePaymentPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Create, Payment);
   }
 }
 
-export class ReadGeneralPaymentPolicyHandler implements IPolicyHandler {
+export class ReadPaymentPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Read, Payment);
   }
 }
 
-export class UpdateGeneralPaymentPolicyHandler implements IPolicyHandler {
+export class UpdatePaymentPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Update, Payment);
   }
 }
 
-export class DeleteGeneralPaymentPolicyHandler implements IPolicyHandler {
+export class DeletePaymentPolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Delete, Payment);
   }

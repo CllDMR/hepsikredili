@@ -1,4 +1,11 @@
-import { IsAlphanumeric, IsEmail, IsMongoId, IsString } from 'class-validator';
+import { Role } from '@hepsikredili/api/main/shared';
+import {
+  IsAlphanumeric,
+  IsEmail,
+  IsEnum,
+  IsMongoId,
+  IsString,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsString()
@@ -12,4 +19,8 @@ export class CreateUserDto {
   @IsString()
   @IsAlphanumeric()
   password!: string;
+
+  @IsString()
+  @IsEnum(Role)
+  role!: Role;
 }

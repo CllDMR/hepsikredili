@@ -2,8 +2,8 @@ import {
   CheckPolicies,
   Image,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralImagePolicyHandler,
+  PoliciesGuard,
+  ReadImagePolicyHandler,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
 import {
@@ -16,12 +16,12 @@ import {
 import { ThrottlerGuard } from '@nestjs/throttler';
 import { ApiMainImageService } from '../services/image.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('images')
 export class ApiMainImageController {
   constructor(private readonly imageService: ApiMainImageService) {}
 
-  @CheckPolicies(new ReadGeneralImagePolicyHandler())
+  @CheckPolicies(new ReadImagePolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string

@@ -2,33 +2,25 @@ import { AdDetailSatilikDaire, IPolicyHandler } from '../..';
 import { Action } from '../../casl/action.enum';
 import { AppAbility } from '../../casl/casl-ability.factory';
 
-export class CreateGeneralAdDetailSatilikDairePolicyHandler
-  implements IPolicyHandler
-{
+export class CreateAdDetailSatilikDairePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Create, AdDetailSatilikDaire);
   }
 }
 
-export class ReadGeneralAdDetailSatilikDairePolicyHandler
-  implements IPolicyHandler
-{
+export class ReadAdDetailSatilikDairePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Read, AdDetailSatilikDaire);
   }
 }
 
-export class UpdateGeneralAdDetailSatilikDairePolicyHandler
-  implements IPolicyHandler
-{
+export class UpdateAdDetailSatilikDairePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Update, AdDetailSatilikDaire);
   }
 }
 
-export class DeleteGeneralAdDetailSatilikDairePolicyHandler
-  implements IPolicyHandler
-{
+export class DeleteAdDetailSatilikDairePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Delete, AdDetailSatilikDaire);
   }

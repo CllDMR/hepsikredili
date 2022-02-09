@@ -2,25 +2,25 @@ import { AdBase, IPolicyHandler } from '../..';
 import { Action } from '../../casl/action.enum';
 import { AppAbility } from '../../casl/casl-ability.factory';
 
-export class CreateGeneralAdBasePolicyHandler implements IPolicyHandler {
+export class CreateAdBasePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Create, AdBase);
   }
 }
 
-export class ReadGeneralAdBasePolicyHandler implements IPolicyHandler {
+export class ReadAdBasePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Read, AdBase);
   }
 }
 
-export class UpdateGeneralAdBasePolicyHandler implements IPolicyHandler {
+export class UpdateAdBasePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Update, AdBase);
   }
 }
 
-export class DeleteGeneralAdBasePolicyHandler implements IPolicyHandler {
+export class DeleteAdBasePolicyHandler implements IPolicyHandler {
   handle(ability: AppAbility) {
     return ability.can(Action.Delete, AdBase);
   }

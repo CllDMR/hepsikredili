@@ -1,11 +1,11 @@
 import {
   CheckPolicies,
-  CreateGeneralUserPolicyHandler,
-  DeleteGeneralUserPolicyHandler,
+  CreateUserPolicyHandler,
+  DeleteUserPolicyHandler,
   JwtAuthGuard,
-  PoliciesGeneralGuard,
-  ReadGeneralUserPolicyHandler,
-  UpdateGeneralUserPolicyHandler,
+  PoliciesGuard,
+  ReadUserPolicyHandler,
+  UpdateUserPolicyHandler,
   User,
 } from '@hepsikredili/api/main/shared';
 import { ValidateMongooseObjectIdPipe } from '@hepsikredili/api/shared';
@@ -27,18 +27,18 @@ import { QueryUserDto } from '../dtos/query-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';
 import { ApiMainUserService } from '../services/user.service';
 
-@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGeneralGuard)
+@UseGuards(ThrottlerGuard, JwtAuthGuard, PoliciesGuard)
 @Controller('users')
 export class ApiMainUserController {
   constructor(private readonly userService: ApiMainUserService) {}
 
-  @CheckPolicies(new ReadGeneralUserPolicyHandler())
+  @CheckPolicies(new ReadUserPolicyHandler())
   @Get()
   async readAll(@Query() queryUserDto: QueryUserDto): Promise<User[]> {
     return await this.userService.findAll(queryUserDto);
   }
 
-  @CheckPolicies(new ReadGeneralUserPolicyHandler())
+  @CheckPolicies(new ReadUserPolicyHandler())
   @Get(':id')
   async readOneById(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
@@ -49,7 +49,7 @@ export class ApiMainUserController {
     return user;
   }
 
-  @CheckPolicies(new CreateGeneralUserPolicyHandler())
+  @CheckPolicies(new CreateUserPolicyHandler())
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<User> {
     const user = await this.userService.create(createUserDto);
@@ -57,7 +57,7 @@ export class ApiMainUserController {
     return user;
   }
 
-  @CheckPolicies(new UpdateGeneralUserPolicyHandler())
+  @CheckPolicies(new UpdateUserPolicyHandler())
   @Patch(':id')
   async update(
     @Param('id', ValidateMongooseObjectIdPipe) id: string,
@@ -71,7 +71,7 @@ export class ApiMainUserController {
     return user;
   }
 
-  @CheckPolicies(new DeleteGeneralUserPolicyHandler())
+  @CheckPolicies(new DeleteUserPolicyHandler())
   @Delete(':id')
   async delete(
     @Param('id', ValidateMongooseObjectIdPipe) id: string
