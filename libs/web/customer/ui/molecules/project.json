@@ -1,0 +1,25 @@
+{
+  "root": "libs/web/customer/ui/molecules",
+  "sourceRoot": "libs/web/customer/ui/molecules/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/customer/ui/molecules/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/customer/ui/molecules"],
+      "options": {
+        "jestConfig": "libs/web/customer/ui/molecules/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "root": "libs/web/customer/ui/atoms",
+  "sourceRoot": "libs/web/customer/ui/atoms/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web/customer/ui/atoms/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/customer/ui/atoms"],
+      "options": {
+        "jestConfig": "libs/web/customer/ui/atoms/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}

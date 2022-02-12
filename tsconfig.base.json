@@ -33,7 +33,15 @@
       "@hepsikredili/api/main/shared": ["libs/api/main/shared/src/index.ts"],
       "@hepsikredili/api/main/user": ["libs/api/main/user/src/index.ts"],
       "@hepsikredili/api/shared": ["libs/api/shared/src/index.ts"],
-      "@hepsikredili/web/customer/ui": ["libs/web/customer/ui/src/index.ts"],
+      "@hepsikredili/web/customer/ui/atoms": [
+        "libs/web/customer/ui/atoms/src/index.ts"
+      ],
+      "@hepsikredili/web/customer/ui/molecules": [
+        "libs/web/customer/ui/molecules/src/index.ts"
+      ],
+      "@hepsikredili/web/customer/ui/organisms": [
+        "libs/web/customer/ui/organisms/src/index.ts"
+      ],
       "@hepsikredili/web/inhouse/ui": ["libs/web/inhouse/ui/src/index.ts"],
       "@hepsikredili/web/main/ui": ["libs/web/main/ui/src/index.ts"],
       "@hepsikredili/web/shared/ui": ["libs/web/shared/ui/src/index.ts"]
