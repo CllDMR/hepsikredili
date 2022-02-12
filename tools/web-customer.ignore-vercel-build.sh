@@ -8,8 +8,8 @@ TS_VERSION=$(node -e "console.log(require('./package.json').devDependencies['typ
 
 # Install @nrwl/workspace in order to run the affected command
 echo "yarn add start"
-yarn add -D @nrwl/workspace@$NX_VERSION --prefer-offline
-yarn add -D typescript@$TS_VERSION --prefer-offline
+yarn add -D @nrwl/workspace@$NX_VERSION --prefer-offline --frozen-lockfile
+yarn add -D typescript@$TS_VERSION --prefer-offline --frozen-lockfile
 echo "yarn add end"
 
 # Run the affected command, comparing latest commit to the one before that
