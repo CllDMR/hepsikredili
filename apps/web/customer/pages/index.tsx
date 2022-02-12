@@ -1,18 +1,34 @@
-import { Button } from '@hepsikredili/web/shared/ui';
-import { FC } from 'react';
+import {
+  Footer,
+  Header,
+  Main,
+  SectionHero,
+  SectionHowItWorks,
+  SectionServices,
+} from '@hepsikredili/web/customer/ui/organisms';
+import { NextPage } from 'next';
+import Head from 'next/head';
+import heroImage from '../public/bg-desktop.png';
 
-export const Index: FC = () => (
-  <div className="container p-20 mx-auto">
-    <div>
-      <Button title="Submit" variant="contained" />
-    </div>
-    <div>
-      <Button title="Submit" variant="flat" />
-    </div>
-    <div>
-      <Button title="Submit" variant="outlined" />
-    </div>
-  </div>
+/* eslint-disable-next-line */
+export interface PageIndexProps {}
+
+export const Index: NextPage<PageIndexProps> = () => (
+  <>
+    <Head>
+      <title>Hepsikredili</title>
+    </Head>
+
+    <Header />
+
+    <Main>
+      <SectionHero bgImg={heroImage} />
+      <SectionServices />
+      <SectionHowItWorks />
+    </Main>
+
+    <Footer />
+  </>
 );
 
 export default Index;
