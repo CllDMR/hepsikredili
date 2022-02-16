@@ -6,7 +6,7 @@ import './section-how-it-works.module.css';
 export interface SectionHowItWorksProps {}
 
 export const SectionHowItWorks: FC<SectionHowItWorksProps> = () => (
-  <Section keyx="section-how-it-works" id="section-how-it-works">
+  <Section id="section-how-it-works">
     <h1 className="mb-5 text-3xl text-center">
       <span className="font-semibold">Sistem nasıl çalışır ?</span>
     </h1>

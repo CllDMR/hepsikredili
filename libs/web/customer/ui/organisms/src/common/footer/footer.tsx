@@ -110,9 +110,9 @@ const Links: FC = () => (
       title="Kurumsal"
       links={[
         { label: 'Kurumsal Üyelik', href: '/auth/register' },
-        { label: 'Hakkımızda', href: '/about-us' },
-        { label: 'İnsan Kaynakları', href: '#' },
-        { label: 'İletişim', href: '#' },
+        { label: 'Hakkımızda', href: '/company/about-us' },
+        { label: 'İnsan Kaynakları', href: '/company/human-resources' },
+        { label: 'İletişim', href: '/company/contact' },
       ]}
     />
   </div>

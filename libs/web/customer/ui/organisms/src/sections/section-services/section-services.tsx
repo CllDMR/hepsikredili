@@ -6,7 +6,7 @@ import './section-services.module.css';
 export interface SectionServicesProps {}
 
 export const SectionServices: FC<SectionServicesProps> = () => (
-  <Section keyx="section-services" id="section-services" bg="dark">
+  <Section id="section-services" bg="dark">
     <h1 className="mb-5 text-3xl text-center">
       <span className="font-semibold">Neden Krediliev.com</span>
     </h1>
