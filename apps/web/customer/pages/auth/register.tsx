@@ -1,5 +1,9 @@
-import { Section } from '@hepsikredili/web/customer/ui/atoms';
-import { Footer, Header, Main } from '@hepsikredili/web/customer/ui/organisms';
+import {
+  Footer,
+  Header,
+  Main,
+  SectionAuthRegister,
+} from '@hepsikredili/web/customer/ui/organisms';
 import { NextPage } from 'next';
 import Head from 'next/head';
 
@@ -15,9 +19,7 @@ export const AuthRegister: NextPage<PageAuthRegisterProps> = () => (
     <Header />
 
     <Main>
-      <Section id="auth-register">
-        <h1>AuthRegister</h1>
-      </Section>
+      <SectionAuthRegister />
     </Main>
 
     <Footer />
