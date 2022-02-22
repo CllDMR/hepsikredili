@@ -11,6 +11,7 @@ export const ButtonOutlined: FC<ButtonOutlinedProps> = ({
   title,
   fullWidth = false,
   buttonRef,
+  disabled,
   onClick,
 }) => (
   <button
@@ -22,6 +23,7 @@ export const ButtonOutlined: FC<ButtonOutlinedProps> = ({
       }`}
     ref={buttonRef}
     onClick={onClick}
+    disabled={disabled}
   >
     <span className="whitespace-nowrap">{title}</span>
   </button>

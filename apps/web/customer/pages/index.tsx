@@ -2,9 +2,9 @@ import {
   Footer,
   Header,
   Main,
-  SectionHero,
-  SectionHowItWorks,
-  SectionServices,
+  SectionMainHero,
+  SectionMainHowItWorks,
+  SectionMainServices,
 } from '@hepsikredili/web/customer/ui/organisms';
 import { NextPage } from 'next';
 import Head from 'next/head';
@@ -22,9 +22,9 @@ export const Index: NextPage<PageIndexProps> = () => (
     <Header />
 
     <Main>
-      <SectionHero bgImg={heroImage} />
-      <SectionServices />
-      <SectionHowItWorks />
+      <SectionMainHero bgImg={heroImage} />
+      <SectionMainServices />
+      <SectionMainHowItWorks />
     </Main>
 
     <Footer />

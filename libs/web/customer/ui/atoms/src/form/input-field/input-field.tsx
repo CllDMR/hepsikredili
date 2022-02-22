@@ -25,7 +25,7 @@ export const InputField = forwardRef<
       {label}
     </label>
     <input
-      className="mt-1 w-full px-3 text-sm text-gray-500 border border-solid border-gray-300 rounded shadow-sm focus:border-[#664fbd] focus:ring-1 ring-[#664fbd]"
+      className="w-full px-3 py-1 mt-1 text-sm text-gray-500 border border-gray-300 border-solid rounded shadow-sm outline-none focus:border-indigo-400 focus:ring-1 ring-indigo-400"
       id={name}
       {...{ ...rest, name }}
       ref={ref}

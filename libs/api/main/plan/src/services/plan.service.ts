@@ -14,7 +14,7 @@ export class ApiMainPlanService {
     private readonly planModel: Model<PlanDocument>
   ) {}
 
-  async findAll(queryPlanDto: QueryPlanDto): Promise<Plan[]> {
+  async findAll(_queryPlanDto: QueryPlanDto): Promise<Plan[]> {
     const filter: FilterQuery<PlanDocument> = {};
     return await this.planModel.find(filter).exec();
   }

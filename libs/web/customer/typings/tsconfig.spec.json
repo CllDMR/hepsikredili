@@ -1,0 +1,34 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../../../dist/out-tsc",
+    "module": "commonjs",
+    "types": ["jest", "node"]
+  },
+  "include": [
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.d.ts",
+    "src/user.ts",
+    "src/user-individual.ts",
+    "src/user-corporate.ts",
+    "src/plan.ts",
+    "src/payment.ts",
+    "src/enums.ts",
+    "src/cephe.ts",
+    "src/axios.ts",
+    "src/auth.ts",
+    "src/address.ts",
+    "src/account.ts",
+    "src/account-individual.ts",
+    "src/account-image.ts",
+    "src/account-corporate.ts",
+    "src/ad-detail/ad-detail.ts",
+    "src/ad-detail/ad-detail-satılık-residence.ts",
+    "src/ad-detail/ad-detail-satılık-daire.ts",
+    "src/ad/ad.ts",
+    "src/ad/ad-satılık-residence.ts",
+    "src/ad/ad-satılık-daire.ts",
+    "src/common.ts"
+  ]
+}
