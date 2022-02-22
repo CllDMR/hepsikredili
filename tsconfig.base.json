@@ -33,6 +33,15 @@
       "@hepsikredili/api/main/shared": ["libs/api/main/shared/src/index.ts"],
       "@hepsikredili/api/main/user": ["libs/api/main/user/src/index.ts"],
       "@hepsikredili/api/shared": ["libs/api/shared/src/index.ts"],
+      "@hepsikredili/web/customer/constant": [
+        "libs/web/customer/constant/src/index.ts"
+      ],
+      "@hepsikredili/web/customer/state/zustand": [
+        "libs/web/customer/state/zustand/src/index.ts"
+      ],
+      "@hepsikredili/web/customer/typings": [
+        "libs/web/customer/typings/src/index.ts"
+      ],
       "@hepsikredili/web/customer/ui/atoms": [
         "libs/web/customer/ui/atoms/src/index.ts"
       ],
