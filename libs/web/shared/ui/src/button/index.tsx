@@ -6,6 +6,7 @@ import { ButtonOutlined, ButtonOutlinedProps } from './outlined/outlined';
 export type ButtonBaseProps = {
   title: string;
   fullWidth?: boolean;
+  disabled?: HTMLProps<HTMLButtonElement>['disabled'];
   onClick?: HTMLProps<HTMLButtonElement>['onClick'];
 };
 
