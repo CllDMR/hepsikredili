@@ -1,10 +1,9 @@
 import { render } from '@testing-library/react';
+import SectionAuthLogin from './login';
 
-import SectionHero from './section-hero';
-
-describe('SectionHero', () => {
+describe('Section Auth Login', () => {
   it('should render successfully', () => {
-    const { baseElement } = render(<SectionHero />);
+    const { baseElement } = render(<SectionAuthLogin />);
     expect(baseElement).toBeTruthy();
   });
 });

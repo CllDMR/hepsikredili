@@ -7,9 +7,9 @@ import './header.module.css';
 /* eslint-disable-next-line */
 export interface HeaderProps {}
 
-export const Header: FC<HeaderProps> = (props) => (
+export const Header: FC<HeaderProps> = () => (
   <header>
-    <nav className="fixed top-0 left-0 right-0 z-50 hidden w-full h-24 bg-white border-b border-gray-300 shadow-sm lg:block">
+    <nav className="fixed top-0 left-0 right-0 z-50 hidden w-full h-24 border-b border-gray-300 shadow-sm bg-indigo-50 lg:block">
       <div className="container flex items-center justify-between h-full px-6 mx-auto">
         <div className="rounded focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-opacity-75">
           <Link href="/">

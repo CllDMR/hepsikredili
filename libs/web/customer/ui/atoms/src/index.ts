@@ -1,5 +1,6 @@
 export * from './common/check/check';
 export * from './common/company-logo/company-logo';
+export * from './common/next-link/next-link';
 export * from './common/switch/switch';
 export * from './form/form/form';
 export * from './form/input-check/input-check';

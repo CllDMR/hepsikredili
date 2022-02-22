@@ -1,12 +1,12 @@
 import { Section } from '@hepsikredili/web/customer/ui/atoms';
 import { FC } from 'react';
-import './section-how-it-works.module.css';
+import './how-it-works.module.css';
 
 /* eslint-disable-next-line */
-export interface SectionHowItWorksProps {}
+export interface SectionMainHowItWorksProps {}
 
-export const SectionHowItWorks: FC<SectionHowItWorksProps> = () => (
-  <Section id="section-how-it-works">
+export const SectionMainHowItWorks: FC<SectionMainHowItWorksProps> = () => (
+  <Section id="section-main-how-it-works">
     <h1 className="mb-5 text-3xl text-center">
       <span className="font-semibold">Sistem nasıl çalışır ?</span>
     </h1>
@@ -73,4 +73,4 @@ export const SectionHowItWorks: FC<SectionHowItWorksProps> = () => (
   </Section>
 );
 
-export default SectionHowItWorks;
+export default SectionMainHowItWorks;

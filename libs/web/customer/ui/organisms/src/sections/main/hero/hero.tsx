@@ -4,16 +4,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FC, Fragment, useState } from 'react';
 import { HiCheck } from 'react-icons/hi';
-import './section-hero.module.css';
+import './hero.module.css';
 
 /* eslint-disable-next-line */
-export interface SectionHeroProps {
+export interface SectionMainHeroProps {
   bgImg: StaticImageData;
 }
 
-export const SectionHero: FC<SectionHeroProps> = ({ bgImg }) => (
+export const SectionMainHero: FC<SectionMainHeroProps> = ({ bgImg }) => (
   <section
-    key="section-hero"
+    key="section-main-hero"
     id="section-hero"
     className="relative"
     style={{
@@ -45,7 +45,7 @@ export const SectionHero: FC<SectionHeroProps> = ({ bgImg }) => (
   </section>
 );
 
-export default SectionHero;
+export default SectionMainHero;
 
 const SearchPaper: FC = () => (
   <div className="w-full p-4 bg-white rounded-md shadow-lg ">

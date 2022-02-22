@@ -1,12 +1,12 @@
 import { Section } from '@hepsikredili/web/customer/ui/atoms';
 import { FC } from 'react';
-import './section-services.module.css';
+import './services.module.css';
 
 /* eslint-disable-next-line */
-export interface SectionServicesProps {}
+export interface SectionMainServicesProps {}
 
-export const SectionServices: FC<SectionServicesProps> = () => (
-  <Section id="section-services" bg="dark">
+export const SectionMainServices: FC<SectionMainServicesProps> = () => (
+  <Section id="section-main-services" bg="dark">
     <h1 className="mb-5 text-3xl text-center">
       <span className="font-semibold">Neden Krediliev.com</span>
     </h1>
@@ -34,4 +34,4 @@ export const SectionServices: FC<SectionServicesProps> = () => (
   </Section>
 );
 
-export default SectionServices;
+export default SectionMainServices;

@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import { NextLink } from '@hepsikredili/web/customer/ui/atoms';
 import { FC } from 'react';
 import './footer.module.css';
 
 /* eslint-disable-next-line */
 export interface FooterProps {}
 
-export const Footer: FC<FooterProps> = (props) => (
+export const Footer: FC<FooterProps> = () => (
   <footer className="pb-[72px] lg:pb-0">
     <div className="border-t border-gray-300">
       <div className="container flex px-8 py-6 mx-auto">
@@ -27,6 +27,7 @@ export const Footer: FC<FooterProps> = (props) => (
 
 export default Footer;
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Contact: FC = () => (
   <div>
     <span className="block font-semibold">Bültenimize Kayıt Ol</span>
@@ -95,11 +96,13 @@ const LinksList: FC<{
       {title}
     </span>
     {links.map(({ href, label }) => (
-      <Link key={`label-${label}`} href={href}>
-        <a className="py-2 px-1 block text-[#262626] hover:text-gray-500 text-sm font-medium rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75">
-          {label}
-        </a>
-      </Link>
+      <NextLink
+        key={`label-${label}`}
+        href={href}
+        className="py-2 px-1 block text-[#262626] hover:text-gray-500 text-sm font-medium rounded focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-75"
+      >
+        {label}
+      </NextLink>
     ))}
   </div>
 );

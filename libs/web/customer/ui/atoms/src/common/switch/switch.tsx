@@ -19,9 +19,9 @@ export const Switch: FC<SwitchProps> = ({
   onSelectLeft,
   onSelectRight,
 }) => (
-  <div className="inline-flex items-center px-3 py-2 border-2 border-gray-300 rounded">
+  <div className="inline-flex items-center bg-white border-2 border-gray-300 rounded focus-within:ring-2 ring-indigo-400 ">
     <button
-      className={`text-sm font-medium text-gray-500  ${
+      className={`outline-none focus:bg-indigo-50 px-3 py-2 text-sm font-medium text-gray-500  ${
         side === 'left' ? 'text-indigo-500' : ''
       } `}
       onClick={() => onSelectLeft()}
@@ -29,7 +29,7 @@ export const Switch: FC<SwitchProps> = ({
       {leftLabel}
     </button>
     <svg
-      className="mx-3"
+      className="mx-1"
       width="2"
       height="15"
       viewBox="0 0 2 15"
@@ -39,7 +39,7 @@ export const Switch: FC<SwitchProps> = ({
       <path d="M1 0V22" stroke="#C4C4C4" />
     </svg>
     <button
-      className={`text-sm font-medium text-gray-500  ${
+      className={`outline-none focus:bg-indigo-50 px-3 py-2 text-sm font-medium text-gray-500  ${
         side === 'right' ? 'text-indigo-500' : ''
       } `}
       onClick={() => onSelectRight()}
