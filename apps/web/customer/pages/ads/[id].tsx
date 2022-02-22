@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 /* eslint-disable-next-line */
 export interface PageAdProps {}
 
-export const Ad: NextPage<PageAdProps> = ({}) => {
+export const Ad: NextPage<PageAdProps> = () => {
   const router = useRouter();
   const id = String(router.query.id);
 
