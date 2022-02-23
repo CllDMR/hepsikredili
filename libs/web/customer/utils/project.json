@@ -1,0 +1,23 @@
+{
+  "root": "libs/web/customer/utils",
+  "sourceRoot": "libs/web/customer/utils/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web/customer/utils/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/customer/utils"],
+      "options": {
+        "jestConfig": "libs/web/customer/utils/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
