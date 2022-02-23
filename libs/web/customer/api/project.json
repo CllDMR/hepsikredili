@@ -1,0 +1,23 @@
+{
+  "root": "libs/web/customer/api",
+  "sourceRoot": "libs/web/customer/api/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/web/customer/api/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/customer/api"],
+      "options": {
+        "jestConfig": "libs/web/customer/api/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
