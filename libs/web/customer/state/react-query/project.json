@@ -1,0 +1,25 @@
+{
+  "root": "libs/web/customer/state/react-query",
+  "sourceRoot": "libs/web/customer/state/react-query/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/customer/state/react-query/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/customer/state/react-query"],
+      "options": {
+        "jestConfig": "libs/web/customer/state/react-query/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  }
+}
